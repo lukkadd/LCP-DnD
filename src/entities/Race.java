@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package entities;
 import java.util.List;
 
 /**
@@ -13,9 +13,8 @@ import java.util.List;
 public class Race {
     private String name;
     private int speed;
-    private List<RaceTrait> traits;
-    private List<RaceTrait> loreTraits;
+    private String traits;
     private List<AttributeIncrease> attBonus;
-    private List<String> languages;
+    private String languages;
     
 }

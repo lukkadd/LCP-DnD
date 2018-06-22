@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
-import java.util.List;
+package entities;
 
 /**
  *
  * @author lukka
  */
-class SubRace {
-    private String name;
-    private Race parentRace;
-    private List<RaceTrait> subTraits;
-    private List<String> additionalLanguages;
+public class Feature {
+    String name;
+    String description;
 }

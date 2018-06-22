@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package entities;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ public class Monster {
     String alignment;
     String description;
     float challengeRating;
-    List<String> special_traits;
-    List<String> actions;
-    List<String> reactions;
-    List<String> legendaryActions;
+    String special_traits;
+    String actions;
+    String reactions;
+    String legendaryActions;
     int armor_class;
     String armor_class_type;
     

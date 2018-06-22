@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package entities;
 
 /**
  *
  * @author lukka
  */
-class AttributeIncrease {
-    private int bonus;
-    private Attribute att;
+public class Item {
+    String name;
+    int cost; //measured in copper pieces
+    String weight; // in lb.
+    
 }
