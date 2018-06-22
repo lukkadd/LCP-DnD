@@ -118,9 +118,6 @@
             <Property name="toolTipText" type="java.lang.String" value="Type your username"/>
             <Property name="name" type="java.lang.String" value="txtUsername" noResource="true"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUsernameActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtPassword">
           <Properties>
@@ -133,15 +130,21 @@
             <Property name="text" type="java.lang.String" value="Sign In"/>
             <Property name="name" type="java.lang.String" value="btnSignIn" noResource="true"/>
           </Properties>
+<<<<<<< HEAD
+=======
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSignInActionPerformed"/>
           </Events>
+>>>>>>> master
         </Component>
         <Component class="javax.swing.JButton" name="btnLogIn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Log In"/>
             <Property name="name" type="java.lang.String" value="btnLogIn" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLogInMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblLogo">
           <Properties>
