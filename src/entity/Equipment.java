@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities;
+package entity;
 
 /**
  *
  * @author lukka
  */
-public class Attribute {
-    String name;
-    int value;
+public class Equipment extends Item{
+    boolean isEquiped;
+    boolean profficiency;
 }
