@@ -8,10 +8,10 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="DnD.jar" size="5655" download="eager" />
+    <jar href="DnD.jar" size="27312" download="eager" />
     <jar href="lib\AbsoluteLayout.jar" size="2903" download="eager" />
   </resources>
-  <applet-desc  width="800" height="600" main-class="dnd.DnD"  name="DnD" >
+  <applet-desc  width="800" height="600" main-class="gui.FrmLogIn"  name="DnD" >
   </applet-desc>
   <update check="always"/>
 </jnlp>

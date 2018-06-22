@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author lukka
  */
-public class RaceTrait {
-    private String name;
-    private String description;
+public class SubClass {
+    String name;
+    List<Feature> subFeatures;
 }
