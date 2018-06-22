@@ -9,7 +9,7 @@ package entities;
  *
  * @author lukka
  */
-public class charSkill {
+public class CharSkill {
     Skill skill;
     int value;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public class Race {
     private String name;
     private int speed;
-    private List<RaceTrait> traits;
+    private String traits;
     private List<AttributeIncrease> attBonus;
     private String languages;
     
