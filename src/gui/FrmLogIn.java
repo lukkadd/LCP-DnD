@@ -6,6 +6,9 @@
 
 package gui;
 
+import entity.Access;
+import controller.AccessController;
+
 /**
  *
  * @author Marjorie
@@ -51,25 +54,28 @@ public class FrmLogIn extends javax.swing.JFrame {
 
         txtUsername.setToolTipText("Type your username");
         txtUsername.setName("txtUsername"); // NOI18N
-        txtUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsernameActionPerformed(evt);
-            }
-        });
 
         txtPassword.setToolTipText("Type your password");
         txtPassword.setName("txtPassword"); // NOI18N
 
         btnSignIn.setText("Sign In");
         btnSignIn.setName("btnSignIn"); // NOI18N
+<<<<<<< HEAD
+=======
         btnSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSignInActionPerformed(evt);
             }
         });
+>>>>>>> master
 
         btnLogIn.setText("Log In");
         btnLogIn.setName("btnLogIn"); // NOI18N
+        btnLogIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLogInMouseClicked(evt);
+            }
+        });
 
         lblLogo.setIcon(new javax.swing.ImageIcon("C:\\LCP\\LCP-DnD\\img\\D&DLOGO.png")); // NOI18N
 
@@ -133,6 +139,26 @@ public class FrmLogIn extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
+    private void btnLogInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogInMouseClicked
+        Access access;
+        AccessController ac;
+        String username; 
+        String password;
+        
+        ac = new AccessController();
+        username = txtUsername.getText();
+        password = new String(txtPassword.getPassword());
+        access = ac.getByLogin(username);
+        
+        if (access == null || !access.getPasskey().equals(password)) {
+            System.out.println("invalid login or password");
+        }
+        else {
+            System.out.println("yes!!");
+        }
+    }//GEN-LAST:event_btnLogInMouseClicked
+=======
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSignInActionPerformed
@@ -140,6 +166,7 @@ public class FrmLogIn extends javax.swing.JFrame {
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
+>>>>>>> master
 
     /**
      * @param args the command line arguments
