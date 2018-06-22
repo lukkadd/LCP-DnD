@@ -130,6 +130,12 @@
             <Property name="text" type="java.lang.String" value="Sign In"/>
             <Property name="name" type="java.lang.String" value="btnSignIn" noResource="true"/>
           </Properties>
+<<<<<<< HEAD
+=======
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSignInActionPerformed"/>
+          </Events>
+>>>>>>> master
         </Component>
         <Component class="javax.swing.JButton" name="btnLogIn">
           <Properties>
