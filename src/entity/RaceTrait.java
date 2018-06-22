@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities.RaceFolder;
+package entity.RaceFolder;
 
 import java.util.List;
 
