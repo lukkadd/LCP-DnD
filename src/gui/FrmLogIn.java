@@ -6,6 +6,9 @@
 
 package gui;
 
+import entity.Access;
+import controller.AccessController;
+
 /**
  *
  * @author Marjorie
@@ -33,7 +36,7 @@ public class FrmLogIn extends javax.swing.JFrame {
         lblPassword = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        btnCancel = new javax.swing.JButton();
+        btnSignIn = new javax.swing.JButton();
         btnLogIn = new javax.swing.JButton();
         lblLogo = new javax.swing.JLabel();
 
@@ -51,25 +54,20 @@ public class FrmLogIn extends javax.swing.JFrame {
 
         txtUsername.setToolTipText("Type your username");
         txtUsername.setName("txtUsername"); // NOI18N
-        txtUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsernameActionPerformed(evt);
-            }
-        });
 
         txtPassword.setToolTipText("Type your password");
         txtPassword.setName("txtPassword"); // NOI18N
 
-        btnCancel.setText("Cancel");
-        btnCancel.setName("btnCancel"); // NOI18N
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnSignIn.setText("Sign In");
+        btnSignIn.setName("btnSignIn"); // NOI18N
 
         btnLogIn.setText("Log In");
         btnLogIn.setName("btnLogIn"); // NOI18N
+        btnLogIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLogInMouseClicked(evt);
+            }
+        });
 
         lblLogo.setIcon(new javax.swing.ImageIcon("C:\\LCP\\LCP-DnD\\img\\D&DLOGO.png")); // NOI18N
 
@@ -85,7 +83,7 @@ public class FrmLogIn extends javax.swing.JFrame {
                 .addGap(159, 159, 159)
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlMainLayout.createSequentialGroup()
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlMainLayout.createSequentialGroup()
@@ -113,7 +111,7 @@ public class FrmLogIn extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancel)
+                    .addComponent(btnSignIn)
                     .addComponent(btnLogIn))
                 .addGap(88, 88, 88))
         );
@@ -133,13 +131,24 @@ public class FrmLogIn extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelActionPerformed
-
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
+    private void btnLogInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogInMouseClicked
+        Access access;
+        AccessController ac;
+        String username; 
+        String password;
+        
+        ac = new AccessController();
+        username = txtUsername.getText();
+        password = new String(txtPassword.getPassword());
+        access = ac.getByLogin(username);
+        
+        if (access == null || !access.getPasskey().equals(password)) {
+            System.out.println("invalid login or password");
+        }
+        else {
+            System.out.println("yes!!");
+        }
+    }//GEN-LAST:event_btnLogInMouseClicked
 
     /**
      * @param args the command line arguments
@@ -177,8 +186,8 @@ public class FrmLogIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnLogIn;
+    private javax.swing.JButton btnSignIn;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUsername;
