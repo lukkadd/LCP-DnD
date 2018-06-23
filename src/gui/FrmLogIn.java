@@ -60,14 +60,6 @@ public class FrmLogIn extends javax.swing.JFrame {
 
         btnSignIn.setText("Sign In");
         btnSignIn.setName("btnSignIn"); // NOI18N
-<<<<<<< HEAD
-=======
-        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSignInActionPerformed(evt);
-            }
-        });
->>>>>>> master
 
         btnLogIn.setText("Log In");
         btnLogIn.setName("btnLogIn"); // NOI18N
@@ -139,7 +131,6 @@ public class FrmLogIn extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
     private void btnLogInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogInMouseClicked
         Access access;
         AccessController ac;
@@ -158,15 +149,6 @@ public class FrmLogIn extends javax.swing.JFrame {
             System.out.println("yes!!");
         }
     }//GEN-LAST:event_btnLogInMouseClicked
-=======
-    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSignInActionPerformed
-
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
->>>>>>> master
 
     /**
      * @param args the command line arguments
