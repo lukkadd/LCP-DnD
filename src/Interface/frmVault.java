@@ -44,6 +44,10 @@ public class frmVault extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGear = new javax.swing.JTable();
         cmbGearType = new javax.swing.JComboBox<>();
+        lblGearName = new javax.swing.JLabel();
+        txtGearName = new javax.swing.JTextField();
+        lblGearCost = new javax.swing.JLabel();
+        txtGearCost = new javax.swing.JTextField();
         jpArmor = new javax.swing.JPanel();
         lblTypeArmor = new javax.swing.JLabel();
         lblACBonus = new javax.swing.JLabel();
@@ -60,11 +64,44 @@ public class frmVault extends javax.swing.JFrame {
         btnCancelArmor = new javax.swing.JButton();
         btnExitArmor = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblArmor = new javax.swing.JTable();
         cmbModifier = new javax.swing.JComboBox<>();
         btnStealthDArmor = new javax.swing.JToggleButton();
         cmbArmorType = new javax.swing.JComboBox<>();
+        txtArmorName = new javax.swing.JTextField();
+        lblArmorName = new javax.swing.JLabel();
+        lblArmorCost = new javax.swing.JLabel();
+        txtArmorCost = new javax.swing.JTextField();
         jpWeapon = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblWeapon = new javax.swing.JTable();
+        tbWeapon = new javax.swing.JToolBar();
+        btnNewWpn = new javax.swing.JButton();
+        btnUpdateWpn = new javax.swing.JButton();
+        btnDeleteWpn = new javax.swing.JButton();
+        btnSaveWpn = new javax.swing.JButton();
+        btnCancelWpn = new javax.swing.JButton();
+        btnExitWpn = new javax.swing.JButton();
+        lblWpnName = new javax.swing.JLabel();
+        txtWpnName = new javax.swing.JTextField();
+        lblWpnCost = new javax.swing.JLabel();
+        txtWpnCost = new javax.swing.JTextField();
+        lblWpnType = new javax.swing.JLabel();
+        cmbWpnType = new javax.swing.JComboBox<>();
+        lblWpnRange = new javax.swing.JLabel();
+        txtWpnMaxRange = new javax.swing.JTextField();
+        txtWpnMinRange = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        chkWpnHeavy = new javax.swing.JCheckBox();
+        chkWpnLoading = new javax.swing.JCheckBox();
+        chkWpnThrown = new javax.swing.JCheckBox();
+        chkWpnTwoHanded = new javax.swing.JCheckBox();
+        chkWpnAmmunition = new javax.swing.JCheckBox();
+        chkWpnFinesse = new javax.swing.JCheckBox();
+        lblWpnAttack = new javax.swing.JLabel();
+        txtWpnAttack = new javax.swing.JTextField();
+        lblWpnTHAttack = new javax.swing.JLabel();
+        txtWpnTHAttack = new javax.swing.JTextField();
         jpMonster = new javax.swing.JPanel();
         jpSpell = new javax.swing.JPanel();
         jpAttribute = new javax.swing.JPanel();
@@ -173,43 +210,74 @@ public class frmVault extends javax.swing.JFrame {
 
         cmbGearType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
 
+        lblGearName.setText("Name :");
+
+        txtGearName.setToolTipText("");
+
+        lblGearCost.setText("Cost :");
+        lblGearCost.setToolTipText("");
+
+        txtGearCost.setToolTipText("cost must be in copper pieces");
+
         javax.swing.GroupLayout jpAdventureGearLayout = new javax.swing.GroupLayout(jpAdventureGear);
         jpAdventureGear.setLayout(jpAdventureGearLayout);
         jpAdventureGearLayout.setHorizontalGroup(
             jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpAdventureGearLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
                 .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpAdventureGearLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(tbAdventureGear, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDescriptionGear)
-                    .addComponent(cmbGearType, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTypeGear))
-                .addGap(18, 18, 18)
+                        .addGap(47, 47, 47)
+                        .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpAdventureGearLayout.createSequentialGroup()
+                                .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblDescriptionGear)
+                                    .addComponent(cmbGearType, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblTypeGear)
+                                    .addGroup(jpAdventureGearLayout.createSequentialGroup()
+                                        .addComponent(txtGearName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(41, 41, 41)
+                                        .addComponent(txtGearCost)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jpAdventureGearLayout.createSequentialGroup()
+                                .addComponent(lblGearName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblGearCost)
+                                .addGap(119, 119, 119))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAdventureGearLayout.createSequentialGroup()
+                        .addContainerGap(60, Short.MAX_VALUE)
+                        .addComponent(tbAdventureGear, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jpAdventureGearLayout.setVerticalGroup(
             jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpAdventureGearLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAdventureGearLayout.createSequentialGroup()
+                .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpAdventureGearLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(70, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
                     .addGroup(jpAdventureGearLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGearName)
+                            .addComponent(lblGearCost))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtGearName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGearCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblDescriptionGear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblTypeGear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbGearType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(tbAdventureGear, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))))
+                        .addGap(68, 68, 68)
+                        .addComponent(tbAdventureGear, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jtVault.addTab("Adventure Gear", jpAdventureGear);
@@ -293,7 +361,7 @@ public class frmVault extends javax.swing.JFrame {
         btnExitArmor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbArmor.add(btnExitArmor);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblArmor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -304,7 +372,7 @@ public class frmVault extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tblArmor);
 
         cmbModifier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
 
@@ -317,6 +385,15 @@ public class frmVault extends javax.swing.JFrame {
 
         cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
 
+        txtArmorName.setToolTipText("");
+
+        lblArmorName.setText("Name :");
+
+        lblArmorCost.setText("Cost :");
+        lblArmorCost.setToolTipText("");
+
+        txtArmorCost.setToolTipText("cost must be in copper pieces");
+
         javax.swing.GroupLayout jpArmorLayout = new javax.swing.GroupLayout(jpArmor);
         jpArmor.setLayout(jpArmorLayout);
         jpArmorLayout.setHorizontalGroup(
@@ -324,35 +401,55 @@ public class frmVault extends javax.swing.JFrame {
             .addGroup(jpArmorLayout.createSequentialGroup()
                 .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpArmorLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
+                        .addContainerGap(51, Short.MAX_VALUE)
                         .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpArmorLayout.createSequentialGroup()
                                 .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblModifierArmor)
                                     .addComponent(lblTypeArmor)
                                     .addComponent(cmbModifier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cmbArmorType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cmbArmorType, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtACBonus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblACBonus)
-                                    .addComponent(lblStealthDArmor, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                                    .addComponent(btnStealthDArmor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(lblStealthDArmor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnStealthDArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(lblStrenghtRArmor)
-                            .addComponent(txtStrenghtRArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpArmorLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(tbArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtStrenghtRArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpArmorLayout.createSequentialGroup()
+                                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtArmorName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblArmorName))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblArmorCost)
+                                    .addComponent(txtArmorCost, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpArmorLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tbArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jpArmorLayout.setVerticalGroup(
             jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpArmorLayout.createSequentialGroup()
-                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpArmorLayout.createSequentialGroup()
+                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpArmorLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
+                    .addGroup(jpArmorLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblArmorName)
+                            .addComponent(lblArmorCost))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtArmorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtArmorCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTypeArmor)
                             .addComponent(lblACBonus))
@@ -372,25 +469,219 @@ public class frmVault extends javax.swing.JFrame {
                         .addComponent(lblStrenghtRArmor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtStrenghtRArmor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(148, 148, 148)
-                        .addComponent(tbArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpArmorLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tbArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jtVault.addTab("Armor", jpArmor);
+
+        tblWeapon.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tblWeapon);
+
+        tbWeapon.setRollover(true);
+
+        btnNewWpn.setText("New");
+        btnNewWpn.setFocusable(false);
+        btnNewWpn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnNewWpn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNewWpn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNewWpnMouseClicked(evt);
+            }
+        });
+        tbWeapon.add(btnNewWpn);
+
+        btnUpdateWpn.setText("Update");
+        btnUpdateWpn.setFocusable(false);
+        btnUpdateWpn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUpdateWpn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUpdateWpn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateWpnMouseClicked(evt);
+            }
+        });
+        tbWeapon.add(btnUpdateWpn);
+
+        btnDeleteWpn.setText("Delete");
+        btnDeleteWpn.setFocusable(false);
+        btnDeleteWpn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDeleteWpn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDeleteWpn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteWpnMouseClicked(evt);
+            }
+        });
+        tbWeapon.add(btnDeleteWpn);
+
+        btnSaveWpn.setText("Save");
+        btnSaveWpn.setFocusable(false);
+        btnSaveWpn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSaveWpn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSaveWpn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSaveWpnMouseClicked(evt);
+            }
+        });
+        tbWeapon.add(btnSaveWpn);
+
+        btnCancelWpn.setText("Cancel");
+        btnCancelWpn.setFocusable(false);
+        btnCancelWpn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCancelWpn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCancelWpn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelWpnMouseClicked(evt);
+            }
+        });
+        tbWeapon.add(btnCancelWpn);
+
+        btnExitWpn.setText("Exit");
+        btnExitWpn.setFocusable(false);
+        btnExitWpn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnExitWpn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbWeapon.add(btnExitWpn);
+
+        lblWpnName.setText("Name :");
+
+        lblWpnCost.setText("Cost :");
+
+        lblWpnType.setText("Weapon Type :");
+
+        cmbWpnType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged" }));
+
+        lblWpnRange.setText("Range :");
+
+        jLabel1.setText("-");
+
+        chkWpnHeavy.setText("Heavy");
+
+        chkWpnLoading.setText("Loading");
+
+        chkWpnThrown.setText("Thrown");
+
+        chkWpnTwoHanded.setText("Two Handed");
+        chkWpnTwoHanded.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkWpnTwoHandedActionPerformed(evt);
+            }
+        });
+
+        chkWpnAmmunition.setText("Ammunition");
+
+        chkWpnFinesse.setText("Finesse");
+
+        lblWpnAttack.setText("Attack Damage");
+
+        lblWpnTHAttack.setText("Two Handed Attack Damage");
 
         javax.swing.GroupLayout jpWeaponLayout = new javax.swing.GroupLayout(jpWeapon);
         jpWeapon.setLayout(jpWeaponLayout);
         jpWeaponLayout.setHorizontalGroup(
             jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpWeaponLayout.createSequentialGroup()
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tbWeapon, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpWeaponLayout.createSequentialGroup()
+                        .addComponent(lblWpnName)
+                        .addGap(130, 130, 130)
+                        .addComponent(lblWpnCost))
+                    .addGroup(jpWeaponLayout.createSequentialGroup()
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cmbWpnType, javax.swing.GroupLayout.Alignment.LEADING, 0, 142, Short.MAX_VALUE)
+                            .addComponent(txtWpnName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblWpnType, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtWpnCost, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpWeaponLayout.createSequentialGroup()
+                                .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtWpnMinRange)
+                                    .addComponent(lblWpnRange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtWpnMaxRange, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lblWpnAttack)
+                    .addComponent(lblWpnTHAttack)
+                    .addGroup(jpWeaponLayout.createSequentialGroup()
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtWpnTHAttack, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtWpnAttack, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpWeaponLayout.createSequentialGroup()
+                                .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkWpnTwoHanded)
+                                    .addComponent(chkWpnHeavy))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkWpnLoading)
+                                    .addComponent(chkWpnAmmunition))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkWpnThrown)
+                            .addComponent(chkWpnFinesse))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jpWeaponLayout.setVerticalGroup(
             jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 464, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpWeaponLayout.createSequentialGroup()
+                .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpWeaponLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
+                    .addGroup(jpWeaponLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblWpnName)
+                            .addComponent(lblWpnCost))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtWpnName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtWpnCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblWpnType)
+                            .addComponent(lblWpnRange))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbWpnType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtWpnMaxRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtWpnMinRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(chkWpnHeavy)
+                            .addComponent(chkWpnLoading)
+                            .addComponent(chkWpnThrown))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(chkWpnTwoHanded)
+                            .addComponent(chkWpnAmmunition)
+                            .addComponent(chkWpnFinesse))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblWpnAttack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtWpnAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblWpnTHAttack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtWpnTHAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tbWeapon, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jtVault.addTab("Weapon", jpWeapon);
@@ -399,7 +690,7 @@ public class frmVault extends javax.swing.JFrame {
         jpMonster.setLayout(jpMonsterLayout);
         jpMonsterLayout.setHorizontalGroup(
             jpMonsterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
+            .addGap(0, 857, Short.MAX_VALUE)
         );
         jpMonsterLayout.setVerticalGroup(
             jpMonsterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,7 +703,7 @@ public class frmVault extends javax.swing.JFrame {
         jpSpell.setLayout(jpSpellLayout);
         jpSpellLayout.setHorizontalGroup(
             jpSpellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
+            .addGap(0, 857, Short.MAX_VALUE)
         );
         jpSpellLayout.setVerticalGroup(
             jpSpellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,7 +716,7 @@ public class frmVault extends javax.swing.JFrame {
         jpAttribute.setLayout(jpAttributeLayout);
         jpAttributeLayout.setHorizontalGroup(
             jpAttributeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
+            .addGap(0, 857, Short.MAX_VALUE)
         );
         jpAttributeLayout.setVerticalGroup(
             jpAttributeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,7 +729,7 @@ public class frmVault extends javax.swing.JFrame {
         jpEquipment.setLayout(jpEquipmentLayout);
         jpEquipmentLayout.setHorizontalGroup(
             jpEquipmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
+            .addGap(0, 857, Short.MAX_VALUE)
         );
         jpEquipmentLayout.setVerticalGroup(
             jpEquipmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,7 +742,7 @@ public class frmVault extends javax.swing.JFrame {
         jpItem.setLayout(jpItemLayout);
         jpItemLayout.setHorizontalGroup(
             jpItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
+            .addGap(0, 857, Short.MAX_VALUE)
         );
         jpItemLayout.setVerticalGroup(
             jpItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,7 +755,7 @@ public class frmVault extends javax.swing.JFrame {
         jpAttack.setLayout(jpAttackLayout);
         jpAttackLayout.setHorizontalGroup(
             jpAttackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
+            .addGap(0, 857, Short.MAX_VALUE)
         );
         jpAttackLayout.setVerticalGroup(
             jpAttackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -477,7 +768,7 @@ public class frmVault extends javax.swing.JFrame {
         jpVault.setLayout(jpVaultLayout);
         jpVaultLayout.setHorizontalGroup(
             jpVaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 859, Short.MAX_VALUE)
+            .addGap(0, 865, Short.MAX_VALUE)
             .addGroup(jpVaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jpVaultLayout.createSequentialGroup()
                     .addGap(1, 1, 1)
@@ -732,6 +1023,30 @@ public class frmVault extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnStealthDArmorActionPerformed
 
+    private void btnNewWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewWpnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNewWpnMouseClicked
+
+    private void btnUpdateWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateWpnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateWpnMouseClicked
+
+    private void btnDeleteWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteWpnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteWpnMouseClicked
+
+    private void btnSaveWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveWpnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveWpnMouseClicked
+
+    private void btnCancelWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelWpnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelWpnMouseClicked
+
+    private void chkWpnTwoHandedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkWpnTwoHandedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkWpnTwoHandedActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -770,24 +1085,38 @@ public class frmVault extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCancelArmor;
+    private javax.swing.JButton btnCancelWpn;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteArmor;
+    private javax.swing.JButton btnDeleteWpn;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnExitArmor;
+    private javax.swing.JButton btnExitWpn;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnNewArmor;
+    private javax.swing.JButton btnNewWpn;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSaveArmor;
+    private javax.swing.JButton btnSaveWpn;
     private javax.swing.JToggleButton btnStealthDArmor;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdateArmor;
+    private javax.swing.JButton btnUpdateWpn;
+    private javax.swing.JCheckBox chkWpnAmmunition;
+    private javax.swing.JCheckBox chkWpnFinesse;
+    private javax.swing.JCheckBox chkWpnHeavy;
+    private javax.swing.JCheckBox chkWpnLoading;
+    private javax.swing.JCheckBox chkWpnThrown;
+    private javax.swing.JCheckBox chkWpnTwoHanded;
     private javax.swing.JComboBox<String> cmbArmorType;
     private javax.swing.JComboBox<String> cmbGearType;
     private javax.swing.JComboBox<String> cmbModifier;
+    private javax.swing.JComboBox<String> cmbWpnType;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPanel jpAdventureGear;
     private javax.swing.JPanel jpArmor;
     private javax.swing.JPanel jpAttack;
@@ -800,17 +1129,40 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JPanel jpWeapon;
     private javax.swing.JTabbedPane jtVault;
     private javax.swing.JLabel lblACBonus;
+    private javax.swing.JLabel lblArmorCost;
+    private javax.swing.JLabel lblArmorName;
     private javax.swing.JLabel lblDescriptionGear;
+    private javax.swing.JLabel lblGearCost;
+    private javax.swing.JLabel lblGearName;
     private javax.swing.JLabel lblModifierArmor;
     private javax.swing.JLabel lblStealthDArmor;
     private javax.swing.JLabel lblStrenghtRArmor;
     private javax.swing.JLabel lblTypeArmor;
     private javax.swing.JLabel lblTypeGear;
+    private javax.swing.JLabel lblWpnAttack;
+    private javax.swing.JLabel lblWpnCost;
+    private javax.swing.JLabel lblWpnName;
+    private javax.swing.JLabel lblWpnRange;
+    private javax.swing.JLabel lblWpnTHAttack;
+    private javax.swing.JLabel lblWpnType;
     private javax.swing.JToolBar tbAdventureGear;
     private javax.swing.JToolBar tbArmor;
+    private javax.swing.JToolBar tbWeapon;
+    private javax.swing.JTable tblArmor;
     private javax.swing.JTable tblGear;
+    private javax.swing.JTable tblWeapon;
     private javax.swing.JTextField txtACBonus;
+    private javax.swing.JTextField txtArmorCost;
+    private javax.swing.JTextField txtArmorName;
     private javax.swing.JTextArea txtDescription;
+    private javax.swing.JTextField txtGearCost;
+    private javax.swing.JTextField txtGearName;
     private javax.swing.JTextField txtStrenghtRArmor;
+    private javax.swing.JTextField txtWpnAttack;
+    private javax.swing.JTextField txtWpnCost;
+    private javax.swing.JTextField txtWpnMaxRange;
+    private javax.swing.JTextField txtWpnMinRange;
+    private javax.swing.JTextField txtWpnName;
+    private javax.swing.JTextField txtWpnTHAttack;
     // End of variables declaration//GEN-END:variables
 }

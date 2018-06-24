@@ -20,6 +20,6 @@ public class Weapon extends Equipment{
     boolean two_handed;//disable this option if versatile
     boolean ammunition;
     boolean finesse;
-    Attack normal_attack;
-    Attack two_handed_attack;
+    String normal_attack;
+    String two_handed_attack; //can be null
 }
