@@ -69,18 +69,12 @@ public class FrmLogIn extends javax.swing.JFrame {
             }
         });
 
-        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\LCP\\LCP-DnD\\img\\D&DLOGO.png")); // NOI18N
-
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addComponent(lblLogo)
-                .addContainerGap(58, Short.MAX_VALUE))
-            .addGroup(pnlMainLayout.createSequentialGroup()
-                .addGap(159, 159, 159)
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlMainLayout.createSequentialGroup()
                         .addComponent(btnSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -94,14 +88,18 @@ public class FrmLogIn extends javax.swing.JFrame {
                         .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUsername)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblLogo)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(205, 205, 205))
+            .addGroup(pnlMainLayout.createSequentialGroup()
+                .addGap(116, 116, 116)
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsername)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -113,7 +111,7 @@ public class FrmLogIn extends javax.swing.JFrame {
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSignIn)
                     .addComponent(btnLogIn))
-                .addGap(88, 88, 88))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -134,14 +132,14 @@ public class FrmLogIn extends javax.swing.JFrame {
     private void btnLogInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogInMouseClicked
         Access access;
         AccessController ac;
-        String username; 
+        String username;
         String password;
-        
+
         ac = new AccessController();
         username = txtUsername.getText();
         password = new String(txtPassword.getPassword());
         access = ac.getByLogin(username);
-        
+
         if (access == null || !access.getPasskey().equals(password)) {
             System.out.println("invalid login or password");
         }

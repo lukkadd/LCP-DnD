@@ -32,7 +32,6 @@ public class frmVault extends javax.swing.JFrame {
         jpAdventureGear = new javax.swing.JPanel();
         lblDescriptionGear = new javax.swing.JLabel();
         lblTypeGear = new javax.swing.JLabel();
-        txtTypeGear = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescription = new javax.swing.JTextArea();
         tbAdventureGear = new javax.swing.JToolBar();
@@ -44,16 +43,14 @@ public class frmVault extends javax.swing.JFrame {
         btnExit = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGear = new javax.swing.JTable();
+        cmbGearType = new javax.swing.JComboBox<>();
         jpArmor = new javax.swing.JPanel();
         lblTypeArmor = new javax.swing.JLabel();
         lblACBonus = new javax.swing.JLabel();
         lblModifierArmor = new javax.swing.JLabel();
         lblStealthDArmor = new javax.swing.JLabel();
         lblStrenghtRArmor = new javax.swing.JLabel();
-        txtTypeArmor = new javax.swing.JTextField();
         txtACBonus = new javax.swing.JTextField();
-        txtModifierArmor = new javax.swing.JTextField();
-        txtStealthDArmor = new javax.swing.JTextField();
         txtStrenghtRArmor = new javax.swing.JTextField();
         tbArmor = new javax.swing.JToolBar();
         btnNewArmor = new javax.swing.JButton();
@@ -64,6 +61,9 @@ public class frmVault extends javax.swing.JFrame {
         btnExitArmor = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        cmbModifier = new javax.swing.JComboBox<>();
+        btnStealthDArmor = new javax.swing.JToggleButton();
+        cmbArmorType = new javax.swing.JComboBox<>();
         jpWeapon = new javax.swing.JPanel();
         jpMonster = new javax.swing.JPanel();
         jpSpell = new javax.swing.JPanel();
@@ -171,6 +171,8 @@ public class frmVault extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblGear);
 
+        cmbGearType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
+
         javax.swing.GroupLayout jpAdventureGearLayout = new javax.swing.GroupLayout(jpAdventureGear);
         jpAdventureGear.setLayout(jpAdventureGearLayout);
         jpAdventureGearLayout.setHorizontalGroup(
@@ -180,16 +182,14 @@ public class frmVault extends javax.swing.JFrame {
                 .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpAdventureGearLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTypeGear, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tbAdventureGear, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tbAdventureGear, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblDescriptionGear)
-                        .addComponent(lblTypeGear)))
+                    .addComponent(lblDescriptionGear)
+                    .addComponent(cmbGearType, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTypeGear))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jpAdventureGearLayout.setVerticalGroup(
             jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,8 +206,8 @@ public class frmVault extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblTypeGear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTypeGear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
+                        .addComponent(cmbGearType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
                         .addComponent(tbAdventureGear, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19))))
         );
@@ -306,6 +306,17 @@ public class frmVault extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTable1);
 
+        cmbModifier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
+
+        btnStealthDArmor.setText("False");
+        btnStealthDArmor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStealthDArmorActionPerformed(evt);
+            }
+        });
+
+        cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
+
         javax.swing.GroupLayout jpArmorLayout = new javax.swing.GroupLayout(jpArmor);
         jpArmor.setLayout(jpArmorLayout);
         jpArmorLayout.setHorizontalGroup(
@@ -315,19 +326,20 @@ public class frmVault extends javax.swing.JFrame {
                     .addGroup(jpArmorLayout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblStrenghtRArmor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblModifierArmor)
-                                .addComponent(lblACBonus)
-                                .addComponent(lblTypeArmor)
-                                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtStealthDArmor, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblStealthDArmor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtModifierArmor, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addComponent(txtStrenghtRArmor))
-                            .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtTypeArmor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                                .addComponent(txtACBonus, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addGroup(jpArmorLayout.createSequentialGroup()
+                                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblModifierArmor)
+                                    .addComponent(lblTypeArmor)
+                                    .addComponent(cmbModifier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbArmorType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtACBonus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblACBonus)
+                                    .addComponent(lblStealthDArmor, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                    .addComponent(btnStealthDArmor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lblStrenghtRArmor)
+                            .addComponent(txtStrenghtRArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jpArmorLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(tbArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -341,26 +353,26 @@ public class frmVault extends javax.swing.JFrame {
                 .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpArmorLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(lblTypeArmor)
+                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTypeArmor)
+                            .addComponent(lblACBonus))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTypeArmor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblACBonus)
+                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtACBonus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbArmorType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblModifierArmor)
+                            .addComponent(lblStealthDArmor))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtACBonus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblModifierArmor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtModifierArmor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblStealthDArmor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtStealthDArmor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbModifier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnStealthDArmor))
+                        .addGap(18, 18, 18)
                         .addComponent(lblStrenghtRArmor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtStrenghtRArmor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
+                        .addGap(148, 148, 148)
                         .addComponent(tbArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpArmorLayout.createSequentialGroup()
                         .addContainerGap()
@@ -511,7 +523,7 @@ public class frmVault extends javax.swing.JFrame {
         // TODO add your handling code here:
          //Desabilitando as caixas de edição
         txtDescription.setEnabled(false);
-        txtTypeGear.setEnabled(false);
+        cmbGearType.setEnabled(false);
         
         //Habilitando a barra de ferramentas
         btnNew.setEnabled(true);
@@ -525,9 +537,9 @@ public class frmVault extends javax.swing.JFrame {
     private void btnNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewMouseClicked
         // TODO add your handling code here:
         txtDescription.setEnabled(true);
-        txtTypeGear.setEnabled(true);
+        cmbGearType.setEnabled(true);
         txtDescription.setText("");
-        txtTypeGear.setText("");
+        cmbGearType.setSelectedIndex(0);
         
         btnNew.setEnabled(false);
         btnUpdate.setEnabled(false);
@@ -540,7 +552,7 @@ public class frmVault extends javax.swing.JFrame {
     private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
         // TODO add your handling code here:
         txtDescription.setEnabled(true);
-        txtTypeGear.setEnabled(true);
+        cmbGearType.setEnabled(true);
         
         btnNew.setEnabled(false);
         btnUpdate.setEnabled(false);
@@ -553,9 +565,9 @@ public class frmVault extends javax.swing.JFrame {
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         // TODO add your handling code here:
         txtDescription.setEnabled(true);
-        txtTypeGear.setEnabled(true);
+        cmbGearType.setEnabled(true);
         txtDescription.setText("");
-        txtTypeGear.setText("");
+        cmbGearType.setSelectedIndex(0);
         
         btnNew.setEnabled(false);
         btnUpdate.setEnabled(false);
@@ -568,9 +580,9 @@ public class frmVault extends javax.swing.JFrame {
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
         // TODO add your handling code here:
         txtDescription.setEnabled(false);
-        txtTypeGear.setEnabled(false);
+        cmbGearType.setEnabled(false);
         txtDescription.setText("");
-        txtTypeGear.setText("");
+        cmbGearType.setSelectedIndex(0);
         
         btnNew.setEnabled(true);
         btnUpdate.setEnabled(true);
@@ -583,9 +595,9 @@ public class frmVault extends javax.swing.JFrame {
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
         // TODO add your handling code here:
         txtDescription.setEnabled(false);
-        txtTypeGear.setEnabled(false);
+        cmbGearType.setEnabled(false);
         txtDescription.setText("");
-        txtTypeGear.setText("");
+        cmbGearType.setSelectedIndex(0);
         //Habilitando a barra de ferramentas
         btnNew.setEnabled(true);
         btnUpdate.setEnabled(true);
@@ -597,10 +609,10 @@ public class frmVault extends javax.swing.JFrame {
 
     private void jpArmorComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpArmorComponentShown
         // TODO add your handling code here:
-        txtTypeArmor.setEnabled(false);
+        cmbArmorType.setEnabled(false);
         txtACBonus.setEnabled(false);
-        txtModifierArmor.setEnabled(false);
-        txtStealthDArmor.setEnabled(false);
+        cmbModifier.setEnabled(false);
+        btnStealthDArmor.setEnabled(false);
         txtStrenghtRArmor.setEnabled(false);
         
         btnNewArmor.setEnabled(true);
@@ -614,15 +626,15 @@ public class frmVault extends javax.swing.JFrame {
     private void btnNewArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewArmorMouseClicked
         // TODO add your handling code here:
         txtACBonus.setEnabled(true);
-        txtModifierArmor.setEnabled(true);
-        txtStealthDArmor.setEnabled(true);
+        cmbModifier.setEnabled(true);
+        btnStealthDArmor.setEnabled(true);
         txtStrenghtRArmor.setEnabled(true);
-        txtTypeArmor.setEnabled(true);
+        cmbArmorType.setEnabled(true);
         txtACBonus.setText("");
-        txtModifierArmor.setText("");
-        txtStealthDArmor.setText("");
+        cmbModifier.setSelectedIndex(0);
+        
         txtStrenghtRArmor.setText("");
-        txtTypeArmor.setText("");
+        
         
         btnNewArmor.setEnabled(false);
         btnUpdateArmor.setEnabled(false);
@@ -635,10 +647,10 @@ public class frmVault extends javax.swing.JFrame {
     private void btnUpdateArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateArmorMouseClicked
         // TODO add your handling code here:
         txtACBonus.setEnabled(true);
-        txtModifierArmor.setEnabled(true);
-        txtStealthDArmor.setEnabled(true);
+        cmbModifier.setEnabled(true);
+        btnStealthDArmor.setEnabled(true);
         txtStrenghtRArmor.setEnabled(true);
-        txtTypeArmor.setEnabled(true);
+        cmbArmorType.setEnabled(true);
         
         btnNewArmor.setEnabled(false);
         btnUpdateArmor.setEnabled(false);
@@ -651,15 +663,15 @@ public class frmVault extends javax.swing.JFrame {
     private void btnDeleteArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteArmorMouseClicked
         // TODO add your handling code here:
         txtACBonus.setEnabled(true);
-        txtModifierArmor.setEnabled(true);
-        txtStealthDArmor.setEnabled(true);
+        cmbModifier.setEnabled(true);
+        btnStealthDArmor.setEnabled(true);
         txtStrenghtRArmor.setEnabled(true);
-        txtTypeArmor.setEnabled(true);
+        cmbArmorType.setEnabled(true);
         txtACBonus.setText("");
-        txtModifierArmor.setText("");
-        txtStealthDArmor.setText("");
+        cmbModifier.setSelectedIndex(0);
+        
         txtStrenghtRArmor.setText("");
-        txtTypeArmor.setText("");
+        
         
         btnNewArmor.setEnabled(false);
         btnUpdateArmor.setEnabled(false);
@@ -672,15 +684,15 @@ public class frmVault extends javax.swing.JFrame {
     private void btnSaveArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveArmorMouseClicked
         // TODO add your handling code here:
         txtACBonus.setEnabled(false);
-        txtModifierArmor.setEnabled(false);
-        txtStealthDArmor.setEnabled(false);
+        cmbModifier.setEnabled(false);
+        btnStealthDArmor.setEnabled(false);
         txtStrenghtRArmor.setEnabled(false);
-        txtTypeArmor.setEnabled(false);
+        cmbArmorType.setEnabled(false);
         txtACBonus.setText("");
-        txtModifierArmor.setText("");
-        txtStealthDArmor.setText("");
+        cmbModifier.setSelectedIndex(0);
+        
         txtStrenghtRArmor.setText("");
-        txtTypeArmor.setText("");
+        
         
         btnNewArmor.setEnabled(true);
         btnUpdateArmor.setEnabled(true);
@@ -693,15 +705,15 @@ public class frmVault extends javax.swing.JFrame {
     private void btnCancelArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelArmorMouseClicked
         // TODO add your handling code here:
         txtACBonus.setEnabled(false);
-        txtModifierArmor.setEnabled(false);
-        txtStealthDArmor.setEnabled(false);
+        cmbModifier.setEnabled(false);
+        btnStealthDArmor.setEnabled(false);
         txtStrenghtRArmor.setEnabled(false);
-        txtTypeArmor.setEnabled(false);
+        cmbArmorType.setEnabled(false);
         txtACBonus.setText("");
-        txtModifierArmor.setText("");
-        txtStealthDArmor.setText("");
+        cmbModifier.setSelectedIndex(0);
+        
         txtStrenghtRArmor.setText("");
-        txtTypeArmor.setText("");
+        
         
         btnNewArmor.setEnabled(true);
         btnUpdateArmor.setEnabled(true);
@@ -710,6 +722,15 @@ public class frmVault extends javax.swing.JFrame {
         btnSaveArmor.setEnabled(false);
         btnExitArmor.setEnabled(true);
     }//GEN-LAST:event_btnCancelArmorMouseClicked
+
+    private void btnStealthDArmorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStealthDArmorActionPerformed
+        // TODO add your handling code here:
+        if(btnStealthDArmor.isSelected()){
+            btnStealthDArmor.setText("True");
+        }else{
+            btnStealthDArmor.setText("False");
+        }
+    }//GEN-LAST:event_btnStealthDArmorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -757,8 +778,12 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JButton btnNewArmor;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSaveArmor;
+    private javax.swing.JToggleButton btnStealthDArmor;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdateArmor;
+    private javax.swing.JComboBox<String> cmbArmorType;
+    private javax.swing.JComboBox<String> cmbGearType;
+    private javax.swing.JComboBox<String> cmbModifier;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -786,10 +811,6 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JTable tblGear;
     private javax.swing.JTextField txtACBonus;
     private javax.swing.JTextArea txtDescription;
-    private javax.swing.JTextField txtModifierArmor;
-    private javax.swing.JTextField txtStealthDArmor;
     private javax.swing.JTextField txtStrenghtRArmor;
-    private javax.swing.JTextField txtTypeArmor;
-    private javax.swing.JTextField txtTypeGear;
     // End of variables declaration//GEN-END:variables
 }
