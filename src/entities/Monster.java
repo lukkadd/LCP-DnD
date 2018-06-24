@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class Monster {
     String name;
-    String type;
-    String size;
+    int type; //
+    int size; // 0- Tiny/ 1- Small/ 2- Medium/ 3- Large/ 4- Huge/ 5- Gargantuan
     String alignment;
     String description;
     float challengeRating;
