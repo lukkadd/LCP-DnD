@@ -108,10 +108,7 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="lblGearCost" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                              </Group>
+                                              <Component id="lblGearCost" min="-2" max="-2" attributes="0"/>
                                               <Component id="txtGearCost" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -372,37 +369,53 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace pref="51" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="lblModifierArmor" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblTypeArmor" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cmbModifier" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="cmbArmorType" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblStrenghtRArmor" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="txtArmorName" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                                                      <Component id="lblArmorName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lblArmorCost" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="txtArmorCost" min="-2" pref="82" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="txtStrenghtRArmor" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="lblModifierArmor" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblTypeArmor" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="cmbModifier" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="cmbArmorType" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="txtACBonus" min="-2" pref="110" max="-2" attributes="0"/>
+                                                      <Component id="lblACBonus" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblStealthDArmor" max="32767" attributes="0"/>
+                                                      <Component id="btnStealthDArmor" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                           </Group>
-                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txtACBonus" min="-2" pref="110" max="-2" attributes="0"/>
-                                              <Component id="lblACBonus" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblStealthDArmor" max="32767" attributes="0"/>
-                                              <Component id="btnStealthDArmor" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
-                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="lblStrenghtRArmor" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtStrenghtRArmor" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtArmorName" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
-                                              <Component id="lblArmorName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblArmorWeight" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtArmorWeight" min="-2" pref="122" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lblArmorCost" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtArmorCost" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lblIsEquiped" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="btnIsEquiped" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                           </Group>
+                                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="88" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
@@ -424,7 +437,7 @@
                                   <Component id="jScrollPane3" pref="442" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblArmorName" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblArmorCost" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -434,7 +447,20 @@
                                       <Component id="txtArmorName" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtArmorCost" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblArmorWeight" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtArmorWeight" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblIsEquiped" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="btnIsEquiped" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblTypeArmor" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblACBonus" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -648,6 +674,30 @@
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="cost must be in copper pieces"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblArmorWeight">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Weight :"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtArmorWeight">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="cost must be in copper pieces"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblIsEquiped">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Is Equiped:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JToggleButton" name="btnIsEquiped">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="False"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIsEquipedActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

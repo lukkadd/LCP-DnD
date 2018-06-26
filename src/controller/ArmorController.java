@@ -9,27 +9,53 @@ package controller;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import entity.Access;
+import entities.Armor;
 import db.Connect;
 
 /**
  *
  * @author Marjorie
  */
-public class AccessController {
+public class ArmorController {
     
-    public AccessController() {
+    public ArmorController() {
         
     }
     
-    public int insert(Access a) {
-        int retorno = 1;
+    public int insert(Armor a) {
         
         try {
             Connect conexao = new Connect();
             
-            String strSql = "insert into Access (username, passkey) values ";
-            strSql =  strSql + "(" + a.getUsername() + "," + a.getPasskey() + ");";
+            String strSql = "insert into Armor (itemName, cost, weight, isEquiped, ";
+            strSql = strSql + "armorType, baseACBonus, modifier, ";
+            strSql = strSql + "strengthRequirement, stealthDisadvantage) values ";
+            strSql = strSql + "('" + a.getName() + "'," + a.getCost() + ",'" + a.getWeight() + "',";
+            strSql = strSql + a.isIsEquiped() + ",'" + a.getArmor_type() + "'," + a.getBase_AC_bonus()+ ",";
+            strSql = strSql + a.getModifier() + "," + a.getStrength_requirement() + "," + a.isStealth_disadvantage();
+            strSql = strSql + ");";
+            
+            Connection conn = conexao.conectaBD();
+            
+            if (conn != null) {
+                Statement stmt = (Statement)conn.createStatement();
+                stmt.execute(strSql);
+                conexao.desconectaBD(conn);
+            }
+            
+            return 1;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
+    public int remove(Armor a) {
+        int retorno = 1;
+        
+        try {
+            Connect conexao = new Connect();
+            String strSql = "delete from Armor where idArmor = " + a.getIdArmor();
             
             Connection conn = conexao.conectaBD();
             
@@ -46,35 +72,13 @@ public class AccessController {
         }
     }
     
-    public int remove(Access a) {
-        int retorno = 1;
-        
-        try {
-            Connect conexao = new Connect();
-            String strSql = "delete from Access where idAccess = " + a.getIdAccess();
-            
-            Connection conn = conexao.conectaBD();
-            
-            if (conn != null) {
-                Statement stmt = (Statement)conn.createStatement();
-                stmt.execute(strSql);
-                conexao.desconectaBD(conn);
-            }
-            
-            return retorno;
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-            return 0;
-        }
-    }
-    
-    public ResultSet getAccessesList() {
+    public ResultSet getArmorList() {
         ResultSet rs = null;
         
         try {
             Connect conexao = new Connect();
             
-            String strSql = "select * from Access";
+            String strSql = "select * from Armor";
             
             Connection conn = conexao.conectaBD();
             
@@ -90,31 +94,4 @@ public class AccessController {
         return rs;
     }
     
-    public Access getByLogin(String login) {
-        ResultSet rs = null;
-        Access access = null;
-        
-        try {
-            Connect conexao = new Connect();
-            
-            String strSql = "select * from Access where username = '" + login + "';";
-            
-            Connection conn = conexao.conectaBD();
-            
-            if (conn != null) {
-                Statement stmt = (Statement)conn.createStatement();
-                rs = stmt.executeQuery(strSql);
-                if (rs != null && rs.next()) {
-                    access = new Access(rs.getString("username"), 
-                            rs.getString("passkey"), rs.getInt("permission"));
-                }
-            }
-            
-            conexao.desconectaBD(conn);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-        
-        return access;
-    }
 }
