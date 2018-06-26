@@ -43,7 +43,7 @@ public class frmVault extends javax.swing.JFrame {
         btnExit = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGear = new javax.swing.JTable();
-        cmbGearType = new javax.swing.JComboBox<>();
+        cmbGearType = new javax.swing.JComboBox<String>();
         lblGearName = new javax.swing.JLabel();
         txtGearName = new javax.swing.JTextField();
         lblGearCost = new javax.swing.JLabel();
@@ -65,9 +65,9 @@ public class frmVault extends javax.swing.JFrame {
         btnExitArmor = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblArmor = new javax.swing.JTable();
-        cmbModifier = new javax.swing.JComboBox<>();
+        cmbModifier = new javax.swing.JComboBox<String>();
         btnStealthDArmor = new javax.swing.JToggleButton();
-        cmbArmorType = new javax.swing.JComboBox<>();
+        cmbArmorType = new javax.swing.JComboBox<String>();
         txtArmorName = new javax.swing.JTextField();
         lblArmorName = new javax.swing.JLabel();
         lblArmorCost = new javax.swing.JLabel();
@@ -87,7 +87,7 @@ public class frmVault extends javax.swing.JFrame {
         lblWpnCost = new javax.swing.JLabel();
         txtWpnCost = new javax.swing.JTextField();
         lblWpnType = new javax.swing.JLabel();
-        cmbWpnType = new javax.swing.JComboBox<>();
+        cmbWpnType = new javax.swing.JComboBox<String>();
         lblWpnRange = new javax.swing.JLabel();
         txtWpnMaxRange = new javax.swing.JTextField();
         txtWpnMinRange = new javax.swing.JTextField();
@@ -113,6 +113,7 @@ public class frmVault extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vault");
         setName("jfVault"); // NOI18N
+        setResizable(false);
 
         jpAdventureGear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -209,7 +210,7 @@ public class frmVault extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblGear);
 
-        cmbGearType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
+        cmbGearType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
         cmbGearType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbGearTypeActionPerformed(evt);
@@ -244,9 +245,7 @@ public class frmVault extends javax.swing.JFrame {
                                     .addComponent(lblGearName))
                                 .addGap(41, 41, 41)
                                 .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpAdventureGearLayout.createSequentialGroup()
-                                        .addComponent(lblGearCost)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblGearCost)
                                     .addComponent(txtGearCost))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAdventureGearLayout.createSequentialGroup()
@@ -379,7 +378,7 @@ public class frmVault extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblArmor);
 
-        cmbModifier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
+        cmbModifier.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
 
         btnStealthDArmor.setText("False");
         btnStealthDArmor.addActionListener(new java.awt.event.ActionListener() {
@@ -388,7 +387,7 @@ public class frmVault extends javax.swing.JFrame {
             }
         });
 
-        cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
+        cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
 
         txtArmorName.setToolTipText("");
 
@@ -573,7 +572,7 @@ public class frmVault extends javax.swing.JFrame {
 
         lblWpnType.setText("Weapon Type :");
 
-        cmbWpnType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged" }));
+        cmbWpnType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged" }));
         cmbWpnType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbWpnTypeItemStateChanged(evt);
@@ -838,6 +837,7 @@ public class frmVault extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jpAdventureGearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpAdventureGearMouseClicked
