@@ -96,28 +96,27 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jScrollPane1" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
+                                      <Component id="lblDescriptionGear" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmbGearType" alignment="0" min="-2" pref="208" max="-2" attributes="0"/>
+                                      <Component id="lblTypeGear" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jScrollPane1" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
-                                              <Component id="lblDescriptionGear" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cmbGearType" alignment="0" min="-2" pref="208" max="-2" attributes="0"/>
-                                              <Component id="lblTypeGear" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="txtGearName" min="-2" pref="153" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                                  <Component id="txtGearCost" max="32767" attributes="0"/>
-                                              </Group>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="txtGearName" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                                              <Component id="lblGearName" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblGearName" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="lblGearCost" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="lblGearCost" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
+                                              </Group>
+                                              <Component id="txtGearCost" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace pref="60" max="32767" attributes="0"/>

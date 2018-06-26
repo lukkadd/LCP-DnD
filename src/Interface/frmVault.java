@@ -233,23 +233,22 @@ public class frmVault extends javax.swing.JFrame {
                 .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpAdventureGearLayout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDescriptionGear)
+                            .addComponent(cmbGearType, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTypeGear)
                             .addGroup(jpAdventureGearLayout.createSequentialGroup()
-                                .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblDescriptionGear)
-                                    .addComponent(cmbGearType, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblTypeGear)
+                                .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtGearName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblGearName))
+                                .addGap(41, 41, 41)
+                                .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jpAdventureGearLayout.createSequentialGroup()
-                                        .addComponent(txtGearName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(41, 41, 41)
-                                        .addComponent(txtGearCost)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jpAdventureGearLayout.createSequentialGroup()
-                                .addComponent(lblGearName)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblGearCost)
-                                .addGap(119, 119, 119))))
+                                        .addComponent(lblGearCost)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtGearCost))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAdventureGearLayout.createSequentialGroup()
                         .addContainerGap(60, Short.MAX_VALUE)
                         .addComponent(tbAdventureGear, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -869,6 +868,8 @@ public class frmVault extends javax.swing.JFrame {
         cmbGearType.setEnabled(true);
         txtDescription.setText("");
         cmbGearType.setSelectedIndex(0);
+        txtGearName.setEnabled(true);
+        txtGearCost.setEnabled(true);
         
         btnNew.setEnabled(false);
         btnUpdate.setEnabled(false);
@@ -1118,7 +1119,7 @@ public class frmVault extends javax.swing.JFrame {
 
     private void cmbWpnTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbWpnTypeItemStateChanged
         // TODO add your handling code here:
-        if(cmbWpnType.getSelectedItem().toString().contains("Ranged")){
+        if(cmbWpnType.getSelectedItem().toString().contains("Melee")){
             txtWpnMaxRange.setEnabled(false);
         }else{
             txtWpnMaxRange.setEnabled(true);
