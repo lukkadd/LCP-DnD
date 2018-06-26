@@ -10,8 +10,41 @@ package entities;
  * @author lukka
  */
 public class Item {
-    String name;
-    int cost; //measured in copper pieces
-    String weight; // in lb.
+    private String name;
+    private int cost; //measured in copper pieces
+    private String weight; // in lb.
+
+    public Item() {
+    }
+
+    public Item(String name, int cost, String weight) {
+        this.name = name;
+        this.cost = cost;
+        this.weight = weight;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
     
 }

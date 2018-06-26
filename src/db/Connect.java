@@ -17,9 +17,9 @@ public class Connect {
     public Connection conectaBD() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String strUrl = "jdbc:mysql://localhost:3306/lcp_dnd?useTimezone=true&serverTimezone=UTC";
+            String strUrl = "jdbc:mysql://localhost:3306/sys?useTimezone=true&serverTimezone=UTC";
             
-            Connection conn = DriverManager.getConnection(strUrl, "root", "vertrigo");
+            Connection conn = DriverManager.getConnection(strUrl, "root", "root");
             System.out.println("Conexão efetuada com sucesso!");
             
             return conn;
