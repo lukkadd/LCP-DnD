@@ -70,7 +70,7 @@ public class FrmLogIn extends javax.swing.JFrame {
             }
         });
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/D&DLOGO.png"))); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\LCP\\LCP-DnD\\img\\D&DLOGO.png")); // NOI18N
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
