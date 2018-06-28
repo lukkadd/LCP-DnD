@@ -52,10 +52,8 @@ public class AdventureGearController {
         }
     }
     
-    public ArrayList getAdventureGearList() {
+    public ResultSet getAdventureGearList() {
         ResultSet rs = null;
-        ArrayList<AdventureGear> advGList = new ArrayList<AdventureGear>();
-        AdventureGear advG = new AdventureGear();
         
         try {
             Connect conexao = new Connect();
@@ -67,17 +65,62 @@ public class AdventureGearController {
             if (conn != null) {
                 Statement stmt = (Statement)conn.createStatement();
                 rs = stmt.executeQuery(strSql);
-                while(rs.next()){
-                    advG.setName(rs.getString("itemName"));
-                    advGList.add(advG);
-                }
-                conexao.desconectaBD(conn);
             }
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
         
-        return advGList;
+        return rs;
+    }
+    
+    public int remove(AdventureGear a) {
+        int retorno = 1;
+
+        try {
+            Connect conexao = new Connect();
+            String strSql = "delete from AdventureGear where idAdventureGear = " + a.getId();
+
+            Connection conn = conexao.conectaBD();
+
+            if (conn != null) {
+                Statement stmt = (Statement)conn.createStatement();
+                stmt.execute(strSql);
+                conexao.desconectaBD(conn);
+            }
+
+            return retorno;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
+    public int update(AdventureGear a) {
+        int retorno = 1;
+
+        try {
+            Connect conexao = new Connect();
+            String strSql = "update AdventureGear set "
+                    + "itemName = " + "'" + a.getName() +"',"
+                    + "cost = " + a.getCost() +","
+                    + "weight = " + "'" + a.getWeight() +"',"
+                    + "description = " + "'" + a.getDescription() + "',"
+                    + "gearType = " + "'" + a.getGear_type() + "' "
+                    + "where idAdventureGear = " + a.getId();
+
+            Connection conn = conexao.conectaBD();
+
+            if (conn != null) {
+                Statement stmt = (Statement)conn.createStatement();
+                stmt.execute(strSql);
+                conexao.desconectaBD(conn);
+            }
+
+            return retorno;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
     }
     
     

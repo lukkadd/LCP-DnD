@@ -6,6 +6,7 @@
 package Interface;
 
 import controller.AdventureGearController;
+import db.ResultSetTableModel;
 import entities.AdventureGear;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -22,6 +23,7 @@ public class frmVault extends javax.swing.JFrame {
 
     private AdventureGear advGear = new AdventureGear();
     private AdventureGearController advGController = new AdventureGearController();
+    private ResultSet advGList;
     /**
      * Creates new form frmVault
      */
@@ -29,19 +31,26 @@ public class frmVault extends javax.swing.JFrame {
         initComponents();
     }
     
-    public void fillTable(ArrayList res, JTable table, ArrayList<String> meta) throws Exception{
-            DefaultTableModel dtm = new DefaultTableModel();
-            int numberOfColumns = meta.size();
-            for(int j = 0; j < numberOfColumns; j++){
-                Object [] rowData = new Object[numberOfColumns];
-                for (int i = 0; i < res.size(); ++i)
-                {
-                    rowData[i] = res.get(i);
-                }
-                dtm.addRow(rowData);
-            }
-            table.setModel(dtm);
-            dtm.fireTableDataChanged();
+    
+    public void fillTable(ResultSet rs, JTable table){
+        ResultSetTableModel model = new ResultSetTableModel(rs);
+        table.setModel(model);
+    }
+    
+    public void fillFields(AdventureGear a){
+        txtGearName.setText(a.getName());
+        txtGearCost.setText(String.valueOf(a.getCost()));
+        txtGearWeight.setText(a.getWeight());
+        txtDescription.setText(a.getDescription());
+        cmbGearType.setSelectedItem(a.getGear_type());
+    }
+    
+    public void clearFields(AdventureGear a){
+        txtGearName.setText("");
+        txtGearCost.setText("");
+        txtGearWeight.setText("");
+        txtDescription.setText("");
+        cmbGearType.setSelectedIndex(0);
     }
     
     /**
@@ -270,6 +279,11 @@ public class frmVault extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblGear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblGearMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tblGear);
@@ -943,11 +957,11 @@ public class frmVault extends javax.swing.JFrame {
         btnCancel.setEnabled(false);
         btnSave.setEnabled(false);
         btnExit.setEnabled(true);
+        
+        //reload table
         try {
-            ArrayList<String> meta = new ArrayList();
-            meta.add("Name");
-            ArrayList advGList = advGController.getAdventureGearList();
-            fillTable(advGList,tblGear,meta);
+            advGList = advGController.getAdventureGearList();
+            fillTable(advGList,tblGear);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }        
@@ -967,12 +981,17 @@ public class frmVault extends javax.swing.JFrame {
         btnCancel.setEnabled(true);
         btnSave.setEnabled(true);
         btnExit.setEnabled(false);
+        
+        advGear.setId(-1);
     }//GEN-LAST:event_btnNewMouseClicked
 
     private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
         // TODO add your handling code here:
         txtDescription.setEnabled(true);
         cmbGearType.setEnabled(true);
+        txtGearName.setEnabled(true);
+        txtGearCost.setEnabled(true);
+        txtGearWeight.setEnabled(true);
         
         btnNew.setEnabled(false);
         btnUpdate.setEnabled(false);
@@ -984,17 +1003,28 @@ public class frmVault extends javax.swing.JFrame {
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         // TODO add your handling code here:
-        txtDescription.setEnabled(true);
-        cmbGearType.setEnabled(true);
-        txtDescription.setText("");
-        cmbGearType.setSelectedIndex(0);
+        clearFields(advGear);
+        txtDescription.setEnabled(false);
+        cmbGearType.setEnabled(false);
+        txtGearName.setEnabled(false);
+        txtGearCost.setEnabled(false);
+        txtGearWeight.setEnabled(false);
         
-        btnNew.setEnabled(false);
+        btnNew.setEnabled(true);
         btnUpdate.setEnabled(false);
         btnDelete.setEnabled(false);
-        btnCancel.setEnabled(true);
-        btnSave.setEnabled(true);
-        btnExit.setEnabled(false);
+        btnCancel.setEnabled(false);
+        btnSave.setEnabled(false);
+        btnExit.setEnabled(true);
+        
+        advGController.remove(advGear);
+        //reload table
+        try {
+            advGList = advGController.getAdventureGearList();
+            fillTable(advGList,tblGear);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
@@ -1006,10 +1036,14 @@ public class frmVault extends javax.swing.JFrame {
         advGear.setDescription(txtDescription.getText());
         advGear.setGear_type(cmbGearType.getSelectedItem().toString());
         advGear.setWeight(txtGearWeight.getText());
-        
+        System.out.println(advGear.getId());
         //manda pro db
-        advGController.insert(advGear);
-
+        if(advGear.getId() == -1){
+            advGController.insert(advGear);    
+        }else{
+            advGController.update(advGear);
+        }
+        
         //desabilitando campos
         txtDescription.setEnabled(false);
         cmbGearType.setEnabled(false);
@@ -1030,15 +1064,22 @@ public class frmVault extends javax.swing.JFrame {
         btnSave.setEnabled(false);
         btnExit.setEnabled(true);
         
-
+        try {
+            advGList = advGController.getAdventureGearList();
+            fillTable(advGList,tblGear);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
         // TODO add your handling code here:
+        clearFields(advGear);
         txtDescription.setEnabled(false);
         cmbGearType.setEnabled(false);
-        txtDescription.setText("");
-        cmbGearType.setSelectedIndex(0);
+        txtGearName.setEnabled(false);
+        txtGearCost.setEnabled(false);
+        txtGearWeight.setEnabled(false);
         //Habilitando a barra de ferramentas
         btnNew.setEnabled(true);
         btnUpdate.setEnabled(true);
@@ -1285,6 +1326,27 @@ public class frmVault extends javax.swing.JFrame {
             txtWpnMinRange.setEnabled(true);
         }
     }//GEN-LAST:event_chkWpnReachActionPerformed
+
+    private void tblGearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGearMouseClicked
+        // TODO add your handling code here:
+        
+        btnNew.setEnabled(false);
+        btnUpdate.setEnabled(true);
+        btnDelete.setEnabled(true);
+        btnCancel.setEnabled(true);
+        btnSave.setEnabled(false);
+        btnExit.setEnabled(false);
+        
+        int row = tblGear.getSelectedRow();
+        advGear.setId(((Long) tblGear.getValueAt(row,0)).intValue());
+        advGear.setName(tblGear.getValueAt(row,1).toString());
+        advGear.setCost(Integer.parseInt(tblGear.getValueAt(row,2).toString()));
+        advGear.setGear_type(tblGear.getValueAt(row,5).toString());
+        advGear.setWeight(tblGear.getValueAt(row,3).toString());
+        advGear.setDescription(tblGear.getValueAt(row,4).toString());
+        
+        fillFields(advGear);
+    }//GEN-LAST:event_tblGearMouseClicked
 
     /**
      * @param args the command line arguments
