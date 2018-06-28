@@ -8,7 +8,6 @@ package gui;
 
 import entity.Access;
 import controller.AccessController;
-import Interface.frmVault;
 
 /**
  *
@@ -150,8 +149,6 @@ public class FrmLogIn extends javax.swing.JFrame {
         }
         else {
             System.out.println("yes!!");
-            this.setVisible(false);
-            new frmVault().setVisible(true);
         }
     }//GEN-LAST:event_btnLogInMouseClicked
 

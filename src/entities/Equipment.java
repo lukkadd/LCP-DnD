@@ -10,19 +10,6 @@ package entities;
  * @author lukka
  */
 public class Equipment extends Item{
-    private boolean isEquiped;
-
-    public Equipment(boolean isEquiped, String name, int cost, String weight) {
-        super(name, cost, weight);
-        this.isEquiped = isEquiped;
-    }
-
-    public boolean isIsEquiped() {
-        return isEquiped;
-    }
-
-    public void setIsEquiped(boolean isEquiped) {
-        this.isEquiped = isEquiped;
-    }
-    
+    boolean isEquiped;
+    boolean profficiency;
 }

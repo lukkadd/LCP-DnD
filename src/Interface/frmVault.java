@@ -15,28 +15,44 @@ import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import entities.Armor;
-import controller.ArmorController;
-import entities.Weapon;
-import controller.WeaponController;
-
 /**
  *
  * @author aluno
  */
 public class frmVault extends javax.swing.JFrame {
-  
+
     private AdventureGear advGear = new AdventureGear();
     private AdventureGearController advGController = new AdventureGearController();
     private ResultSet advGList;
-  
     /**
      * Creates new form frmVault
      */
     public frmVault() {
         initComponents();
     }
-
+    
+    
+    public void fillTable(ResultSet rs, JTable table){
+        ResultSetTableModel model = new ResultSetTableModel(rs);
+        table.setModel(model);
+    }
+    
+    public void fillFields(AdventureGear a){
+        txtGearName.setText(a.getName());
+        txtGearCost.setText(String.valueOf(a.getCost()));
+        txtGearWeight.setText(a.getWeight());
+        txtDescription.setText(a.getDescription());
+        cmbGearType.setSelectedItem(a.getGear_type());
+    }
+    
+    public void clearFields(AdventureGear a){
+        txtGearName.setText("");
+        txtGearCost.setText("");
+        txtGearWeight.setText("");
+        txtDescription.setText("");
+        cmbGearType.setSelectedIndex(0);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,17 +102,13 @@ public class frmVault extends javax.swing.JFrame {
         btnExitArmor = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblArmor = new javax.swing.JTable();
-        cmbModifier = new javax.swing.JComboBox<String>();
+        cmbModifier = new javax.swing.JComboBox<>();
         btnStealthDArmor = new javax.swing.JToggleButton();
-        cmbArmorType = new javax.swing.JComboBox<String>();
+        cmbArmorType = new javax.swing.JComboBox<>();
         txtArmorName = new javax.swing.JTextField();
         lblArmorName = new javax.swing.JLabel();
         lblArmorCost = new javax.swing.JLabel();
         txtArmorCost = new javax.swing.JTextField();
-        lblArmorWeight = new javax.swing.JLabel();
-        txtArmorWeight = new javax.swing.JTextField();
-        lblArmorIsEquiped = new javax.swing.JLabel();
-        btnArmorIsEquiped = new javax.swing.JToggleButton();
         jpWeapon = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblWeapon = new javax.swing.JTable();
@@ -112,10 +124,11 @@ public class frmVault extends javax.swing.JFrame {
         lblWpnCost = new javax.swing.JLabel();
         txtWpnCost = new javax.swing.JTextField();
         lblWpnType = new javax.swing.JLabel();
-        cmbWpnType = new javax.swing.JComboBox<String>();
+        cmbWpnType = new javax.swing.JComboBox<>();
         lblWpnRange = new javax.swing.JLabel();
         txtWpnMaxRange = new javax.swing.JTextField();
         txtWpnMinRange = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         chkWpnHeavy = new javax.swing.JCheckBox();
         chkWpnLoading = new javax.swing.JCheckBox();
         chkWpnThrown = new javax.swing.JCheckBox();
@@ -126,12 +139,8 @@ public class frmVault extends javax.swing.JFrame {
         txtWpnAttack = new javax.swing.JTextField();
         lblWpnTHAttack = new javax.swing.JLabel();
         txtWpnTHAttack = new javax.swing.JTextField();
-        lblWpnWeight = new javax.swing.JLabel();
-        txtWpnWeight = new javax.swing.JTextField();
-        lblWpnIsEquiped = new javax.swing.JLabel();
-        btnWpnIsEquiped = new javax.swing.JToggleButton();
-        lblWpnSpecialCondition = new javax.swing.JLabel();
-        txtWpnSpecialCondition = new javax.swing.JTextField();
+        chkWpnVersatile = new javax.swing.JCheckBox();
+        chkWpnReach = new javax.swing.JCheckBox();
         jpMonster = new javax.swing.JPanel();
         jpSpell = new javax.swing.JPanel();
         jpAttribute = new javax.swing.JPanel();
@@ -142,7 +151,6 @@ public class frmVault extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vault");
         setName("jfVault"); // NOI18N
-        setResizable(false);
 
         jpAdventureGear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -173,7 +181,7 @@ public class frmVault extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnNewMouseClicked(evt);
             }
-        });        
+        });
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewActionPerformed(evt);
@@ -295,7 +303,7 @@ public class frmVault extends javax.swing.JFrame {
         lblGearCost.setToolTipText("");
 
         txtGearCost.setToolTipText("cost must be in copper pieces");
-        
+
         lblGearWeight.setText("Weight :");
 
         javax.swing.GroupLayout jpAdventureGearLayout = new javax.swing.GroupLayout(jpAdventureGear);
@@ -477,20 +485,6 @@ public class frmVault extends javax.swing.JFrame {
 
         txtArmorCost.setToolTipText("cost must be in copper pieces");
 
-        lblArmorWeight.setText("Weight :");
-        lblArmorWeight.setToolTipText("");
-
-        txtArmorWeight.setToolTipText("cost must be in copper pieces");
-
-        lblArmorIsEquiped.setText("Is Equiped:");
-
-        btnArmorIsEquiped.setText("False");
-        btnArmorIsEquiped.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnArmorIsEquipedActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jpArmorLayout = new javax.swing.GroupLayout(jpArmor);
         jpArmor.setLayout(jpArmorLayout);
         jpArmorLayout.setHorizontalGroup(
@@ -499,41 +493,30 @@ public class frmVault extends javax.swing.JFrame {
                 .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpArmorLayout.createSequentialGroup()
                         .addContainerGap(51, Short.MAX_VALUE)
-                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpArmorLayout.createSequentialGroup()
-                                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblStrenghtRArmor)
-                                    .addGroup(jpArmorLayout.createSequentialGroup()
-                                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtArmorName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblArmorName))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblArmorCost)
-                                            .addComponent(txtArmorCost, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jpArmorLayout.createSequentialGroup()
-                                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txtStrenghtRArmor, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblModifierArmor, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblTypeArmor, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cmbModifier, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cmbArmorType, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtACBonus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblACBonus)
-                                            .addComponent(lblStealthDArmor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnStealthDArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jpArmorLayout.createSequentialGroup()
-                                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblArmorWeight)
-                                    .addComponent(txtArmorWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(21, 21, 21)
                                 .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblArmorIsEquiped, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnArmorIsEquiped, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(88, 88, 88))))
+                                    .addComponent(lblModifierArmor)
+                                    .addComponent(lblTypeArmor)
+                                    .addComponent(cmbModifier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbArmorType, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtACBonus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblACBonus)
+                                    .addComponent(lblStealthDArmor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnStealthDArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblStrenghtRArmor)
+                            .addComponent(txtStrenghtRArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpArmorLayout.createSequentialGroup()
+                                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtArmorName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblArmorName))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblArmorCost)
+                                    .addComponent(txtArmorCost, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpArmorLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tbArmor, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -549,7 +532,7 @@ public class frmVault extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
                     .addGroup(jpArmorLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
+                        .addGap(64, 64, 64)
                         .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblArmorName)
                             .addComponent(lblArmorCost))
@@ -557,17 +540,7 @@ public class frmVault extends javax.swing.JFrame {
                         .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtArmorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtArmorCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpArmorLayout.createSequentialGroup()
-                                .addComponent(lblArmorWeight)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtArmorWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpArmorLayout.createSequentialGroup()
-                                .addComponent(lblArmorIsEquiped)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnArmorIsEquiped)))
-                        .addGap(7, 7, 7)
+                        .addGap(18, 18, 18)
                         .addGroup(jpArmorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTypeArmor)
                             .addComponent(lblACBonus))
@@ -700,6 +673,8 @@ public class frmVault extends javax.swing.JFrame {
 
         lblWpnRange.setText("Range :");
 
+        jLabel1.setText("-");
+
         chkWpnHeavy.setText("Heavy");
 
         chkWpnLoading.setText("Loading");
@@ -721,82 +696,69 @@ public class frmVault extends javax.swing.JFrame {
 
         lblWpnTHAttack.setText("Two Handed Attack Damage");
 
-        lblWpnWeight.setText("Weight :");
-        lblWpnWeight.setToolTipText("");
-
-        txtWpnWeight.setToolTipText("cost must be in copper pieces");
-
-        lblWpnIsEquiped.setText("Is Equiped:");
-
-        btnWpnIsEquiped.setText("False");
-        btnWpnIsEquiped.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnWpnIsEquipedMouseClicked(evt);
+        chkWpnVersatile.setText("Versatile");
+        chkWpnVersatile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkWpnVersatileActionPerformed(evt);
             }
         });
 
-        lblWpnSpecialCondition.setText("Special Condition");
+        chkWpnReach.setText("Reach");
+        chkWpnReach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkWpnReachActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpWeaponLayout = new javax.swing.GroupLayout(jpWeapon);
         jpWeapon.setLayout(jpWeaponLayout);
         jpWeaponLayout.setHorizontalGroup(
             jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpWeaponLayout.createSequentialGroup()
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tbWeapon, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpWeaponLayout.createSequentialGroup()
-                        .addContainerGap(66, Short.MAX_VALUE)
-                        .addComponent(tbWeapon, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblWpnName)
+                        .addGap(130, 130, 130)
+                        .addComponent(lblWpnCost))
                     .addGroup(jpWeaponLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cmbWpnType, javax.swing.GroupLayout.Alignment.LEADING, 0, 142, Short.MAX_VALUE)
+                            .addComponent(txtWpnName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblWpnType, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(18, 18, 18)
                         .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtWpnCost, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpWeaponLayout.createSequentialGroup()
+                                .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtWpnMinRange)
+                                    .addComponent(lblWpnRange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtWpnMaxRange, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lblWpnAttack)
+                    .addComponent(lblWpnTHAttack)
+                    .addComponent(chkWpnVersatile)
+                    .addGroup(jpWeaponLayout.createSequentialGroup()
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtWpnTHAttack, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtWpnAttack, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpWeaponLayout.createSequentialGroup()
                                 .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(chkWpnTwoHanded)
                                     .addComponent(chkWpnHeavy))
                                 .addGap(18, 18, 18)
                                 .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(chkWpnLoading)
-                                    .addComponent(chkWpnAmmunition))
-                                .addGap(18, 18, 18)
-                                .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(chkWpnThrown)
-                                    .addComponent(chkWpnFinesse)))
-                            .addGroup(jpWeaponLayout.createSequentialGroup()
-                                .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cmbWpnType, 0, 142, Short.MAX_VALUE)
-                                    .addComponent(lblWpnType, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtWpnMinRange)
-                                    .addComponent(lblWpnRange))
-                                .addGap(11, 11, 11)
-                                .addComponent(txtWpnMaxRange, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jpWeaponLayout.createSequentialGroup()
-                                    .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblWpnWeight)
-                                        .addComponent(txtWpnWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblWpnIsEquiped, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnWpnIsEquiped, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jpWeaponLayout.createSequentialGroup()
-                                    .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtWpnName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblWpnName))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblWpnCost)
-                                        .addComponent(txtWpnCost, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(lblWpnAttack)
-                            .addComponent(lblWpnTHAttack)
-                            .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtWpnTHAttack, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtWpnAttack, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblWpnSpecialCondition)
-                            .addComponent(txtWpnSpecialCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                    .addComponent(chkWpnAmmunition)
+                                    .addComponent(chkWpnReach))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkWpnThrown)
+                            .addComponent(chkWpnFinesse))))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -808,25 +770,15 @@ public class frmVault extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
                     .addGroup(jpWeaponLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGap(48, 48, 48)
                         .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblWpnName)
                             .addComponent(lblWpnCost))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtWpnCost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtWpnName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpWeaponLayout.createSequentialGroup()
-                                .addComponent(lblWpnWeight)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtWpnWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpWeaponLayout.createSequentialGroup()
-                                .addComponent(lblWpnIsEquiped)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnWpnIsEquiped)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtWpnName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtWpnCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblWpnType)
                             .addComponent(lblWpnRange))
@@ -834,7 +786,8 @@ public class frmVault extends javax.swing.JFrame {
                         .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbWpnType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtWpnMaxRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtWpnMinRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtWpnMinRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(chkWpnHeavy)
@@ -845,11 +798,11 @@ public class frmVault extends javax.swing.JFrame {
                             .addComponent(chkWpnTwoHanded)
                             .addComponent(chkWpnAmmunition)
                             .addComponent(chkWpnFinesse))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblWpnSpecialCondition)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtWpnSpecialCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(chkWpnVersatile)
+                            .addComponent(chkWpnReach))
+                        .addGap(13, 13, 13)
                         .addComponent(lblWpnAttack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtWpnAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -981,7 +934,6 @@ public class frmVault extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jpAdventureGearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpAdventureGearMouseClicked
@@ -1005,14 +957,14 @@ public class frmVault extends javax.swing.JFrame {
         btnCancel.setEnabled(false);
         btnSave.setEnabled(false);
         btnExit.setEnabled(true);
-      
+        
         //reload table
         try {
             advGList = advGController.getAdventureGearList();
             fillTable(advGList,tblGear);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
+        }        
     }//GEN-LAST:event_jpAdventureGearComponentShown
 
     private void btnNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewMouseClicked
@@ -1029,6 +981,7 @@ public class frmVault extends javax.swing.JFrame {
         btnCancel.setEnabled(true);
         btnSave.setEnabled(true);
         btnExit.setEnabled(false);
+        
         advGear.setId(-1);
     }//GEN-LAST:event_btnNewMouseClicked
 
@@ -1060,10 +1013,10 @@ public class frmVault extends javax.swing.JFrame {
         btnNew.setEnabled(true);
         btnUpdate.setEnabled(false);
         btnDelete.setEnabled(false);
-        btnCancel.setEnabled(true);
+        btnCancel.setEnabled(false);
         btnSave.setEnabled(false);
         btnExit.setEnabled(true);
-      
+        
         advGController.remove(advGear);
         //reload table
         try {
@@ -1076,6 +1029,7 @@ public class frmVault extends javax.swing.JFrame {
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
         // TODO add your handling code here:
+
         //populando o obj
         advGear.setName(txtGearName.getText());
         advGear.setCost(Integer.parseInt(txtGearCost.getText()));
@@ -1089,7 +1043,8 @@ public class frmVault extends javax.swing.JFrame {
         }else{
             advGController.update(advGear);
         }
-      
+        
+        //desabilitando campos
         txtDescription.setEnabled(false);
         cmbGearType.setEnabled(false);
         txtDescription.setText("");
@@ -1101,13 +1056,14 @@ public class frmVault extends javax.swing.JFrame {
         txtGearWeight.setEnabled(false);
         txtGearWeight.setText("");
         
+        //gerenciando os botoes
         btnNew.setEnabled(true);
         btnUpdate.setEnabled(false);
         btnDelete.setEnabled(false);
         btnCancel.setEnabled(false);
         btnSave.setEnabled(false);
         btnExit.setEnabled(true);
-      
+        
         try {
             advGList = advGController.getAdventureGearList();
             fillTable(advGList,tblGear);
@@ -1134,7 +1090,14 @@ public class frmVault extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelMouseClicked
 
     private void jpArmorComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpArmorComponentShown
-        habilitaDesabilitaCamposArmor(false);
+        // TODO add your handling code here:
+        cmbArmorType.setEnabled(false);
+        txtACBonus.setEnabled(false);
+        cmbModifier.setEnabled(false);
+        btnStealthDArmor.setEnabled(false);
+        txtStrenghtRArmor.setEnabled(false);
+        txtArmorName.setEnabled(false);
+        txtArmorCost.setEnabled(false);
         
         btnNewArmor.setEnabled(true);
         btnUpdateArmor.setEnabled(true);
@@ -1145,21 +1108,33 @@ public class frmVault extends javax.swing.JFrame {
     }//GEN-LAST:event_jpArmorComponentShown
 
     private void btnNewArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewArmorMouseClicked
-        if (btnNewArmor.isEnabled()) {
-            limpaCamposArmor();
-            habilitaDesabilitaCamposArmor(true);
+        // TODO add your handling code here:
+        txtACBonus.setEnabled(true);
+        cmbModifier.setEnabled(true);
+        btnStealthDArmor.setEnabled(true);
+        txtStrenghtRArmor.setEnabled(true);
+        cmbArmorType.setEnabled(true);
+        txtACBonus.setText("");
+        cmbModifier.setSelectedIndex(0);
         
-            btnNewArmor.setEnabled(false);
-            btnUpdateArmor.setEnabled(false);
-            btnDeleteArmor.setEnabled(false);
-            btnCancelArmor.setEnabled(true);
-            btnSaveArmor.setEnabled(true);
-            btnExitArmor.setEnabled(false);
-        }
+        txtStrenghtRArmor.setText("");
+        
+        
+        btnNewArmor.setEnabled(false);
+        btnUpdateArmor.setEnabled(false);
+        btnDeleteArmor.setEnabled(false);
+        btnCancelArmor.setEnabled(true);
+        btnSaveArmor.setEnabled(true);
+        btnExitArmor.setEnabled(false);
     }//GEN-LAST:event_btnNewArmorMouseClicked
 
     private void btnUpdateArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateArmorMouseClicked
-        habilitaDesabilitaCamposArmor(true);
+        // TODO add your handling code here:
+        txtACBonus.setEnabled(true);
+        cmbModifier.setEnabled(true);
+        btnStealthDArmor.setEnabled(true);
+        txtStrenghtRArmor.setEnabled(true);
+        cmbArmorType.setEnabled(true);
         
         btnNewArmor.setEnabled(false);
         btnUpdateArmor.setEnabled(false);
@@ -1170,72 +1145,66 @@ public class frmVault extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateArmorMouseClicked
 
     private void btnDeleteArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteArmorMouseClicked
-        if (btnDeleteArmor.isEnabled()) {
-            limpaCamposArmor();
-            habilitaDesabilitaCamposArmor(false);
+        // TODO add your handling code here:
+        txtACBonus.setEnabled(true);
+        cmbModifier.setEnabled(true);
+        btnStealthDArmor.setEnabled(true);
+        txtStrenghtRArmor.setEnabled(true);
+        cmbArmorType.setEnabled(true);
+        txtACBonus.setText("");
+        cmbModifier.setSelectedIndex(0);
         
-            btnNewArmor.setEnabled(true);
-            btnUpdateArmor.setEnabled(true);
-            btnDeleteArmor.setEnabled(true);
-            btnCancelArmor.setEnabled(true);
-            btnSaveArmor.setEnabled(false);
-            btnExitArmor.setEnabled(true);
-        }
+        txtStrenghtRArmor.setText("");
+        
+        
+        btnNewArmor.setEnabled(false);
+        btnUpdateArmor.setEnabled(false);
+        btnDeleteArmor.setEnabled(false);
+        btnCancelArmor.setEnabled(true);
+        btnSaveArmor.setEnabled(true);
+        btnExitArmor.setEnabled(false);
     }//GEN-LAST:event_btnDeleteArmorMouseClicked
 
     private void btnSaveArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveArmorMouseClicked
-        if (btnSaveArmor.isEnabled()) {
-            //Faz o insert
-            Armor armor;
-            ArmorController armorC;
-            String armorName,armorWeight, armorType;
-            int baseACBonus, modifier, strengthReq, armorCost;
-            boolean isEquiped, stealthDArmor;
-
-            armorC = new ArmorController();
-            armorName = txtArmorName.getText();
-            armorWeight = txtArmorWeight.getText();
-            armorCost = Integer.parseInt(txtArmorCost.getText());
-            armorType = (String)cmbArmorType.getSelectedItem();
-            baseACBonus = Integer.parseInt(txtACBonus.getText());
-            modifier = cmbModifier.getSelectedIndex();
-            strengthReq = Integer.parseInt(txtStrenghtRArmor.getText());
-            isEquiped = btnArmorIsEquiped.isSelected();
-            stealthDArmor = btnStealthDArmor.isEnabled();
-            armor = new Armor(armorType, baseACBonus, modifier,
-                    strengthReq, stealthDArmor, isEquiped, armorName, 
-                    armorCost, armorWeight);
-
-            if (armorC.insert(armor) == 1) {
-                System.out.println("armor inserted!");
-            }
-            else {
-                System.out.println("error");
-            }
-
-            habilitaDesabilitaCamposArmor(false);
-
-            btnNewArmor.setEnabled(true);
-            btnUpdateArmor.setEnabled(true);
-            btnDeleteArmor.setEnabled(true);
-            btnCancelArmor.setEnabled(false);
-            btnSaveArmor.setEnabled(false);
-            btnExitArmor.setEnabled(true);
-        }
+        // TODO add your handling code here:
+        txtACBonus.setEnabled(false);
+        cmbModifier.setEnabled(false);
+        btnStealthDArmor.setEnabled(false);
+        txtStrenghtRArmor.setEnabled(false);
+        cmbArmorType.setEnabled(false);
+        txtACBonus.setText("");
+        cmbModifier.setSelectedIndex(0);
+        
+        txtStrenghtRArmor.setText("");
+        
+        
+        btnNewArmor.setEnabled(true);
+        btnUpdateArmor.setEnabled(true);
+        btnDeleteArmor.setEnabled(true);
+        btnCancelArmor.setEnabled(false);
+        btnSaveArmor.setEnabled(false);
+        btnExitArmor.setEnabled(true);
     }//GEN-LAST:event_btnSaveArmorMouseClicked
 
     private void btnCancelArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelArmorMouseClicked
-        if (btnCancelArmor.isEnabled()) {
-            limpaCamposArmor();
-            habilitaDesabilitaCamposArmor(true);       
-
-            btnNewArmor.setEnabled(true);
-            btnUpdateArmor.setEnabled(true);
-            btnDeleteArmor.setEnabled(true);
-            btnCancelArmor.setEnabled(false);
-            btnSaveArmor.setEnabled(false);
-            btnExitArmor.setEnabled(true);
-        }
+        // TODO add your handling code here:
+        txtACBonus.setEnabled(false);
+        cmbModifier.setEnabled(false);
+        btnStealthDArmor.setEnabled(false);
+        txtStrenghtRArmor.setEnabled(false);
+        cmbArmorType.setEnabled(false);
+        txtACBonus.setText("");
+        cmbModifier.setSelectedIndex(0);
+        
+        txtStrenghtRArmor.setText("");
+        
+        
+        btnNewArmor.setEnabled(true);
+        btnUpdateArmor.setEnabled(true);
+        btnDeleteArmor.setEnabled(true);
+        btnCancelArmor.setEnabled(false);
+        btnSaveArmor.setEnabled(false);
+        btnExitArmor.setEnabled(true);
     }//GEN-LAST:event_btnCancelArmorMouseClicked
 
     private void btnStealthDArmorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStealthDArmorActionPerformed
@@ -1247,32 +1216,54 @@ public class frmVault extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnStealthDArmorActionPerformed
 
-    private void cmbGearTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGearTypeActionPerformed
+    private void btnNewWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewWpnMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbGearTypeActionPerformed
-
-    private void btnArmorIsEquipedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArmorIsEquipedActionPerformed
-        if(btnArmorIsEquiped.isSelected()){
-            btnArmorIsEquiped.setText("True");
-        }else{
-            btnArmorIsEquiped.setText("False");
-        }
-    }//GEN-LAST:event_btnArmorIsEquipedActionPerformed
-
-    private void jpWeaponComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpWeaponComponentShown
-        habilitaDesabilitaCamposWeapon(false);
-
-        btnNewWpn.setEnabled(true);
-        btnUpdateWpn.setEnabled(true);
-        btnDeleteWpn.setEnabled(true);
-        btnSaveWpn.setEnabled(false);
-        btnCancelWpn.setEnabled(false);
+        txtWpnName.setEnabled(true);
+        txtWpnCost.setEnabled(true);
+        cmbWpnType.setEnabled(true);
+        txtWpnMinRange.setEnabled(true);
+        txtWpnMaxRange.setEnabled(false);
+        chkWpnHeavy.setEnabled(true);
+        chkWpnLoading.setEnabled(true);
+        chkWpnThrown.setEnabled(true);
+        chkWpnTwoHanded.setEnabled(true);
+        chkWpnAmmunition.setEnabled(true);
+        chkWpnFinesse.setEnabled(true);
+        txtWpnAttack.setEnabled(true);
+        txtWpnTHAttack.setEnabled(false);
+        chkWpnVersatile.setEnabled(true);
+        
+        btnNewWpn.setEnabled(false);
+        btnUpdateWpn.setEnabled(false);
+        btnDeleteWpn.setEnabled(false);
+        btnSaveWpn.setEnabled(true);
+        btnCancelWpn.setEnabled(true);
         btnExitWpn.setEnabled(true);
-    }//GEN-LAST:event_jpWeaponComponentShown
+    }//GEN-LAST:event_btnNewWpnMouseClicked
+
+    private void btnUpdateWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateWpnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateWpnMouseClicked
+
+    private void btnDeleteWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteWpnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteWpnMouseClicked
+
+    private void btnSaveWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveWpnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveWpnMouseClicked
+
+    private void btnCancelWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelWpnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelWpnMouseClicked
 
     private void chkWpnTwoHandedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkWpnTwoHandedActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chkWpnTwoHandedActionPerformed
+
+    private void cmbGearTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGearTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbGearTypeActionPerformed
 
     private void cmbWpnTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbWpnTypeActionPerformed
         // TODO add your handling code here:
@@ -1287,88 +1278,56 @@ public class frmVault extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbWpnTypeItemStateChanged
 
-    private void btnCancelWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelWpnMouseClicked
+    private void jpWeaponComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpWeaponComponentShown
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelWpnMouseClicked
+        txtWpnName.setEnabled(false);
+        txtWpnCost.setEnabled(false);
+        cmbWpnType.setEnabled(false);
+        txtWpnMinRange.setEnabled(false);
+        txtWpnMaxRange.setEnabled(false);
+        chkWpnHeavy.setEnabled(false);
+        chkWpnLoading.setEnabled(false);
+        chkWpnThrown.setEnabled(false);
+        chkWpnTwoHanded.setEnabled(false);
+        chkWpnAmmunition.setEnabled(false);
+        chkWpnFinesse.setEnabled(false);
+        txtWpnAttack.setEnabled(false);
+        txtWpnTHAttack.setEnabled(false);
+        chkWpnVersatile.setEnabled(false);
+        
+        btnNewWpn.setEnabled(true);
+        btnUpdateWpn.setEnabled(false);
+        btnDeleteWpn.setEnabled(false);
+        btnSaveWpn.setEnabled(false);
+        btnCancelWpn.setEnabled(false);
+        btnExitWpn.setEnabled(true);
+    }//GEN-LAST:event_jpWeaponComponentShown
 
-    private void btnSaveWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveWpnMouseClicked
-        if (btnSaveWpn.isEnabled()) {
-            Weapon weapon;
-            WeaponController weaponC;
-            String weaponName, weaponWeight, weaponType, specialCondition, normalAtk, twoHandedAtk;
-            int weaponCost, minRange, maxRange = 0;
-            boolean isEquiped, heavy, loading, thrown, twoHanded, ammunition, finesse;
-
-            weaponC = new WeaponController();
-            weaponName = txtWpnName.getText();
-            weaponWeight = txtWpnWeight.getText();
-            weaponType = (String)cmbWpnType.getSelectedItem();
-            specialCondition = txtWpnSpecialCondition.getText();
-            normalAtk = txtWpnAttack.getText();
-            twoHandedAtk = txtWpnTHAttack.getText();
-            weaponCost = Integer.parseInt(txtWpnCost.getText());
-            minRange = Integer.parseInt(txtWpnMinRange.getText());
-            if (txtWpnMaxRange.isEnabled()) maxRange = Integer.parseInt(txtWpnMaxRange.getText());
-            isEquiped = btnWpnIsEquiped.isSelected();
-            heavy = chkWpnHeavy.isSelected();
-            loading = chkWpnLoading.isSelected();
-            thrown = chkWpnThrown.isSelected();
-            twoHanded = chkWpnTwoHanded.isSelected();
-            ammunition = chkWpnAmmunition.isSelected();
-            finesse = chkWpnFinesse.isSelected();
-            weapon = new Weapon(weaponType, heavy, loading, minRange, maxRange, specialCondition, 
-                    thrown, twoHanded, ammunition, finesse, normalAtk, twoHandedAtk, isEquiped, 
-                    weaponName, weaponCost, weaponWeight);
-
-            if (weaponC.insert(weapon) == 1) {
-                System.out.println("weapon inserted!");
-            }
-            else {
-                System.out.println("error");
-            }
-
-            habilitaDesabilitaCamposWeapon(false);
-
-            btnNewWpn.setEnabled(true);
-            btnUpdateWpn.setEnabled(false);
-            btnDeleteWpn.setEnabled(false);
-            btnSaveWpn.setEnabled(false);
-            btnCancelWpn.setEnabled(false);
-            btnExitWpn.setEnabled(true);            
-        }
-    }//GEN-LAST:event_btnSaveWpnMouseClicked
-
-    private void btnDeleteWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteWpnMouseClicked
+    private void chkWpnVersatileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkWpnVersatileActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteWpnMouseClicked
-
-    private void btnUpdateWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateWpnMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateWpnMouseClicked
-
-    private void btnNewWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewWpnMouseClicked
-        if (btnNewWpn.isEnabled()) {
-            limpaCamposWeapon();
-            habilitaDesabilitaCamposWeapon(true);
-
-            btnNewWpn.setEnabled(false);
-            btnUpdateWpn.setEnabled(false);
-            btnDeleteWpn.setEnabled(false);
-            btnSaveWpn.setEnabled(true);
-            btnCancelWpn.setEnabled(true);
-            btnExitWpn.setEnabled(true);            
-        }
-    }//GEN-LAST:event_btnNewWpnMouseClicked
-
-    private void btnWpnIsEquipedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWpnIsEquipedMouseClicked
-        if(btnWpnIsEquiped.isSelected()){
-            btnWpnIsEquiped.setText("True");
+        if(chkWpnVersatile.isSelected()){
+            txtWpnTHAttack.setEnabled(true);
         }else{
-            btnWpnIsEquiped.setText("False");
+            txtWpnTHAttack.setEnabled(false);
         }
-    }//GEN-LAST:event_btnWpnIsEquipedMouseClicked
-    
-    private void tblGearMouseClicked(java.awt.event.MouseEvent evt) {                                     
+    }//GEN-LAST:event_chkWpnVersatileActionPerformed
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void chkWpnReachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkWpnReachActionPerformed
+        // TODO add your handling code here:
+        if(chkWpnReach.isSelected()){
+            txtWpnMinRange.setText("5");
+            txtWpnMinRange.setEnabled(false);
+        }else{
+            txtWpnMinRange.setText("");
+            txtWpnMinRange.setEnabled(true);
+        }
+    }//GEN-LAST:event_chkWpnReachActionPerformed
+
+    private void tblGearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGearMouseClicked
         // TODO add your handling code here:
         
         btnNew.setEnabled(false);
@@ -1387,91 +1346,8 @@ public class frmVault extends javax.swing.JFrame {
         advGear.setDescription(tblGear.getValueAt(row,4).toString());
         
         fillFields(advGear);
-    }
-  
-    public void fillTable(ResultSet rs, JTable table){
-        ResultSetTableModel model = new ResultSetTableModel(rs);
-        table.setModel(model);
-    }
-    
-    public void fillFields(AdventureGear a){
-        txtGearName.setText(a.getName());
-        txtGearCost.setText(String.valueOf(a.getCost()));
-        txtGearWeight.setText(a.getWeight());
-        txtDescription.setText(a.getDescription());
-        cmbGearType.setSelectedItem(a.getGear_type());
-    }
-    
-    public void clearFields(AdventureGear a){
-        txtGearName.setText("");
-        txtGearCost.setText("");
-        txtGearWeight.setText("");
-        txtDescription.setText("");
-        cmbGearType.setSelectedIndex(0);
-    }
-  
-    public void habilitaDesabilitaCamposArmor(boolean habilita) {
-        txtArmorName.setEnabled(habilita);
-        txtArmorCost.setEnabled(habilita);
-        txtArmorWeight.setEnabled(habilita);
-        btnArmorIsEquiped.setEnabled(habilita);
-        cmbArmorType.setEnabled(habilita);
-        txtACBonus.setEnabled(habilita);
-        cmbModifier.setEnabled(habilita);
-        btnStealthDArmor.setEnabled(habilita);
-        txtStrenghtRArmor.setEnabled(habilita);
-    }
-    
-    public void limpaCamposArmor() {
-        txtArmorName.setText("");
-        txtArmorCost.setText("");
-        txtArmorWeight.setText("");
-        btnArmorIsEquiped.setSelected(false);
-        cmbArmorType.setSelectedIndex(0);
-        txtACBonus.setText("");
-        cmbModifier.setSelectedIndex(0);
-        btnStealthDArmor.setSelected(false);
-        txtStrenghtRArmor.setText("");
-    }
-    
-    public void habilitaDesabilitaCamposWeapon(boolean habilita) {
-        txtWpnName.setEnabled(habilita);
-        txtWpnCost.setEnabled(habilita);
-        txtWpnWeight.setEnabled(habilita);
-        btnWpnIsEquiped.setEnabled(habilita);
-        cmbWpnType.setEnabled(habilita);
-        txtWpnMinRange.setEnabled(habilita);
-        txtWpnMaxRange.setEnabled(habilita);
-        chkWpnHeavy.setEnabled(habilita);
-        chkWpnLoading.setEnabled(habilita);
-        chkWpnThrown.setEnabled(habilita);
-        chkWpnTwoHanded.setEnabled(habilita);
-        chkWpnAmmunition.setEnabled(habilita);
-        chkWpnFinesse.setEnabled(habilita);
-        txtWpnSpecialCondition.setEnabled(habilita);
-        txtWpnAttack.setEnabled(habilita);
-        txtWpnTHAttack.setEnabled(habilita);
-    }
-    
-    public void limpaCamposWeapon() {
-        txtWpnName.setText("");
-        txtWpnCost.setText("");
-        txtWpnWeight.setText("");
-        btnWpnIsEquiped.setSelected(true);
-        cmbWpnType.setSelectedIndex(0);
-        txtWpnMinRange.setText("");
-        txtWpnMaxRange.setText("");
-        chkWpnHeavy.setSelected(false);
-        chkWpnLoading.setSelected(false);
-        chkWpnThrown.setSelected(false);
-        chkWpnTwoHanded.setSelected(false);
-        chkWpnAmmunition.setSelected(false);
-        chkWpnFinesse.setSelected(false);
-        txtWpnSpecialCondition.setText("");
-        txtWpnAttack.setText("");
-        txtWpnTHAttack.setText("");
-    }
-    
+    }//GEN-LAST:event_tblGearMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1508,7 +1384,6 @@ public class frmVault extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btnArmorIsEquiped;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCancelArmor;
     private javax.swing.JButton btnCancelWpn;
@@ -1528,17 +1403,19 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdateArmor;
     private javax.swing.JButton btnUpdateWpn;
-    private javax.swing.JToggleButton btnWpnIsEquiped;
     private javax.swing.JCheckBox chkWpnAmmunition;
     private javax.swing.JCheckBox chkWpnFinesse;
     private javax.swing.JCheckBox chkWpnHeavy;
     private javax.swing.JCheckBox chkWpnLoading;
+    private javax.swing.JCheckBox chkWpnReach;
     private javax.swing.JCheckBox chkWpnThrown;
     private javax.swing.JCheckBox chkWpnTwoHanded;
+    private javax.swing.JCheckBox chkWpnVersatile;
     private javax.swing.JComboBox<String> cmbArmorType;
     private javax.swing.JComboBox<String> cmbGearType;
     private javax.swing.JComboBox<String> cmbModifier;
     private javax.swing.JComboBox<String> cmbWpnType;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1556,9 +1433,7 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jtVault;
     private javax.swing.JLabel lblACBonus;
     private javax.swing.JLabel lblArmorCost;
-    private javax.swing.JLabel lblArmorIsEquiped;
     private javax.swing.JLabel lblArmorName;
-    private javax.swing.JLabel lblArmorWeight;
     private javax.swing.JLabel lblDescriptionGear;
     private javax.swing.JLabel lblGearCost;
     private javax.swing.JLabel lblGearName;
@@ -1570,13 +1445,10 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JLabel lblTypeGear;
     private javax.swing.JLabel lblWpnAttack;
     private javax.swing.JLabel lblWpnCost;
-    private javax.swing.JLabel lblWpnIsEquiped;
     private javax.swing.JLabel lblWpnName;
     private javax.swing.JLabel lblWpnRange;
-    private javax.swing.JLabel lblWpnSpecialCondition;
     private javax.swing.JLabel lblWpnTHAttack;
     private javax.swing.JLabel lblWpnType;
-    private javax.swing.JLabel lblWpnWeight;
     private javax.swing.JToolBar tbAdventureGear;
     private javax.swing.JToolBar tbArmor;
     private javax.swing.JToolBar tbWeapon;
@@ -1586,7 +1458,6 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JTextField txtACBonus;
     private javax.swing.JTextField txtArmorCost;
     private javax.swing.JTextField txtArmorName;
-    private javax.swing.JTextField txtArmorWeight;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtGearCost;
     private javax.swing.JTextField txtGearName;
@@ -1597,8 +1468,6 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JTextField txtWpnMaxRange;
     private javax.swing.JTextField txtWpnMinRange;
     private javax.swing.JTextField txtWpnName;
-    private javax.swing.JTextField txtWpnSpecialCondition;
     private javax.swing.JTextField txtWpnTHAttack;
-    private javax.swing.JTextField txtWpnWeight;
     // End of variables declaration//GEN-END:variables
 }
