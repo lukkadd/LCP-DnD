@@ -12,10 +12,16 @@ package entities;
 public class AdventureGear extends Item {
     //equipment packs count as a single item
     //to-do: containers and vehicles
-    private int id;
     private String description;
-    private String gear_type; //set to general if it does not have a specific one
+    private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public AdventureGear() {
     }
 
@@ -24,12 +30,11 @@ public class AdventureGear extends Item {
         this.description = description;
         this.gear_type = gear_type;
     }
-  
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    
+    public AdventureGear(String description, String gear_type, String name, int cost, String weight,int id) {
+        super(name, cost, weight);
+        this.description = description;
+        this.gear_type = gear_type;
         this.id = id;
     }
 
@@ -48,5 +53,6 @@ public class AdventureGear extends Item {
     public void setGear_type(String gear_type) {
         this.gear_type = gear_type;
     }
+    private String gear_type; //set to general if it does not have a specific one
     
 }
