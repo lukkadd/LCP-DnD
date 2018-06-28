@@ -9,11 +9,7 @@ import controller.AdventureGearController;
 import db.ResultSetTableModel;
 import entities.AdventureGear;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.util.ArrayList;
-import java.util.Vector;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmVault extends javax.swing.JFrame {
 
-    private AdventureGear advGear = new AdventureGear();
+    private AdventureGear advGear;
     private AdventureGearController advGController = new AdventureGearController();
     private ResultSet advGList;
     /**
@@ -78,13 +74,15 @@ public class frmVault extends javax.swing.JFrame {
         btnExit = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGear = new javax.swing.JTable();
-        cmbGearType = new javax.swing.JComboBox<>();
+        cmbGearType = new javax.swing.JComboBox<String>();
         lblGearName = new javax.swing.JLabel();
         txtGearName = new javax.swing.JTextField();
         lblGearCost = new javax.swing.JLabel();
         txtGearCost = new javax.swing.JTextField();
         lblGearWeight = new javax.swing.JLabel();
         txtGearWeight = new javax.swing.JTextField();
+        txtGearId = new javax.swing.JTextField();
+        lblGearId = new javax.swing.JLabel();
         jpArmor = new javax.swing.JPanel();
         lblTypeArmor = new javax.swing.JLabel();
         lblACBonus = new javax.swing.JLabel();
@@ -102,9 +100,9 @@ public class frmVault extends javax.swing.JFrame {
         btnExitArmor = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblArmor = new javax.swing.JTable();
-        cmbModifier = new javax.swing.JComboBox<>();
+        cmbModifier = new javax.swing.JComboBox<String>();
         btnStealthDArmor = new javax.swing.JToggleButton();
-        cmbArmorType = new javax.swing.JComboBox<>();
+        cmbArmorType = new javax.swing.JComboBox<String>();
         txtArmorName = new javax.swing.JTextField();
         lblArmorName = new javax.swing.JLabel();
         lblArmorCost = new javax.swing.JLabel();
@@ -124,7 +122,7 @@ public class frmVault extends javax.swing.JFrame {
         lblWpnCost = new javax.swing.JLabel();
         txtWpnCost = new javax.swing.JTextField();
         lblWpnType = new javax.swing.JLabel();
-        cmbWpnType = new javax.swing.JComboBox<>();
+        cmbWpnType = new javax.swing.JComboBox<String>();
         lblWpnRange = new javax.swing.JLabel();
         txtWpnMaxRange = new javax.swing.JTextField();
         txtWpnMinRange = new javax.swing.JTextField();
@@ -288,7 +286,7 @@ public class frmVault extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblGear);
 
-        cmbGearType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
+        cmbGearType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
         cmbGearType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbGearTypeActionPerformed(evt);
@@ -306,6 +304,11 @@ public class frmVault extends javax.swing.JFrame {
 
         lblGearWeight.setText("Weight :");
 
+        txtGearId.setToolTipText("cost must be in copper pieces");
+
+        lblGearId.setText("Id :");
+        lblGearId.setToolTipText("");
+
         javax.swing.GroupLayout jpAdventureGearLayout = new javax.swing.GroupLayout(jpAdventureGear);
         jpAdventureGear.setLayout(jpAdventureGearLayout);
         jpAdventureGearLayout.setHorizontalGroup(
@@ -315,21 +318,23 @@ public class frmVault extends javax.swing.JFrame {
                     .addGroup(jpAdventureGearLayout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbGearType, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTypeGear)
                             .addGroup(jpAdventureGearLayout.createSequentialGroup()
                                 .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtGearName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblGearName)
-                                    .addComponent(lblGearWeight))
+                                    .addComponent(lblGearWeight)
+                                    .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtGearWeight, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblDescriptionGear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(41, 41, 41)
                                 .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblGearCost)
-                                    .addComponent(txtGearCost, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbGearType, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTypeGear)
-                            .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtGearWeight, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblDescriptionGear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(txtGearCost, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblGearId)
+                                    .addComponent(txtGearId, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAdventureGearLayout.createSequentialGroup()
                         .addContainerGap(60, Short.MAX_VALUE)
@@ -355,9 +360,15 @@ public class frmVault extends javax.swing.JFrame {
                             .addComponent(txtGearName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtGearCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblGearWeight)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGearWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jpAdventureGearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpAdventureGearLayout.createSequentialGroup()
+                                .addComponent(lblGearWeight)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtGearWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpAdventureGearLayout.createSequentialGroup()
+                                .addComponent(lblGearId)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtGearId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblDescriptionGear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -465,7 +476,7 @@ public class frmVault extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblArmor);
 
-        cmbModifier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
+        cmbModifier.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
 
         btnStealthDArmor.setText("False");
         btnStealthDArmor.addActionListener(new java.awt.event.ActionListener() {
@@ -474,7 +485,7 @@ public class frmVault extends javax.swing.JFrame {
             }
         });
 
-        cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
+        cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
 
         txtArmorName.setToolTipText("");
 
@@ -659,7 +670,7 @@ public class frmVault extends javax.swing.JFrame {
 
         lblWpnType.setText("Weapon Type :");
 
-        cmbWpnType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged" }));
+        cmbWpnType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged" }));
         cmbWpnType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbWpnTypeItemStateChanged(evt);
@@ -948,6 +959,7 @@ public class frmVault extends javax.swing.JFrame {
         cmbGearType.setEnabled(false);
         txtGearName.setEnabled(false);
         txtGearCost.setEnabled(false);
+        txtGearId.setEnabled(false);
         txtGearWeight.setEnabled(false);
         
         //Habilitando a barra de ferramentas
@@ -974,6 +986,7 @@ public class frmVault extends javax.swing.JFrame {
         txtGearName.setEnabled(true);
         txtGearCost.setEnabled(true);
         txtGearWeight.setEnabled(true);
+        txtGearId.setEnabled(false);
         
         btnNew.setEnabled(false);
         btnUpdate.setEnabled(false);
@@ -982,7 +995,7 @@ public class frmVault extends javax.swing.JFrame {
         btnSave.setEnabled(true);
         btnExit.setEnabled(false);
         
-        advGear.setId(-1);
+        //advGear.setId(-1);
     }//GEN-LAST:event_btnNewMouseClicked
 
     private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
@@ -992,6 +1005,7 @@ public class frmVault extends javax.swing.JFrame {
         txtGearName.setEnabled(true);
         txtGearCost.setEnabled(true);
         txtGearWeight.setEnabled(true);
+        txtGearId.setEnabled(true);
         
         btnNew.setEnabled(false);
         btnUpdate.setEnabled(false);
@@ -1009,6 +1023,7 @@ public class frmVault extends javax.swing.JFrame {
         txtGearName.setEnabled(false);
         txtGearCost.setEnabled(false);
         txtGearWeight.setEnabled(false);
+        txtGearId.setEnabled(false);
         
         btnNew.setEnabled(true);
         btnUpdate.setEnabled(false);
@@ -1028,20 +1043,22 @@ public class frmVault extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
-        // TODO add your handling code here:
+        advGear = new AdventureGear(txtDescription.getText(),
+            cmbGearType.getSelectedItem().toString(), txtGearName.getText(),
+            Integer.parseInt(txtGearCost.getText()), txtGearWeight.getText());
 
         //populando o obj
-        advGear.setName(txtGearName.getText());
-        advGear.setCost(Integer.parseInt(txtGearCost.getText()));
-        advGear.setDescription(txtDescription.getText());
-        advGear.setGear_type(cmbGearType.getSelectedItem().toString());
-        advGear.setWeight(txtGearWeight.getText());
+        //advGear.setName(txtGearName.getText());
+        //advGear.setCost(Integer.parseInt(txtGearCost.getText()));
+        //advGear.setDescription(txtDescription.getText());
+        //advGear.setGear_type(cmbGearType.getSelectedItem().toString());
+        //advGear.setWeight(txtGearWeight.getText());
         System.out.println(advGear.getId());
         //manda pro db
-        if(advGear.getId() == -1){
-            advGController.insert(advGear);    
+        if(txtGearId.isEnabled()){
+            advGController.update(advGear);    
         }else{
-            advGController.update(advGear);
+            advGController.insert(advGear);
         }
         
         //desabilitando campos
@@ -1055,6 +1072,8 @@ public class frmVault extends javax.swing.JFrame {
         txtGearCost.setEnabled(false);
         txtGearWeight.setEnabled(false);
         txtGearWeight.setText("");
+        txtGearId.setEnabled(false);
+        txtGearId.setText("");
         
         //gerenciando os botoes
         btnNew.setEnabled(true);
@@ -1328,8 +1347,6 @@ public class frmVault extends javax.swing.JFrame {
     }//GEN-LAST:event_chkWpnReachActionPerformed
 
     private void tblGearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGearMouseClicked
-        // TODO add your handling code here:
-        
         btnNew.setEnabled(false);
         btnUpdate.setEnabled(true);
         btnDelete.setEnabled(true);
@@ -1338,12 +1355,17 @@ public class frmVault extends javax.swing.JFrame {
         btnExit.setEnabled(false);
         
         int row = tblGear.getSelectedRow();
-        advGear.setId(((Long) tblGear.getValueAt(row,0)).intValue());
-        advGear.setName(tblGear.getValueAt(row,1).toString());
-        advGear.setCost(Integer.parseInt(tblGear.getValueAt(row,2).toString()));
-        advGear.setGear_type(tblGear.getValueAt(row,5).toString());
-        advGear.setWeight(tblGear.getValueAt(row,3).toString());
-        advGear.setDescription(tblGear.getValueAt(row,4).toString());
+        advGear = new AdventureGear(tblGear.getValueAt(row,4).toString(),
+            tblGear.getValueAt(row,5).toString(), tblGear.getValueAt(row,1).toString(),
+            Integer.parseInt(tblGear.getValueAt(row,2).toString()), 
+            tblGear.getValueAt(row,3).toString(), ((Long) tblGear.getValueAt(row,0)).intValue());
+        
+        //advGear.setId(((Long) tblGear.getValueAt(row,0)).intValue());
+        //advGear.setName(tblGear.getValueAt(row,1).toString());
+        //advGear.setCost(Integer.parseInt(tblGear.getValueAt(row,2).toString()));
+        //advGear.setGear_type(tblGear.getValueAt(row,5).toString());
+        //advGear.setWeight(tblGear.getValueAt(row,3).toString());
+        //advGear.setDescription(tblGear.getValueAt(row,4).toString());
         
         fillFields(advGear);
     }//GEN-LAST:event_tblGearMouseClicked
@@ -1436,6 +1458,7 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JLabel lblArmorName;
     private javax.swing.JLabel lblDescriptionGear;
     private javax.swing.JLabel lblGearCost;
+    private javax.swing.JLabel lblGearId;
     private javax.swing.JLabel lblGearName;
     private javax.swing.JLabel lblGearWeight;
     private javax.swing.JLabel lblModifierArmor;
@@ -1460,6 +1483,7 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JTextField txtArmorName;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtGearCost;
+    private javax.swing.JTextField txtGearId;
     private javax.swing.JTextField txtGearName;
     private javax.swing.JTextField txtGearWeight;
     private javax.swing.JTextField txtStrenghtRArmor;

@@ -22,8 +22,6 @@ public class AdventureGear extends Item {
     public void setId(int id) {
         this.id = id;
     }
-    public AdventureGear() {
-    }
 
     public AdventureGear(String description, String gear_type, String name, int cost, String weight) {
         super(name, cost, weight);

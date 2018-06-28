@@ -97,24 +97,26 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPane1" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
+                                      <Component id="cmbGearType" alignment="0" min="-2" pref="208" max="-2" attributes="0"/>
+                                      <Component id="lblTypeGear" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="txtGearName" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
                                               <Component id="lblGearName" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="lblGearWeight" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="txtGearWeight" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="lblDescriptionGear" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
                                           </Group>
                                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lblGearCost" min="-2" max="-2" attributes="0"/>
                                               <Component id="txtGearCost" min="-2" pref="43" max="-2" attributes="0"/>
+                                              <Component id="lblGearId" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtGearId" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
                                           </Group>
-                                      </Group>
-                                      <Component id="jScrollPane1" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
-                                      <Component id="cmbGearType" alignment="0" min="-2" pref="208" max="-2" attributes="0"/>
-                                      <Component id="lblTypeGear" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="txtGearWeight" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lblDescriptionGear" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -150,9 +152,18 @@
                                       <Component id="txtGearCost" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblGearWeight" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtGearWeight" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblGearWeight" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtGearWeight" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblGearId" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtGearId" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="lblDescriptionGear" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -372,6 +383,17 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtGearWeight">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtGearId">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="cost must be in copper pieces"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblGearId">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Id :"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
