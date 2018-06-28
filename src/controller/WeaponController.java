@@ -9,27 +9,56 @@ package controller;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import entity.Access;
+import entities.Weapon;
 import db.Connect;
 
 /**
  *
  * @author Marjorie
  */
-public class AccessController {
+public class WeaponController {
     
-    public AccessController() {
+    public WeaponController() {
         
     }
     
-    public int insert(Access a) {
-        int retorno = 1;
+    public int insert(Weapon w) {
         
         try {
             Connect conexao = new Connect();
             
-            String strSql = "insert into Access (username, passkey) values ";
-            strSql =  strSql + "(" + a.getUsername() + "," + a.getPasskey() + ");";
+            String strSql = "insert into Weapon (itemName, cost, weight, isEquiped, ";
+            strSql = strSql + "weaponType, heavy, loading, minRange, maxRange, specialCondition, ";
+            strSql = strSql + "thrown, twoHanded, ammunition, finesse, normalAttack, twoHandedAttack) values ";
+            strSql = strSql + "('" + w.getName() + "'," + w.getCost() + ",'" + w.getWeight() + "',";
+            strSql = strSql + w.isIsEquiped() + ",'" + w.getWeapon_type()+ "'," + w.isHeavy() + ",";
+            strSql = strSql + w.isLoading() + "," + w.getMin_range() + "," + w.getMax_range() + ",'";
+            strSql = strSql + w.getSpecial_condition() + "'," + w.isThrown() + "," + w.isTwo_handed() + ",";
+            strSql = strSql + w.isAmmunition() + "," + w.isFinesse() + ",'" + w.getNormal_attack() + "','";
+            strSql = strSql + w.getTwo_handed_attack();
+            strSql = strSql + "');";
+            
+            Connection conn = conexao.conectaBD();
+            
+            if (conn != null) {
+                Statement stmt = (Statement)conn.createStatement();
+                stmt.execute(strSql);
+                conexao.desconectaBD(conn);
+            }
+            
+            return 1;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
+    public int remove(Weapon w) {
+        int retorno = 1;
+        
+        try {
+            Connect conexao = new Connect();
+            String strSql = "delete from Weapon where idWeapon = " + w.getIdWeapon();
             
             Connection conn = conexao.conectaBD();
             
@@ -46,35 +75,13 @@ public class AccessController {
         }
     }
     
-    public int remove(Access a) {
-        int retorno = 1;
-        
-        try {
-            Connect conexao = new Connect();
-            String strSql = "delete from Access where idAccess = " + a.getIdAccess();
-            
-            Connection conn = conexao.conectaBD();
-            
-            if (conn != null) {
-                Statement stmt = (Statement)conn.createStatement();
-                stmt.execute(strSql);
-                conexao.desconectaBD(conn);
-            }
-            
-            return retorno;
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-            return 0;
-        }
-    }
-    
-    public ResultSet getAccessesList() {
+    public ResultSet getWeaponList() {
         ResultSet rs = null;
         
         try {
             Connect conexao = new Connect();
             
-            String strSql = "select * from Access";
+            String strSql = "select * from Weapon";
             
             Connection conn = conexao.conectaBD();
             
@@ -90,31 +97,4 @@ public class AccessController {
         return rs;
     }
     
-    public Access getByLogin(String login) {
-        ResultSet rs = null;
-        Access access = null;
-        
-        try {
-            Connect conexao = new Connect();
-            
-            String strSql = "select * from Access where username = '" + login + "';";
-            
-            Connection conn = conexao.conectaBD();
-            
-            if (conn != null) {
-                Statement stmt = (Statement)conn.createStatement();
-                rs = stmt.executeQuery(strSql);
-                if (rs != null && rs.next()) {
-                    access = new Access(rs.getString("username"), 
-                            rs.getString("passkey"), rs.getInt("permission"));
-                }
-            }
-            
-            conexao.desconectaBD(conn);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-        
-        return access;
-    }
 }
