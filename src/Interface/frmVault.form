@@ -410,8 +410,8 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="lblIsEquiped" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="btnIsEquiped" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
+                                              <Component id="lblArmorIsEquiped" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="btnArmorIsEquiped" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                                       </Group>
@@ -455,9 +455,9 @@
                                           <Component id="txtArmorWeight" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Component id="lblIsEquiped" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblArmorIsEquiped" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnIsEquiped" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnArmorIsEquiped" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
@@ -686,17 +686,17 @@
                     <Property name="toolTipText" type="java.lang.String" value="cost must be in copper pieces"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblIsEquiped">
+                <Component class="javax.swing.JLabel" name="lblArmorIsEquiped">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Is Equiped:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JToggleButton" name="btnIsEquiped">
+                <Component class="javax.swing.JToggleButton" name="btnArmorIsEquiped">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="False"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIsEquipedActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnArmorIsEquipedActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -717,42 +717,14 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="57" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tbWeapon" min="-2" pref="320" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="lblWpnName" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
-                                  <Component id="lblWpnCost" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace pref="66" max="32767" attributes="0"/>
+                                  <Component id="tbWeapon" min="-2" pref="320" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="cmbWpnType" alignment="0" pref="142" max="32767" attributes="0"/>
-                                      <Component id="txtWpnName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="lblWpnType" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtWpnCost" min="-2" pref="78" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="txtWpnMinRange" max="32767" attributes="0"/>
-                                              <Component id="lblWpnRange" alignment="1" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtWpnMaxRange" min="-2" pref="38" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Component id="lblWpnAttack" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblWpnTHAttack" min="-2" max="-2" attributes="0"/>
-                              <Component id="chkWpnVersatile" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="txtWpnTHAttack" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtWpnAttack" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="chkWpnTwoHanded" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -763,16 +735,62 @@
                                               <Component id="chkWpnLoading" min="-2" max="-2" attributes="0"/>
                                               <Component id="chkWpnAmmunition" min="-2" max="-2" attributes="0"/>
                                           </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="chkWpnThrown" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkWpnFinesse" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="cmbWpnType" alignment="1" pref="142" max="32767" attributes="0"/>
+                                              <Component id="lblWpnType" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="txtWpnMinRange" max="32767" attributes="0"/>
+                                              <Component id="lblWpnRange" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
+                                          <Component id="txtWpnMaxRange" min="-2" pref="38" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lblWpnWeight" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txtWpnWeight" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="lblWpnIsEquiped" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="btnWpnIsEquiped" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txtWpnName" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                                                  <Component id="lblWpnName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lblWpnCost" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txtWpnCost" min="-2" pref="78" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Component id="lblWpnAttack" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblWpnTHAttack" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="txtWpnTHAttack" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtWpnAttack" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="lblWpnSpecialCondition" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtWpnSpecialCondition" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="chkWpnThrown" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chkWpnFinesse" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace pref="9" max="32767" attributes="0"/>
                           <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -787,7 +805,7 @@
                                   <Component id="jScrollPane4" pref="442" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblWpnName" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblWpnCost" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -795,9 +813,22 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="txtWpnName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtWpnCost" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtWpnCost" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="lblWpnWeight" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtWpnWeight" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="lblWpnIsEquiped" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="btnWpnIsEquiped" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblWpnType" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblWpnRange" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -807,7 +838,6 @@
                                       <Component id="cmbWpnType" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtWpnMaxRange" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtWpnMinRange" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -821,9 +851,11 @@
                                       <Component id="chkWpnAmmunition" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="chkWpnFinesse" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="chkWpnVersatile" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblWpnSpecialCondition" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtWpnSpecialCondition" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lblWpnAttack" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="txtWpnAttack" min="-2" max="-2" attributes="0"/>
@@ -985,11 +1017,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtWpnMinRange">
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="-"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JCheckBox" name="chkWpnHeavy">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Heavy"/>
@@ -1037,13 +1064,36 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtWpnTHAttack">
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="chkWpnVersatile">
+                <Component class="javax.swing.JLabel" name="lblWpnWeight">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Versatile"/>
+                    <Property name="text" type="java.lang.String" value="Weight :"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtWpnWeight">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="cost must be in copper pieces"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblWpnIsEquiped">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Is Equiped:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JToggleButton" name="btnWpnIsEquiped">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="False"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkWpnVersatileActionPerformed"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnWpnIsEquipedMouseClicked"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblWpnSpecialCondition">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Special Condition"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtWpnSpecialCondition">
                 </Component>
               </SubComponents>
             </Container>
