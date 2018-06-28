@@ -81,7 +81,6 @@ public class AccessController {
             if (conn != null) {
                 Statement stmt = (Statement)conn.createStatement();
                 rs = stmt.executeQuery(strSql);
-                conexao.desconectaBD(conn);
             }
         } catch(Exception e) {
             System.out.println(e.getMessage());
