@@ -126,6 +126,7 @@ public class frmVault extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vault");
         setName("jfVault"); // NOI18N
+        setResizable(false);
 
         jpAdventureGear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -746,9 +747,9 @@ public class frmVault extends javax.swing.JFrame {
                             .addComponent(lblWpnName)
                             .addComponent(lblWpnCost))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtWpnName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtWpnCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtWpnCost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtWpnName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpWeaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jpWeaponLayout.createSequentialGroup()
@@ -914,6 +915,7 @@ public class frmVault extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jpAdventureGearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpAdventureGearMouseClicked
@@ -1014,18 +1016,7 @@ public class frmVault extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelMouseClicked
 
     private void jpArmorComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpArmorComponentShown
-        // TODO add your handling code here:
-        txtArmorName.setEnabled(false);
-        txtArmorCost.setEnabled(false);
-        txtArmorWeight.setEnabled(false);
-        cmbArmorType.setEnabled(false);
-        txtACBonus.setEnabled(false);
-        cmbModifier.setEnabled(false);
-        btnStealthDArmor.setEnabled(false);
-        btnArmorIsEquiped.setEnabled(false);
-        txtStrenghtRArmor.setEnabled(false);
-        txtArmorName.setEnabled(false);
-        txtArmorCost.setEnabled(false);
+        habilitaDesabilitaCamposArmor(false);
         
         btnNewArmor.setEnabled(true);
         btnUpdateArmor.setEnabled(true);
@@ -1036,40 +1027,21 @@ public class frmVault extends javax.swing.JFrame {
     }//GEN-LAST:event_jpArmorComponentShown
 
     private void btnNewArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewArmorMouseClicked
-        // TODO add your handling code here:
-        txtArmorName.setEnabled(true);
-        txtArmorCost.setEnabled(true);
-        txtArmorWeight.setEnabled(true);
-        txtACBonus.setEnabled(true);
-        cmbModifier.setEnabled(true);
-        btnStealthDArmor.setEnabled(true);
-        btnArmorIsEquiped.setEnabled(true);
-        txtStrenghtRArmor.setEnabled(true);
-        cmbArmorType.setEnabled(true);
-        txtACBonus.setText("");
-        cmbModifier.setSelectedIndex(0);
+        if (btnNewArmor.isEnabled()) {
+            limpaCamposArmor();
+            habilitaDesabilitaCamposArmor(true);
         
-        txtStrenghtRArmor.setText("");
-        
-        
-        btnNewArmor.setEnabled(false);
-        btnUpdateArmor.setEnabled(false);
-        btnDeleteArmor.setEnabled(false);
-        btnCancelArmor.setEnabled(true);
-        btnSaveArmor.setEnabled(true);
-        btnExitArmor.setEnabled(false);
+            btnNewArmor.setEnabled(false);
+            btnUpdateArmor.setEnabled(false);
+            btnDeleteArmor.setEnabled(false);
+            btnCancelArmor.setEnabled(true);
+            btnSaveArmor.setEnabled(true);
+            btnExitArmor.setEnabled(false);
+        }
     }//GEN-LAST:event_btnNewArmorMouseClicked
 
     private void btnUpdateArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateArmorMouseClicked
-        // TODO add your handling code here:
-        txtArmorName.setEnabled(true);
-        txtArmorCost.setEnabled(true);
-        txtArmorWeight.setEnabled(true);
-        txtACBonus.setEnabled(true);
-        cmbModifier.setEnabled(true);
-        btnStealthDArmor.setEnabled(true);
-        txtStrenghtRArmor.setEnabled(true);
-        cmbArmorType.setEnabled(true);
+        habilitaDesabilitaCamposArmor(true);
         
         btnNewArmor.setEnabled(false);
         btnUpdateArmor.setEnabled(false);
@@ -1080,103 +1052,72 @@ public class frmVault extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateArmorMouseClicked
 
     private void btnDeleteArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteArmorMouseClicked
-        // TODO add your handling code here:
-        txtArmorName.setEnabled(true);
-        txtArmorCost.setEnabled(true);
-        txtArmorWeight.setEnabled(true);
-        txtACBonus.setEnabled(true);
-        cmbModifier.setEnabled(true);
-        btnStealthDArmor.setEnabled(true);
-        txtStrenghtRArmor.setEnabled(true);
-        cmbArmorType.setEnabled(true);
-        txtACBonus.setText("");
-        cmbModifier.setSelectedIndex(0);
+        if (btnDeleteArmor.isEnabled()) {
+            limpaCamposArmor();
+            habilitaDesabilitaCamposArmor(false);
         
-        txtStrenghtRArmor.setText("");
-        
-        
-        btnNewArmor.setEnabled(false);
-        btnUpdateArmor.setEnabled(false);
-        btnDeleteArmor.setEnabled(false);
-        btnCancelArmor.setEnabled(true);
-        btnSaveArmor.setEnabled(true);
-        btnExitArmor.setEnabled(false);
+            btnNewArmor.setEnabled(true);
+            btnUpdateArmor.setEnabled(true);
+            btnDeleteArmor.setEnabled(true);
+            btnCancelArmor.setEnabled(true);
+            btnSaveArmor.setEnabled(false);
+            btnExitArmor.setEnabled(true);
+        }
     }//GEN-LAST:event_btnDeleteArmorMouseClicked
 
     private void btnSaveArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveArmorMouseClicked
-        //Faz o insert
-        Armor armor;
-        ArmorController armorC;
-        String armorName,armorWeight, armorType;
-        int baseACBonus, modifier, strengthReq, armorCost;
-        boolean isEquiped, stealthDArmor;
-        
-        armorC = new ArmorController();
-        armorName = txtArmorName.getText();
-        armorWeight = txtArmorWeight.getText();
-        armorCost = Integer.parseInt(txtArmorCost.getText());
-        armorType = (String)cmbArmorType.getSelectedItem();
-        baseACBonus = Integer.parseInt(txtACBonus.getText());
-        modifier = cmbModifier.getSelectedIndex();
-        strengthReq = Integer.parseInt(txtStrenghtRArmor.getText());
-        isEquiped = btnArmorIsEquiped.isSelected();
-        stealthDArmor = btnStealthDArmor.isEnabled();
-        armor = new Armor(armorType, baseACBonus, modifier,
-                strengthReq, stealthDArmor, isEquiped, armorName, 
-                armorCost, armorWeight);
-        
-        if (armorC.insert(armor) == 1) {
-            System.out.println("armor inserted!");
+        if (btnSaveArmor.isEnabled()) {
+            //Faz o insert
+            Armor armor;
+            ArmorController armorC;
+            String armorName,armorWeight, armorType;
+            int baseACBonus, modifier, strengthReq, armorCost;
+            boolean isEquiped, stealthDArmor;
+
+            armorC = new ArmorController();
+            armorName = txtArmorName.getText();
+            armorWeight = txtArmorWeight.getText();
+            armorCost = Integer.parseInt(txtArmorCost.getText());
+            armorType = (String)cmbArmorType.getSelectedItem();
+            baseACBonus = Integer.parseInt(txtACBonus.getText());
+            modifier = cmbModifier.getSelectedIndex();
+            strengthReq = Integer.parseInt(txtStrenghtRArmor.getText());
+            isEquiped = btnArmorIsEquiped.isSelected();
+            stealthDArmor = btnStealthDArmor.isEnabled();
+            armor = new Armor(armorType, baseACBonus, modifier,
+                    strengthReq, stealthDArmor, isEquiped, armorName, 
+                    armorCost, armorWeight);
+
+            if (armorC.insert(armor) == 1) {
+                System.out.println("armor inserted!");
+            }
+            else {
+                System.out.println("error");
+            }
+
+            habilitaDesabilitaCamposArmor(false);
+
+            btnNewArmor.setEnabled(true);
+            btnUpdateArmor.setEnabled(true);
+            btnDeleteArmor.setEnabled(true);
+            btnCancelArmor.setEnabled(false);
+            btnSaveArmor.setEnabled(false);
+            btnExitArmor.setEnabled(true);
         }
-        else {
-            System.out.println("error");
-        }
-        
-        txtArmorName.setEnabled(false);
-        txtArmorCost.setEnabled(false);
-        txtArmorWeight.setEnabled(false);
-        txtACBonus.setEnabled(false);
-        cmbModifier.setEnabled(false);
-        txtArmorWeight.setEnabled(false);
-        btnStealthDArmor.setEnabled(false);
-        txtStrenghtRArmor.setEnabled(false);
-        cmbArmorType.setEnabled(false);
-        txtACBonus.setText("");
-        cmbModifier.setSelectedIndex(0);
-        
-        txtStrenghtRArmor.setText("");
-        
-        
-        btnNewArmor.setEnabled(true);
-        btnUpdateArmor.setEnabled(true);
-        btnDeleteArmor.setEnabled(true);
-        btnCancelArmor.setEnabled(false);
-        btnSaveArmor.setEnabled(false);
-        btnExitArmor.setEnabled(true);
     }//GEN-LAST:event_btnSaveArmorMouseClicked
 
     private void btnCancelArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelArmorMouseClicked
-        // TODO add your handling code here:
-        txtArmorName.setEnabled(false);
-        txtArmorCost.setEnabled(false);
-        txtArmorWeight.setEnabled(false);
-        txtACBonus.setEnabled(false);
-        cmbModifier.setEnabled(false);
-        btnStealthDArmor.setEnabled(false);
-        txtStrenghtRArmor.setEnabled(false);
-        cmbArmorType.setEnabled(false);
-        txtACBonus.setText("");
-        cmbModifier.setSelectedIndex(0);
-        
-        txtStrenghtRArmor.setText("");
-        
-        
-        btnNewArmor.setEnabled(true);
-        btnUpdateArmor.setEnabled(true);
-        btnDeleteArmor.setEnabled(true);
-        btnCancelArmor.setEnabled(false);
-        btnSaveArmor.setEnabled(false);
-        btnExitArmor.setEnabled(true);
+        if (btnCancelArmor.isEnabled()) {
+            limpaCamposArmor();
+            habilitaDesabilitaCamposArmor(true);       
+
+            btnNewArmor.setEnabled(true);
+            btnUpdateArmor.setEnabled(true);
+            btnDeleteArmor.setEnabled(true);
+            btnCancelArmor.setEnabled(false);
+            btnSaveArmor.setEnabled(false);
+            btnExitArmor.setEnabled(true);
+        }
     }//GEN-LAST:event_btnCancelArmorMouseClicked
 
     private void btnStealthDArmorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStealthDArmorActionPerformed
@@ -1201,27 +1142,11 @@ public class frmVault extends javax.swing.JFrame {
     }//GEN-LAST:event_btnArmorIsEquipedActionPerformed
 
     private void jpWeaponComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpWeaponComponentShown
-        // TODO add your handling code here:
-        txtWpnName.setEnabled(false);
-        txtWpnCost.setEnabled(false);
-        cmbWpnType.setEnabled(false);
-        txtWpnMinRange.setEnabled(false);
-        txtWpnMaxRange.setEnabled(false);
-        chkWpnHeavy.setEnabled(false);
-        chkWpnLoading.setEnabled(false);
-        chkWpnThrown.setEnabled(false);
-        chkWpnTwoHanded.setEnabled(false);
-        chkWpnAmmunition.setEnabled(false);
-        chkWpnFinesse.setEnabled(false);
-        txtWpnAttack.setEnabled(false);
-        txtWpnTHAttack.setEnabled(false);
-        txtWpnWeight.setEnabled(false);
-        txtWpnSpecialCondition.setEnabled(false);
-        btnWpnIsEquiped.setEnabled(false);
+        habilitaDesabilitaCamposWeapon(false);
 
         btnNewWpn.setEnabled(true);
-        btnUpdateWpn.setEnabled(false);
-        btnDeleteWpn.setEnabled(false);
+        btnUpdateWpn.setEnabled(true);
+        btnDeleteWpn.setEnabled(true);
         btnSaveWpn.setEnabled(false);
         btnCancelWpn.setEnabled(false);
         btnExitWpn.setEnabled(true);
@@ -1249,63 +1174,50 @@ public class frmVault extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelWpnMouseClicked
 
     private void btnSaveWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveWpnMouseClicked
-        Weapon weapon;
-        WeaponController weaponC;
-        String weaponName, weaponWeight, weaponType, specialCondition, normalAtk, twoHandedAtk;
-        int weaponCost, minRange, maxRange = 0;
-        boolean isEquiped, heavy, loading, thrown, twoHanded, ammunition, finesse;
-        
-        weaponC = new WeaponController();
-        weaponName = txtWpnName.getText();
-        weaponWeight = txtWpnWeight.getText();
-        weaponType = (String)cmbWpnType.getSelectedItem();
-        specialCondition = txtWpnSpecialCondition.getText();
-        normalAtk = txtWpnAttack.getText();
-        twoHandedAtk = txtWpnTHAttack.getText();
-        weaponCost = Integer.parseInt(txtWpnCost.getText());
-        minRange = Integer.parseInt(txtWpnMinRange.getText());
-        if (txtWpnMaxRange.isEnabled()) maxRange = Integer.parseInt(txtWpnMaxRange.getText());
-        isEquiped = btnWpnIsEquiped.isSelected();
-        heavy = chkWpnHeavy.isSelected();
-        loading = chkWpnLoading.isSelected();
-        thrown = chkWpnThrown.isSelected();
-        twoHanded = chkWpnTwoHanded.isSelected();
-        ammunition = chkWpnAmmunition.isSelected();
-        finesse = chkWpnFinesse.isSelected();
-        weapon = new Weapon(weaponType, heavy, loading, minRange, maxRange, specialCondition, 
-                thrown, twoHanded, ammunition, finesse, normalAtk, twoHandedAtk, isEquiped, 
-                weaponName, weaponCost, weaponWeight);
-        
-        if (weaponC.insert(weapon) == 1) {
-            System.out.println("weapon inserted!");
-        }
-        else {
-            System.out.println("error");
-        }
-        
-        txtWpnName.setEnabled(false);
-        txtWpnCost.setEnabled(false);
-        cmbWpnType.setEnabled(false);
-        txtWpnMinRange.setEnabled(false);
-        txtWpnMaxRange.setEnabled(false);
-        chkWpnHeavy.setEnabled(false);
-        chkWpnLoading.setEnabled(false);
-        chkWpnThrown.setEnabled(false);
-        chkWpnTwoHanded.setEnabled(false);
-        chkWpnAmmunition.setEnabled(false);
-        chkWpnFinesse.setEnabled(false);
-        txtWpnAttack.setEnabled(false);
-        txtWpnTHAttack.setEnabled(false);
-        txtWpnWeight.setEnabled(false);
-        txtWpnSpecialCondition.setEnabled(false);
-        btnWpnIsEquiped.setEnabled(false);
+        if (btnSaveWpn.isEnabled()) {
+            Weapon weapon;
+            WeaponController weaponC;
+            String weaponName, weaponWeight, weaponType, specialCondition, normalAtk, twoHandedAtk;
+            int weaponCost, minRange, maxRange = 0;
+            boolean isEquiped, heavy, loading, thrown, twoHanded, ammunition, finesse;
 
-        btnNewWpn.setEnabled(true);
-        btnUpdateWpn.setEnabled(false);
-        btnDeleteWpn.setEnabled(false);
-        btnSaveWpn.setEnabled(false);
-        btnCancelWpn.setEnabled(false);
-        btnExitWpn.setEnabled(true);
+            weaponC = new WeaponController();
+            weaponName = txtWpnName.getText();
+            weaponWeight = txtWpnWeight.getText();
+            weaponType = (String)cmbWpnType.getSelectedItem();
+            specialCondition = txtWpnSpecialCondition.getText();
+            normalAtk = txtWpnAttack.getText();
+            twoHandedAtk = txtWpnTHAttack.getText();
+            weaponCost = Integer.parseInt(txtWpnCost.getText());
+            minRange = Integer.parseInt(txtWpnMinRange.getText());
+            if (txtWpnMaxRange.isEnabled()) maxRange = Integer.parseInt(txtWpnMaxRange.getText());
+            isEquiped = btnWpnIsEquiped.isSelected();
+            heavy = chkWpnHeavy.isSelected();
+            loading = chkWpnLoading.isSelected();
+            thrown = chkWpnThrown.isSelected();
+            twoHanded = chkWpnTwoHanded.isSelected();
+            ammunition = chkWpnAmmunition.isSelected();
+            finesse = chkWpnFinesse.isSelected();
+            weapon = new Weapon(weaponType, heavy, loading, minRange, maxRange, specialCondition, 
+                    thrown, twoHanded, ammunition, finesse, normalAtk, twoHandedAtk, isEquiped, 
+                    weaponName, weaponCost, weaponWeight);
+
+            if (weaponC.insert(weapon) == 1) {
+                System.out.println("weapon inserted!");
+            }
+            else {
+                System.out.println("error");
+            }
+
+            habilitaDesabilitaCamposWeapon(false);
+
+            btnNewWpn.setEnabled(true);
+            btnUpdateWpn.setEnabled(false);
+            btnDeleteWpn.setEnabled(false);
+            btnSaveWpn.setEnabled(false);
+            btnCancelWpn.setEnabled(false);
+            btnExitWpn.setEnabled(true);            
+        }
     }//GEN-LAST:event_btnSaveWpnMouseClicked
 
     private void btnDeleteWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteWpnMouseClicked
@@ -1317,30 +1229,17 @@ public class frmVault extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateWpnMouseClicked
 
     private void btnNewWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewWpnMouseClicked
-        // TODO add your handling code here:
-        txtWpnName.setEnabled(true);
-        txtWpnCost.setEnabled(true);
-        cmbWpnType.setEnabled(true);
-        txtWpnMinRange.setEnabled(true);
-        txtWpnMaxRange.setEnabled(false);
-        chkWpnHeavy.setEnabled(true);
-        chkWpnLoading.setEnabled(true);
-        chkWpnThrown.setEnabled(true);
-        chkWpnTwoHanded.setEnabled(true);
-        chkWpnAmmunition.setEnabled(true);
-        chkWpnFinesse.setEnabled(true);
-        txtWpnAttack.setEnabled(true);
-        txtWpnTHAttack.setEnabled(true);
-        txtWpnWeight.setEnabled(true);
-        txtWpnSpecialCondition.setEnabled(true);
-        btnWpnIsEquiped.setEnabled(true);
+        if (btnNewWpn.isEnabled()) {
+            limpaCamposWeapon();
+            habilitaDesabilitaCamposWeapon(true);
 
-        btnNewWpn.setEnabled(false);
-        btnUpdateWpn.setEnabled(false);
-        btnDeleteWpn.setEnabled(false);
-        btnSaveWpn.setEnabled(true);
-        btnCancelWpn.setEnabled(true);
-        btnExitWpn.setEnabled(true);
+            btnNewWpn.setEnabled(false);
+            btnUpdateWpn.setEnabled(false);
+            btnDeleteWpn.setEnabled(false);
+            btnSaveWpn.setEnabled(true);
+            btnCancelWpn.setEnabled(true);
+            btnExitWpn.setEnabled(true);            
+        }
     }//GEN-LAST:event_btnNewWpnMouseClicked
 
     private void btnWpnIsEquipedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWpnIsEquipedMouseClicked
@@ -1350,7 +1249,69 @@ public class frmVault extends javax.swing.JFrame {
             btnWpnIsEquiped.setText("False");
         }
     }//GEN-LAST:event_btnWpnIsEquipedMouseClicked
-
+    
+    public void habilitaDesabilitaCamposArmor(boolean habilita) {
+        txtArmorName.setEnabled(habilita);
+        txtArmorCost.setEnabled(habilita);
+        txtArmorWeight.setEnabled(habilita);
+        btnArmorIsEquiped.setEnabled(habilita);
+        cmbArmorType.setEnabled(habilita);
+        txtACBonus.setEnabled(habilita);
+        cmbModifier.setEnabled(habilita);
+        btnStealthDArmor.setEnabled(habilita);
+        txtStrenghtRArmor.setEnabled(habilita);
+    }
+    
+    public void limpaCamposArmor() {
+        txtArmorName.setText("");
+        txtArmorCost.setText("");
+        txtArmorWeight.setText("");
+        btnArmorIsEquiped.setSelected(false);
+        cmbArmorType.setSelectedIndex(0);
+        txtACBonus.setText("");
+        cmbModifier.setSelectedIndex(0);
+        btnStealthDArmor.setSelected(false);
+        txtStrenghtRArmor.setText("");
+    }
+    
+    public void habilitaDesabilitaCamposWeapon(boolean habilita) {
+        txtWpnName.setEnabled(habilita);
+        txtWpnCost.setEnabled(habilita);
+        txtWpnWeight.setEnabled(habilita);
+        btnWpnIsEquiped.setEnabled(habilita);
+        cmbWpnType.setEnabled(habilita);
+        txtWpnMinRange.setEnabled(habilita);
+        txtWpnMaxRange.setEnabled(habilita);
+        chkWpnHeavy.setEnabled(habilita);
+        chkWpnLoading.setEnabled(habilita);
+        chkWpnThrown.setEnabled(habilita);
+        chkWpnTwoHanded.setEnabled(habilita);
+        chkWpnAmmunition.setEnabled(habilita);
+        chkWpnFinesse.setEnabled(habilita);
+        txtWpnSpecialCondition.setEnabled(habilita);
+        txtWpnAttack.setEnabled(habilita);
+        txtWpnTHAttack.setEnabled(habilita);
+    }
+    
+    public void limpaCamposWeapon() {
+        txtWpnName.setText("");
+        txtWpnCost.setText("");
+        txtWpnWeight.setText("");
+        btnWpnIsEquiped.setSelected(true);
+        cmbWpnType.setSelectedIndex(0);
+        txtWpnMinRange.setText("");
+        txtWpnMaxRange.setText("");
+        chkWpnHeavy.setSelected(false);
+        chkWpnLoading.setSelected(false);
+        chkWpnThrown.setSelected(false);
+        chkWpnTwoHanded.setSelected(false);
+        chkWpnAmmunition.setSelected(false);
+        chkWpnFinesse.setSelected(false);
+        txtWpnSpecialCondition.setText("");
+        txtWpnAttack.setText("");
+        txtWpnTHAttack.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
