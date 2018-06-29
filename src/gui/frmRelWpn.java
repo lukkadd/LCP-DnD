@@ -8,6 +8,7 @@ package gui;
 import db.ResultSetTableModel;
 import java.sql.ResultSet;
 import javax.swing.JTable;
+import controller.WeaponController;
 
 /**
  *
