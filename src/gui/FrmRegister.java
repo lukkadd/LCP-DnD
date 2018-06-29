@@ -47,6 +47,7 @@ public class FrmRegister extends javax.swing.JFrame {
             
             loged = a;
             access = a;
+            txtUsername.setEnabled(false);
             fillFieldsRegister();
         }
     }
@@ -299,7 +300,7 @@ public class FrmRegister extends javax.swing.JFrame {
                 if (acC.update(access) == 1) {
                     JOptionPane.showMessageDialog(jpRegister, "success!");
                     limpaCamposRegister();
-                    habilitaDesabilitaCamposRegister(rootPaneCheckingEnabled);
+                    habilitaDesabilitaCamposRegister(false);
 
                     btnNewRegister.setEnabled(true);
                     btnUpdateRegister.setEnabled(false);
@@ -405,6 +406,8 @@ public class FrmRegister extends javax.swing.JFrame {
         if (btnSearchRegister.isEnabled()) {
             access = acC.getByLogin(txtUsername.getText());
             
+            System.out.println(access.getIdAccess());
+            
             if (access == null) {
                 JOptionPane.showMessageDialog(jpRegister, "invalid login");
                 btnSearchRegister.setSelected(false);
@@ -425,7 +428,7 @@ public class FrmRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchRegisterMouseClicked
 
     private void btnExitRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitRegisterMouseClicked
-        System.exit(0);
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitRegisterMouseClicked
 
     /**

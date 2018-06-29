@@ -130,7 +130,7 @@ public class AccessController {
                 Statement stmt = (Statement)conn.createStatement();
                 rs = stmt.executeQuery(strSql);
                 if (rs != null && rs.next()) {
-                    access = new Access(rs.getString("username"), 
+                    access = new Access(rs.getInt("idAccess"), rs.getString("username"), 
                             rs.getString("passkey"), rs.getInt("permission"));
                 }
             }

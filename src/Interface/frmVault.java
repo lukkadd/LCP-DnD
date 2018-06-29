@@ -16,6 +16,7 @@ import entity.Access;
 import gui.frmRelAdv;
 import gui.frmRelArmor;
 import gui.frmRelWpn;
+import gui.FrmRegister;
 import java.sql.ResultSet;
 import javax.swing.JTable;
 
@@ -235,7 +236,7 @@ public class frmVault extends javax.swing.JFrame {
         btnAdvRel = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGear = new javax.swing.JTable();
-        cmbGearType = new javax.swing.JComboBox<>();
+        cmbGearType = new javax.swing.JComboBox<String>();
         lblGearName = new javax.swing.JLabel();
         txtGearName = new javax.swing.JTextField();
         lblGearCost = new javax.swing.JLabel();
@@ -259,9 +260,9 @@ public class frmVault extends javax.swing.JFrame {
         btnRelArmor = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblArmor = new javax.swing.JTable();
-        cmbModifier = new javax.swing.JComboBox<>();
+        cmbModifier = new javax.swing.JComboBox<String>();
         btnStealthDArmor = new javax.swing.JToggleButton();
-        cmbArmorType = new javax.swing.JComboBox<>();
+        cmbArmorType = new javax.swing.JComboBox<String>();
         txtArmorName = new javax.swing.JTextField();
         lblArmorName = new javax.swing.JLabel();
         lblArmorCost = new javax.swing.JLabel();
@@ -285,7 +286,7 @@ public class frmVault extends javax.swing.JFrame {
         lblWpnCost = new javax.swing.JLabel();
         txtWpnCost = new javax.swing.JTextField();
         lblWpnType = new javax.swing.JLabel();
-        cmbWpnType = new javax.swing.JComboBox<>();
+        cmbWpnType = new javax.swing.JComboBox<String>();
         lblWpnRange = new javax.swing.JLabel();
         txtWpnMaxRange = new javax.swing.JTextField();
         txtWpnMinRange = new javax.swing.JTextField();
@@ -457,7 +458,7 @@ public class frmVault extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblGear);
 
-        cmbGearType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
+        cmbGearType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
         cmbGearType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbGearTypeActionPerformed(evt);
@@ -639,7 +640,7 @@ public class frmVault extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblArmor);
 
-        cmbModifier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
+        cmbModifier.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
 
         btnStealthDArmor.setText("False");
         btnStealthDArmor.addActionListener(new java.awt.event.ActionListener() {
@@ -648,7 +649,7 @@ public class frmVault extends javax.swing.JFrame {
             }
         });
 
-        cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
+        cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
 
         txtArmorName.setToolTipText("");
 
@@ -870,7 +871,7 @@ public class frmVault extends javax.swing.JFrame {
 
         lblWpnType.setText("Weapon Type :");
 
-        cmbWpnType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged" }));
+        cmbWpnType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged" }));
         cmbWpnType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbWpnTypeItemStateChanged(evt);
@@ -1090,17 +1091,17 @@ public class frmVault extends javax.swing.JFrame {
         jMenu1.setText("Options");
 
         mnUpdate.setText("Update Account");
-        mnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mnUpdateMouseClicked(evt);
+        mnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnUpdateActionPerformed(evt);
             }
         });
         jMenu1.add(mnUpdate);
 
         mnRegister.setText("Register Account");
-        mnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mnRegisterMouseClicked(evt);
+        mnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnRegisterActionPerformed(evt);
             }
         });
         jMenu1.add(mnRegister);
@@ -1715,15 +1716,15 @@ public class frmVault extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRelWeaponMouseClicked
 
-    private void mnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnRegisterMouseClicked
-        // TODO add your handling code here:
-        FrmRegister frmReg = new FrmRegister(access).setVisible();
-    }//GEN-LAST:event_mnRegisterMouseClicked
+    private void mnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnUpdateActionPerformed
+        FrmRegister frmReg = new FrmRegister(access);
+        frmReg.setVisible(true);
+    }//GEN-LAST:event_mnUpdateActionPerformed
 
-    private void mnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnUpdateMouseClicked
-        // TODO add your handling code here:
-        FrmRegister frmReg = new FrmRegister(access).setVisible();
-    }//GEN-LAST:event_mnUpdateMouseClicked
+    private void mnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegisterActionPerformed
+        FrmRegister frmReg = new FrmRegister(access);
+        frmReg.setVisible(true);
+    }//GEN-LAST:event_mnRegisterActionPerformed
 
     /**
      * @param args the command line arguments

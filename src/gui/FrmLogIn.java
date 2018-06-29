@@ -9,7 +9,7 @@ package gui;
 import Interface.frmVault;
 import entity.Access;
 import controller.AccessController;
-import javax.swing.JOptionPane;
+import gui.FrmRegister;
 
 /**
  *
@@ -162,7 +162,7 @@ public class FrmLogIn extends javax.swing.JFrame {
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         // TODO add your handling code here: 
-        FrmRegister frmReg = new FrmRegister().setVisible(true);
+        new FrmRegister().setVisible(true);
     }//GEN-LAST:event_btnSignInActionPerformed
 
     /**
