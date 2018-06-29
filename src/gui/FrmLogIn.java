@@ -6,6 +6,7 @@
 
 package gui;
 
+import Interface.frmVault;
 import entity.Access;
 import controller.AccessController;
 import javax.swing.JOptionPane;
@@ -152,6 +153,9 @@ public class FrmLogIn extends javax.swing.JFrame {
             System.out.println("invalid login or password");
         }
         else {
+            frmVault vault = new frmVault();
+            vault.setVisible(true);
+            this.setVisible(false);
             System.out.println("yes!!");
         }
     }//GEN-LAST:event_btnLogInMouseClicked
