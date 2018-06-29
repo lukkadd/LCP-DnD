@@ -28,12 +28,12 @@ public class WeaponController {
             Connect conexao = new Connect();
             
             String strSql = "insert into Weapon (itemName, cost, weight, isEquiped, ";
-            strSql = strSql + "weaponType, heavy, loading, minRange, maxRange, specialCondition, ";
+            strSql = strSql + "weaponType, heavy, loading, minRange, maxRange, ";
             strSql = strSql + "thrown, twoHanded, ammunition, finesse, normalAttack, twoHandedAttack) values ";
             strSql = strSql + "('" + w.getName() + "'," + w.getCost() + ",'" + w.getWeight() + "',";
             strSql = strSql + w.isIsEquiped() + ",'" + w.getWeapon_type()+ "'," + w.isHeavy() + ",";
-            strSql = strSql + w.isLoading() + "," + w.getMin_range() + "," + w.getMax_range() + ",'";
-            strSql = strSql + w.getSpecial_condition() + "'," + w.isThrown() + "," + w.isTwo_handed() + ",";
+            strSql = strSql + w.isLoading() + "," + w.getMin_range() + "," + w.getMax_range() + ",";
+            strSql = strSql + w.isThrown() + "," + w.isTwo_handed() + ",";
             strSql = strSql + w.isAmmunition() + "," + w.isFinesse() + ",'" + w.getNormal_attack() + "','";
             strSql = strSql + w.getTwo_handed_attack();
             strSql = strSql + "');";
