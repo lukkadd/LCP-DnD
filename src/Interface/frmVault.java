@@ -232,7 +232,6 @@ public class frmVault extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
         btnAdvRel = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGear = new javax.swing.JTable();
@@ -257,7 +256,6 @@ public class frmVault extends javax.swing.JFrame {
         btnDeleteArmor = new javax.swing.JButton();
         btnSaveArmor = new javax.swing.JButton();
         btnCancelArmor = new javax.swing.JButton();
-        btnExitArmor = new javax.swing.JButton();
         btnRelArmor = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblArmor = new javax.swing.JTable();
@@ -281,7 +279,6 @@ public class frmVault extends javax.swing.JFrame {
         btnDeleteWpn = new javax.swing.JButton();
         btnSaveWpn = new javax.swing.JButton();
         btnCancelWpn = new javax.swing.JButton();
-        btnExitWpn = new javax.swing.JButton();
         btnRelWeapon = new javax.swing.JButton();
         lblWpnName = new javax.swing.JLabel();
         txtWpnName = new javax.swing.JTextField();
@@ -399,12 +396,6 @@ public class frmVault extends javax.swing.JFrame {
             }
         });
         tbAdventureGear.add(btnCancel);
-
-        btnExit.setText("Exit");
-        btnExit.setFocusable(false);
-        btnExit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnExit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbAdventureGear.add(btnExit);
 
         btnAdvRel.setText("Relatorio");
         btnAdvRel.setFocusable(false);
@@ -618,12 +609,6 @@ public class frmVault extends javax.swing.JFrame {
             }
         });
         tbArmor.add(btnCancelArmor);
-
-        btnExitArmor.setText("Exit");
-        btnExitArmor.setFocusable(false);
-        btnExitArmor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnExitArmor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbArmor.add(btnExitArmor);
 
         btnRelArmor.setText("Relatorio");
         btnRelArmor.setFocusable(false);
@@ -867,12 +852,6 @@ public class frmVault extends javax.swing.JFrame {
             }
         });
         tbWeapon.add(btnCancelWpn);
-
-        btnExitWpn.setText("Exit");
-        btnExitWpn.setFocusable(false);
-        btnExitWpn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnExitWpn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbWeapon.add(btnExitWpn);
 
         btnRelWeapon.setText("Relatorio");
         btnRelWeapon.setFocusable(false);
@@ -1160,7 +1139,6 @@ public class frmVault extends javax.swing.JFrame {
         btnDeleteWpn.setEnabled(false);
         btnSaveWpn.setEnabled(false);
         btnCancelWpn.setEnabled(false);
-        btnExitWpn.setEnabled(true);
 
         //reload table
         try {
@@ -1206,7 +1184,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDeleteWpn.setEnabled(false);
             btnCancelWpn.setEnabled(true);
             btnSaveWpn.setEnabled(true);
-            btnExitWpn.setEnabled(true);
         }
     }//GEN-LAST:event_btnCancelWpnMouseClicked
 
@@ -1250,7 +1227,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDeleteWpn.setEnabled(false);
             btnSaveWpn.setEnabled(false);
             btnCancelWpn.setEnabled(false);
-            btnExitWpn.setEnabled(true);
 
             //reload table
             try {
@@ -1273,7 +1249,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDeleteWpn.setEnabled(false);
             btnCancelWpn.setEnabled(false);
             btnSaveWpn.setEnabled(false);
-            btnExitWpn.setEnabled(true);
 
             //reload table
             try {
@@ -1313,7 +1288,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDeleteWpn.setEnabled(false);
             btnSaveWpn.setEnabled(false);
             btnCancelWpn.setEnabled(false);
-            btnExitWpn.setEnabled(true);
 
             //reload table
             try {
@@ -1335,7 +1309,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDeleteWpn.setEnabled(false);
             btnSaveWpn.setEnabled(true);
             btnCancelWpn.setEnabled(true);
-            btnExitWpn.setEnabled(true);
         }
     }//GEN-LAST:event_btnNewWpnMouseClicked
 
@@ -1347,7 +1320,6 @@ public class frmVault extends javax.swing.JFrame {
         btnDeleteWpn.setEnabled(true);
         btnCancelWpn.setEnabled(true);
         btnSaveWpn.setEnabled(false);
-        btnExitWpn.setEnabled(true);
 
         int row = tblWeapon.getSelectedRow();
         weapon = new Weapon(((Long) tblWeapon.getValueAt(row,0)).intValue(),tblWeapon.getValueAt(row,5).toString(),
@@ -1373,7 +1345,6 @@ public class frmVault extends javax.swing.JFrame {
         btnDeleteArmor.setEnabled(false);
         btnCancelArmor.setEnabled(false);
         btnSaveArmor.setEnabled(false);
-        btnExitArmor.setEnabled(true);
 
         //reload table
         try {
@@ -1409,7 +1380,6 @@ public class frmVault extends javax.swing.JFrame {
         btnDeleteArmor.setEnabled(true);
         btnCancelArmor.setEnabled(true);
         btnSaveArmor.setEnabled(false);
-        btnExitArmor.setEnabled(true);
 
         int row = tblArmor.getSelectedRow();
         armor = new Armor(((Long) tblArmor.getValueAt(row,0)).intValue(),tblArmor.getValueAt(row,5).toString(),
@@ -1432,7 +1402,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDeleteArmor.setEnabled(false);
             btnCancelArmor.setEnabled(true);
             btnSaveArmor.setEnabled(true);
-            btnExitArmor.setEnabled(true);
         }
     }//GEN-LAST:event_btnCancelArmorMouseClicked
 
@@ -1471,7 +1440,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDeleteArmor.setEnabled(false);
             btnCancelArmor.setEnabled(false);
             btnSaveArmor.setEnabled(false);
-            btnExitArmor.setEnabled(true);
 
             //reload table
             try {
@@ -1494,7 +1462,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDeleteArmor.setEnabled(false);
             btnCancelArmor.setEnabled(false);
             btnSaveArmor.setEnabled(false);
-            btnExitArmor.setEnabled(true);
 
             //reload table
             try {
@@ -1528,7 +1495,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDeleteArmor.setEnabled(false);
             btnCancelArmor.setEnabled(false);
             btnSaveArmor.setEnabled(false);
-            btnExitArmor.setEnabled(true);
 
             //reload table
             try {
@@ -1550,7 +1516,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDeleteArmor.setEnabled(false);
             btnCancelArmor.setEnabled(true);
             btnSaveArmor.setEnabled(true);
-            btnExitArmor.setEnabled(true);
         }
     }//GEN-LAST:event_btnNewArmorMouseClicked
 
@@ -1564,7 +1529,6 @@ public class frmVault extends javax.swing.JFrame {
         btnDelete.setEnabled(false);
         btnCancel.setEnabled(false);
         btnSave.setEnabled(false);
-        btnExit.setEnabled(true);
 
         //reload table
         try {
@@ -1592,7 +1556,6 @@ public class frmVault extends javax.swing.JFrame {
         btnDelete.setEnabled(true);
         btnCancel.setEnabled(true);
         btnSave.setEnabled(false);
-        btnExit.setEnabled(true);
 
         int row = tblGear.getSelectedRow();
         advGear = new AdventureGear(tblGear.getValueAt(row,4).toString(),
@@ -1628,7 +1591,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDelete.setEnabled(false);
             btnCancel.setEnabled(true);
             btnSave.setEnabled(true);
-            btnExit.setEnabled(true);
         }
     }//GEN-LAST:event_btnCancelMouseClicked
 
@@ -1657,7 +1619,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDelete.setEnabled(false);
             btnCancel.setEnabled(false);
             btnSave.setEnabled(false);
-            btnExit.setEnabled(true);
 
             try {
                 advGList = advGController.getAdventureGearList();
@@ -1679,7 +1640,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDelete.setEnabled(false);
             btnCancel.setEnabled(false);
             btnSave.setEnabled(false);
-            btnExit.setEnabled(true);
 
             //reload table
             try {
@@ -1710,7 +1670,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDelete.setEnabled(false);
             btnCancel.setEnabled(false);
             btnSave.setEnabled(false);
-            btnExit.setEnabled(true);
 
             try {
                 advGList = advGController.getAdventureGearList();
@@ -1735,7 +1694,6 @@ public class frmVault extends javax.swing.JFrame {
             btnDelete.setEnabled(false);
             btnCancel.setEnabled(true);
             btnSave.setEnabled(true);
-            btnExit.setEnabled(false);
 
             //advGear.setId(-1);
         }
@@ -1811,9 +1769,6 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteArmor;
     private javax.swing.JButton btnDeleteWpn;
-    private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnExitArmor;
-    private javax.swing.JButton btnExitWpn;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnNewArmor;
     private javax.swing.JButton btnNewWpn;
