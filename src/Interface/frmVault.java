@@ -12,6 +12,7 @@ import db.ResultSetTableModel;
 import entities.AdventureGear;
 import entities.Armor;
 import entities.Weapon;
+import entity.Access;
 import gui.frmRelAdv;
 import gui.frmRelArmor;
 import gui.frmRelWpn;
@@ -33,18 +34,35 @@ public class frmVault extends javax.swing.JFrame {
     private ResultSet advGList;
     private ResultSet armorList;
     private ResultSet weaponList;
+    private Access access;
     /**
      * Creates new form frmVault
      */
-    public frmVault(int nvSeg) {
+    public frmVault(){
         initComponents();
-        if(nvSeg == 0){
+        
+        btnAdvRel.setVisible(false);
+        btnAdvRel.setEnabled(false);
+        btnRelArmor.setVisible(false);
+        btnRelArmor.setEnabled(false);
+        btnRelWeapon.setVisible(false);
+        btnRelWeapon.setEnabled(false);
+        mnRegister.setEnabled(false);
+        mnRegister.setVisible(false);
+    }
+    
+    public frmVault(Access acc) {
+        initComponents();
+        access = acc;
+        if(access.getPermission() == 0){
             btnAdvRel.setVisible(false);
             btnAdvRel.setEnabled(false);
             btnRelArmor.setVisible(false);
             btnRelArmor.setEnabled(false);
             btnRelWeapon.setVisible(false);
             btnRelWeapon.setEnabled(false);
+            mnRegister.setEnabled(false);
+            mnRegister.setVisible(false);
         }
     }
     
@@ -291,6 +309,10 @@ public class frmVault extends javax.swing.JFrame {
         btnWpnIsEquiped = new javax.swing.JToggleButton();
         jpMonster = new javax.swing.JPanel();
         jpSpell = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnUpdate = new javax.swing.JMenuItem();
+        mnRegister = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vault");
@@ -1086,6 +1108,28 @@ public class frmVault extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
+        jMenu1.setText("Options");
+
+        mnUpdate.setText("Update Account");
+        mnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnUpdateMouseClicked(evt);
+            }
+        });
+        jMenu1.add(mnUpdate);
+
+        mnRegister.setText("Register Account");
+        mnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnRegisterMouseClicked(evt);
+            }
+        });
+        jMenu1.add(mnRegister);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1713,6 +1757,16 @@ public class frmVault extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRelWeaponMouseClicked
 
+    private void mnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnRegisterMouseClicked
+        // TODO add your handling code here:
+        FrmRegister frmReg = new FrmRegister(access).setVisible();
+    }//GEN-LAST:event_mnRegisterMouseClicked
+
+    private void mnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnUpdateMouseClicked
+        // TODO add your handling code here:
+        FrmRegister frmReg = new FrmRegister(access).setVisible();
+    }//GEN-LAST:event_mnUpdateMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1743,7 +1797,7 @@ public class frmVault extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVault(0).setVisible(true);
+                new frmVault().setVisible(true);
             }
         });
     }
@@ -1784,6 +1838,8 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbModifier;
     private javax.swing.JComboBox<String> cmbWpnType;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1817,6 +1873,8 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JLabel lblWpnTHAttack;
     private javax.swing.JLabel lblWpnType;
     private javax.swing.JLabel lblWpnWeight;
+    private javax.swing.JMenuItem mnRegister;
+    private javax.swing.JMenuItem mnUpdate;
     private javax.swing.JToolBar tbAdventureGear;
     private javax.swing.JToolBar tbArmor;
     private javax.swing.JToolBar tbWeapon;
