@@ -74,6 +74,44 @@ public class WeaponController {
             return 0;
         }
     }
+            
+    public int update(Weapon w) {
+        int retorno = 1;
+
+        try {
+            Connect conexao = new Connect();
+            String strSql = "update Weapon set "
+                    + "itemName = " + "'" + w.getName() +"',"
+                    + "cost = " + w.getCost() +","
+                    + "weight = " + "'" + w.getWeight() +"',"
+                    + "isEquiped = " + w.isIsEquiped() + ","
+                    + "weaponType = '" + w.getWeapon_type() + "', "
+                    + "heavy = " + w.isHeavy()+ ", "
+                    + "loading = " + w.isLoading() + ", "
+                    + "minRange = " + w.getMin_range() + ", "
+                    + "maxRange = " + w.getMax_range() + ", "
+                    + "thrown = " + w.isThrown() + ", "
+                    + "twoHanded = " + w.isTwo_handed() + ", "
+                    + "ammunition = " + w.isAmmunition() + ", "
+                    + "finesse = " + w.isFinesse() + ", "
+                    + "normalAttack = '" + w.getNormal_attack() + "', "
+                    + "twoHandedAttack = '" + w.getTwo_handed_attack() + "' "
+                    + "where idWeapon = " + w.getIdWeapon();
+
+            Connection conn = conexao.conectaBD();
+
+            if (conn != null) {
+                Statement stmt = (Statement)conn.createStatement();
+                stmt.execute(strSql);
+                conexao.desconectaBD(conn);
+            }
+
+            return retorno;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
     
     public ResultSet getWeaponList() {
         ResultSet rs = null;
@@ -88,7 +126,6 @@ public class WeaponController {
             if (conn != null) {
                 Statement stmt = (Statement)conn.createStatement();
                 rs = stmt.executeQuery(strSql);
-                conexao.desconectaBD(conn);
             }
         } catch(Exception e) {
             System.out.println(e.getMessage());

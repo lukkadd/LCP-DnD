@@ -26,6 +26,16 @@ public class Armor extends Equipment{
         this.stealth_disadvantage = stealth_disadvantage;
     }
 
+    public Armor(int idArmor, String armor_type, int base_AC_bonus, int modifier, int strength_requirement, boolean stealth_disadvantage, boolean isEquiped, String name, int cost, String weight) {
+        super(isEquiped, name, cost, weight);
+        this.idArmor = idArmor;
+        this.armor_type = armor_type;
+        this.base_AC_bonus = base_AC_bonus;
+        this.modifier = modifier;
+        this.strength_requirement = strength_requirement;
+        this.stealth_disadvantage = stealth_disadvantage;
+    }
+
     public int getIdArmor() {
         return idArmor;
     }

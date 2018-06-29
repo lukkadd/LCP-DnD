@@ -71,6 +71,38 @@ public class ArmorController {
             return 0;
         }
     }
+        
+    public int update(Armor a) {
+        int retorno = 1;
+
+        try {
+            Connect conexao = new Connect();
+            String strSql = "update Armor set "
+                    + "itemName = " + "'" + a.getName() +"',"
+                    + "cost = " + a.getCost() +","
+                    + "weight = " + "'" + a.getWeight() +"',"
+                    + "isEquiped = " + "" + a.isIsEquiped() + ","
+                    + "armorType = " + "'" + a.getArmor_type() + "', "
+                    + "baseACBonus = " + a.getBase_AC_bonus()+ ", "
+                    + "modifier = " + a.getModifier() + ", "
+                    + "strengthRequirement = " + a.getStrength_requirement() + ", "
+                    + "stealthDisadvantage = " + a.isStealth_disadvantage()
+                    + " where idArmor = " + a.getIdArmor();
+
+            Connection conn = conexao.conectaBD();
+
+            if (conn != null) {
+                Statement stmt = (Statement)conn.createStatement();
+                stmt.execute(strSql);
+                conexao.desconectaBD(conn);
+            }
+
+            return retorno;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
     
     public ResultSet getArmorList() {
         ResultSet rs = null;
@@ -85,7 +117,6 @@ public class ArmorController {
             if (conn != null) {
                 Statement stmt = (Statement)conn.createStatement();
                 rs = stmt.executeQuery(strSql);
-                conexao.desconectaBD(conn);
             }
         } catch(Exception e) {
             System.out.println(e.getMessage());
