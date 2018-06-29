@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package entity;
+import java.util.List;
 
 /**
  *
  * @author lukka
  */
-public class Attribute {
-    String name;
+public class Race {
+    private String name;
+    private int speed;
+    private String traits;
+    private List<AttributeIncrease> attBonus;
+    private String languages;
+    
 }

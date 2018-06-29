@@ -9,7 +9,7 @@ package controller;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import entities.Weapon;
+import entity.Weapon;
 import db.Connect;
 
 /**

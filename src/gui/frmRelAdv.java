@@ -7,7 +7,7 @@ package gui;
 
 import controller.AdventureGearController;
 import db.ResultSetTableModel;
-import entities.AdventureGear;
+import entity.AdventureGear;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JTable;

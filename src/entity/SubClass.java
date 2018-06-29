@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package entity;
+
+import java.util.List;
 
 /**
  *
  * @author lukka
  */
-class AttributeIncrease {
-    private int bonus;
-    private Attribute att;
+public class SubClass {
+    String name;
+    List<Feature> subFeatures;
 }

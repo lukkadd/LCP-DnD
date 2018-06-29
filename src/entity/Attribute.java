@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
-
-import java.util.List;
+package entity;
 
 /**
  *
  * @author lukka
  */
-public class SubClass {
+public class Attribute {
     String name;
-    List<Feature> subFeatures;
 }

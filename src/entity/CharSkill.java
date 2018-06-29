@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package entity;
 
 /**
  *
  * @author lukka
  */
-public class CharAttribute {
-    Attribute att;
-    int baseValue;
+public class CharSkill {
+    Skill skill;
+    int value;
 }

@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface;
+package gui;
 
 import controller.AdventureGearController;
 import controller.ArmorController;
 import controller.WeaponController;
 import db.ResultSetTableModel;
-import entities.AdventureGear;
-import entities.Armor;
-import entities.Weapon;
+import entity.AdventureGear;
+import entity.Armor;
+import entity.Weapon;
 import entity.Access;
 import gui.frmRelAdv;
 import gui.frmRelArmor;
