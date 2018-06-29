@@ -355,6 +355,7 @@ public class FrmRegister extends javax.swing.JFrame {
                 }
                 else {
                     if (chkPermission.isVisible()) permission = chkPermission.isSelected()?1:0;
+                    System.out.println(permission);
                     access = new Access(txtUsername.getText(), passkey, permission);
 
                     if (acC.insert(access) == 1) {

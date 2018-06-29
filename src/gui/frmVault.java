@@ -65,8 +65,7 @@ public class frmVault extends javax.swing.JFrame {
             mnRegister.setEnabled(false);
             mnRegister.setVisible(false);
         }
-    }
-    
+    }    
     
     public void fillTable(ResultSet rs, JTable table){
         ResultSetTableModel model = new ResultSetTableModel(rs);

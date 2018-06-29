@@ -164,7 +164,7 @@ public class FrmLogIn extends javax.swing.JFrame {
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         // TODO add your handling code here: 
-        new FrmRegister().setVisible(true);
+        new FrmRegister(null).setVisible(true);
     }//GEN-LAST:event_btnSignInActionPerformed
 
     /**

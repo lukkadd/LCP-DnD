@@ -28,8 +28,8 @@ public class AccessController {
         try {
             Connect conexao = new Connect();
             
-            String strSql = "insert into Access (username, passkey) values ";
-            strSql =  strSql + "('" + a.getUsername() + "','" + a.getPasskey() + "');";
+            String strSql = "insert into Access (username, passkey, permission) values ";
+            strSql =  strSql + "('" + a.getUsername() + "','" + a.getPasskey() + "'," + a.getPermission() + ");";
             
             Connection conn = conexao.conectaBD();
             
