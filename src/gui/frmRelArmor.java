@@ -9,6 +9,7 @@ import db.ResultSetTableModel;
 import java.sql.ResultSet;
 import javax.swing.JTable;
 import controller.ArmorController;
+import javax.swing.JFrame;
 
 /**
  *
@@ -29,6 +30,7 @@ public class frmRelArmor extends javax.swing.JFrame {
      */
     public frmRelArmor() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
     /**
@@ -128,6 +130,7 @@ public class frmRelArmor extends javax.swing.JFrame {
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitMouseClicked
 
     /**

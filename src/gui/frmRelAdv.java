@@ -9,6 +9,7 @@ import controller.AdventureGearController;
 import db.ResultSetTableModel;
 import entities.AdventureGear;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 
 /**
@@ -29,6 +30,7 @@ public class frmRelAdv extends javax.swing.JFrame {
      */
     public frmRelAdv() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
     /**
@@ -126,6 +128,7 @@ public class frmRelAdv extends javax.swing.JFrame {
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitMouseClicked
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown

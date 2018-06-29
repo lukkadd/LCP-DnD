@@ -153,7 +153,7 @@ public class FrmLogIn extends javax.swing.JFrame {
             System.out.println("invalid login or password");
         }
         else {
-            frmVault vault = new frmVault();
+            frmVault vault = new frmVault(access.getPermission());
             vault.setVisible(true);
             this.setVisible(false);
             System.out.println("yes!!");
@@ -166,7 +166,7 @@ public class FrmLogIn extends javax.swing.JFrame {
         AccessController ac = new AccessController();
         acc.setPermission(0);
         acc.setUsername(txtUsername.getText());
-        acc.setPasskey(txtPassword.getText());
+        acc.setPasskey(new String(txtPassword.getPassword()));
         
         if(ac.insert(acc) == 1){
             JOptionPane.showMessageDialog(pnlMain, "Account registration accepted! please log in");
