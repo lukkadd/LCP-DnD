@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import entities.AdventureGear;
 import db.Connect;
-import java.util.ArrayList;
 
 /**
  *

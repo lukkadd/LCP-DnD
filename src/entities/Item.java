@@ -14,9 +14,6 @@ public class Item {
     private int cost; //measured in copper pieces
     private String weight; // in lb.
 
-    public Item() {
-    }
-
     public Item(String name, int cost, String weight) {
         this.name = name;
         this.cost = cost;
