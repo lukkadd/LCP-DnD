@@ -155,7 +155,7 @@ public class FrmLogIn extends javax.swing.JFrame {
             System.out.println("invalid login or password");
         }
         else {
-            frmVault vault = new frmVault(access);
+            FrmVault vault = new FrmVault(access);
             vault.setVisible(true);
             this.setVisible(false);
             System.out.println("yes!!");

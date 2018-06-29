@@ -13,9 +13,9 @@ import entity.AdventureGear;
 import entity.Armor;
 import entity.Weapon;
 import entity.Access;
-import gui.frmRelAdv;
-import gui.frmRelArmor;
-import gui.frmRelWpn;
+import gui.FrmRelAdv;
+import gui.FrmRelArmor;
+import gui.FrmRelWpn;
 import gui.FrmRegister;
 import java.sql.ResultSet;
 import javax.swing.JTable;
@@ -24,7 +24,7 @@ import javax.swing.JTable;
  *
  * @author aluno
  */
-public class frmVault extends javax.swing.JFrame {
+public class FrmVault extends javax.swing.JFrame {
     
     private Armor armor;
     private ArmorController armorC = new ArmorController();
@@ -39,7 +39,7 @@ public class frmVault extends javax.swing.JFrame {
     /**
      * Creates new form frmVault
      */
-    public frmVault(){
+    public FrmVault(){
         initComponents();
         
         btnAdvRel.setVisible(false);
@@ -52,7 +52,7 @@ public class frmVault extends javax.swing.JFrame {
         mnRegister.setVisible(false);
     }
     
-    public frmVault(Access acc) {
+    public FrmVault(Access acc) {
         initComponents();
         access = acc;
         if(access.getPermission() == 0){
@@ -1576,7 +1576,7 @@ public class frmVault extends javax.swing.JFrame {
     private void btnAdvRelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdvRelMouseClicked
         // TODO add your handling code here:
         if(btnAdvRel.isEnabled()){
-            frmRelAdv relAdv = new frmRelAdv();
+            FrmRelAdv relAdv = new FrmRelAdv();
             relAdv.setVisible(true);
         }
     }//GEN-LAST:event_btnAdvRelMouseClicked
@@ -1702,7 +1702,7 @@ public class frmVault extends javax.swing.JFrame {
     private void btnRelArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelArmorMouseClicked
         // TODO add your handling code here:
         if(btnRelArmor.isEnabled()){
-            frmRelArmor relArmor = new frmRelArmor();
+            FrmRelArmor relArmor = new FrmRelArmor();
             relArmor.setVisible(true);
         }
     }//GEN-LAST:event_btnRelArmorMouseClicked
@@ -1710,7 +1710,7 @@ public class frmVault extends javax.swing.JFrame {
     private void btnRelWeaponMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelWeaponMouseClicked
         // TODO add your handling code here:
         if(btnRelWeapon.isEnabled()){
-            frmRelWpn relWpn = new frmRelWpn();
+            FrmRelWpn relWpn = new FrmRelWpn();
             relWpn.setVisible(true);
         }
     }//GEN-LAST:event_btnRelWeaponMouseClicked
@@ -1742,20 +1742,20 @@ public class frmVault extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVault.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmVault.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVault.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmVault.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVault.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmVault.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVault.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmVault.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVault().setVisible(true);
+                new FrmVault().setVisible(true);
             }
         });
     }
