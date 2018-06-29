@@ -21,6 +21,13 @@ public class Access {
         this.passkey = passkey;
         this.permission = permission;
     }
+
+    public Access(int idAccess, String username, String passkey, int permission) {
+        this.idAccess = idAccess;
+        this.username = username;
+        this.passkey = passkey;
+        this.permission = permission;
+    }
     
     public Access() {}
 

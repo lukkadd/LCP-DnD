@@ -68,6 +68,32 @@ public class AccessController {
         }
     }
     
+    public int update(Access a) {
+        int retorno = 1;
+
+        try {
+            Connect conexao = new Connect();
+            String strSql = "update Access set "
+                    + "username = '" + a.getUsername() +"',"
+                    + "passkey = '" + a.getPasskey() +"',"
+                    + "permission = " + a.getPermission()
+                    + " where idAccess = " + a.getIdAccess();
+
+            Connection conn = conexao.conectaBD();
+
+            if (conn != null) {
+                Statement stmt = (Statement)conn.createStatement();
+                stmt.execute(strSql);
+                conexao.desconectaBD(conn);
+            }
+
+            return retorno;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
     public ResultSet getAccessesList() {
         ResultSet rs = null;
         
