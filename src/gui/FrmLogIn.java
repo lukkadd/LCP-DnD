@@ -153,7 +153,7 @@ public class FrmLogIn extends javax.swing.JFrame {
             System.out.println("invalid login or password");
         }
         else {
-            frmVault vault = new frmVault();
+            frmVault vault = new frmVault(access);
             vault.setVisible(true);
             this.setVisible(false);
             System.out.println("yes!!");
@@ -162,17 +162,7 @@ public class FrmLogIn extends javax.swing.JFrame {
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         // TODO add your handling code here: 
-        Access acc = new Access();
-        AccessController ac = new AccessController();
-        acc.setPermission(0);
-        acc.setUsername(txtUsername.getText());
-        acc.setPasskey(txtPassword.getText());
-        
-        if(ac.insert(acc) == 1){
-            JOptionPane.showMessageDialog(pnlMain, "Account registration accepted! please log in");
-        }else{
-            JOptionPane.showMessageDialog(pnlMain, "Account registration failed!");
-        }
+        FrmRegister frmReg = new FrmRegister().setVisible(true);
     }//GEN-LAST:event_btnSignInActionPerformed
 
     /**

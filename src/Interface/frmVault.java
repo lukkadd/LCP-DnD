@@ -12,6 +12,10 @@ import db.ResultSetTableModel;
 import entities.AdventureGear;
 import entities.Armor;
 import entities.Weapon;
+import entity.Access;
+import gui.frmRelAdv;
+import gui.frmRelArmor;
+import gui.frmRelWpn;
 import java.sql.ResultSet;
 import javax.swing.JTable;
 
@@ -30,11 +34,36 @@ public class frmVault extends javax.swing.JFrame {
     private ResultSet advGList;
     private ResultSet armorList;
     private ResultSet weaponList;
+    private Access access;
     /**
      * Creates new form frmVault
      */
-    public frmVault() {
+    public frmVault(){
         initComponents();
+        
+        btnAdvRel.setVisible(false);
+        btnAdvRel.setEnabled(false);
+        btnRelArmor.setVisible(false);
+        btnRelArmor.setEnabled(false);
+        btnRelWeapon.setVisible(false);
+        btnRelWeapon.setEnabled(false);
+        mnRegister.setEnabled(false);
+        mnRegister.setVisible(false);
+    }
+    
+    public frmVault(Access acc) {
+        initComponents();
+        access = acc;
+        if(access.getPermission() == 0){
+            btnAdvRel.setVisible(false);
+            btnAdvRel.setEnabled(false);
+            btnRelArmor.setVisible(false);
+            btnRelArmor.setEnabled(false);
+            btnRelWeapon.setVisible(false);
+            btnRelWeapon.setEnabled(false);
+            mnRegister.setEnabled(false);
+            mnRegister.setVisible(false);
+        }
     }
     
     
@@ -203,10 +232,10 @@ public class frmVault extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
+        btnAdvRel = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGear = new javax.swing.JTable();
-        cmbGearType = new javax.swing.JComboBox<String>();
+        cmbGearType = new javax.swing.JComboBox<>();
         lblGearName = new javax.swing.JLabel();
         txtGearName = new javax.swing.JTextField();
         lblGearCost = new javax.swing.JLabel();
@@ -227,12 +256,12 @@ public class frmVault extends javax.swing.JFrame {
         btnDeleteArmor = new javax.swing.JButton();
         btnSaveArmor = new javax.swing.JButton();
         btnCancelArmor = new javax.swing.JButton();
-        btnExitArmor = new javax.swing.JButton();
+        btnRelArmor = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblArmor = new javax.swing.JTable();
-        cmbModifier = new javax.swing.JComboBox<String>();
+        cmbModifier = new javax.swing.JComboBox<>();
         btnStealthDArmor = new javax.swing.JToggleButton();
-        cmbArmorType = new javax.swing.JComboBox<String>();
+        cmbArmorType = new javax.swing.JComboBox<>();
         txtArmorName = new javax.swing.JTextField();
         lblArmorName = new javax.swing.JLabel();
         lblArmorCost = new javax.swing.JLabel();
@@ -250,13 +279,13 @@ public class frmVault extends javax.swing.JFrame {
         btnDeleteWpn = new javax.swing.JButton();
         btnSaveWpn = new javax.swing.JButton();
         btnCancelWpn = new javax.swing.JButton();
-        btnExitWpn = new javax.swing.JButton();
+        btnRelWeapon = new javax.swing.JButton();
         lblWpnName = new javax.swing.JLabel();
         txtWpnName = new javax.swing.JTextField();
         lblWpnCost = new javax.swing.JLabel();
         txtWpnCost = new javax.swing.JTextField();
         lblWpnType = new javax.swing.JLabel();
-        cmbWpnType = new javax.swing.JComboBox<String>();
+        cmbWpnType = new javax.swing.JComboBox<>();
         lblWpnRange = new javax.swing.JLabel();
         txtWpnMaxRange = new javax.swing.JTextField();
         txtWpnMinRange = new javax.swing.JTextField();
@@ -277,10 +306,10 @@ public class frmVault extends javax.swing.JFrame {
         btnWpnIsEquiped = new javax.swing.JToggleButton();
         jpMonster = new javax.swing.JPanel();
         jpSpell = new javax.swing.JPanel();
-        jpAttribute = new javax.swing.JPanel();
-        jpEquipment = new javax.swing.JPanel();
-        jpItem = new javax.swing.JPanel();
-        jpAttack = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnUpdate = new javax.swing.JMenuItem();
+        mnRegister = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vault");
@@ -368,11 +397,16 @@ public class frmVault extends javax.swing.JFrame {
         });
         tbAdventureGear.add(btnCancel);
 
-        btnExit.setText("Exit");
-        btnExit.setFocusable(false);
-        btnExit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnExit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbAdventureGear.add(btnExit);
+        btnAdvRel.setText("Relatorio");
+        btnAdvRel.setFocusable(false);
+        btnAdvRel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAdvRel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAdvRel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAdvRelMouseClicked(evt);
+            }
+        });
+        tbAdventureGear.add(btnAdvRel);
 
         tblGear.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -423,7 +457,7 @@ public class frmVault extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblGear);
 
-        cmbGearType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
+        cmbGearType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
         cmbGearType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbGearTypeActionPerformed(evt);
@@ -576,11 +610,16 @@ public class frmVault extends javax.swing.JFrame {
         });
         tbArmor.add(btnCancelArmor);
 
-        btnExitArmor.setText("Exit");
-        btnExitArmor.setFocusable(false);
-        btnExitArmor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnExitArmor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbArmor.add(btnExitArmor);
+        btnRelArmor.setText("Relatorio");
+        btnRelArmor.setFocusable(false);
+        btnRelArmor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelArmor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRelArmor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelArmorMouseClicked(evt);
+            }
+        });
+        tbArmor.add(btnRelArmor);
 
         tblArmor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -600,7 +639,7 @@ public class frmVault extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblArmor);
 
-        cmbModifier.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
+        cmbModifier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
 
         btnStealthDArmor.setText("False");
         btnStealthDArmor.addActionListener(new java.awt.event.ActionListener() {
@@ -609,7 +648,7 @@ public class frmVault extends javax.swing.JFrame {
             }
         });
 
-        cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
+        cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
 
         txtArmorName.setToolTipText("");
 
@@ -814,11 +853,16 @@ public class frmVault extends javax.swing.JFrame {
         });
         tbWeapon.add(btnCancelWpn);
 
-        btnExitWpn.setText("Exit");
-        btnExitWpn.setFocusable(false);
-        btnExitWpn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnExitWpn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tbWeapon.add(btnExitWpn);
+        btnRelWeapon.setText("Relatorio");
+        btnRelWeapon.setFocusable(false);
+        btnRelWeapon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelWeapon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRelWeapon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelWeaponMouseClicked(evt);
+            }
+        });
+        tbWeapon.add(btnRelWeapon);
 
         lblWpnName.setText("Name :");
 
@@ -826,7 +870,7 @@ public class frmVault extends javax.swing.JFrame {
 
         lblWpnType.setText("Weapon Type :");
 
-        cmbWpnType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged" }));
+        cmbWpnType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged" }));
         cmbWpnType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbWpnTypeItemStateChanged(evt);
@@ -1022,58 +1066,6 @@ public class frmVault extends javax.swing.JFrame {
 
         jtVault.addTab("Spell", jpSpell);
 
-        javax.swing.GroupLayout jpAttributeLayout = new javax.swing.GroupLayout(jpAttribute);
-        jpAttribute.setLayout(jpAttributeLayout);
-        jpAttributeLayout.setHorizontalGroup(
-            jpAttributeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 862, Short.MAX_VALUE)
-        );
-        jpAttributeLayout.setVerticalGroup(
-            jpAttributeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 464, Short.MAX_VALUE)
-        );
-
-        jtVault.addTab("Attribute", jpAttribute);
-
-        javax.swing.GroupLayout jpEquipmentLayout = new javax.swing.GroupLayout(jpEquipment);
-        jpEquipment.setLayout(jpEquipmentLayout);
-        jpEquipmentLayout.setHorizontalGroup(
-            jpEquipmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 862, Short.MAX_VALUE)
-        );
-        jpEquipmentLayout.setVerticalGroup(
-            jpEquipmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 464, Short.MAX_VALUE)
-        );
-
-        jtVault.addTab("Equipment", jpEquipment);
-
-        javax.swing.GroupLayout jpItemLayout = new javax.swing.GroupLayout(jpItem);
-        jpItem.setLayout(jpItemLayout);
-        jpItemLayout.setHorizontalGroup(
-            jpItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 862, Short.MAX_VALUE)
-        );
-        jpItemLayout.setVerticalGroup(
-            jpItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 464, Short.MAX_VALUE)
-        );
-
-        jtVault.addTab("Item", jpItem);
-
-        javax.swing.GroupLayout jpAttackLayout = new javax.swing.GroupLayout(jpAttack);
-        jpAttack.setLayout(jpAttackLayout);
-        jpAttackLayout.setHorizontalGroup(
-            jpAttackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 862, Short.MAX_VALUE)
-        );
-        jpAttackLayout.setVerticalGroup(
-            jpAttackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 464, Short.MAX_VALUE)
-        );
-
-        jtVault.addTab("Attack", jpAttack);
-
         javax.swing.GroupLayout jpVaultLayout = new javax.swing.GroupLayout(jpVault);
         jpVault.setLayout(jpVaultLayout);
         jpVaultLayout.setHorizontalGroup(
@@ -1094,6 +1086,28 @@ public class frmVault extends javax.swing.JFrame {
                     .addComponent(jtVault)
                     .addContainerGap()))
         );
+
+        jMenu1.setText("Options");
+
+        mnUpdate.setText("Update Account");
+        mnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnUpdateMouseClicked(evt);
+            }
+        });
+        jMenu1.add(mnUpdate);
+
+        mnRegister.setText("Register Account");
+        mnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnRegisterMouseClicked(evt);
+            }
+        });
+        jMenu1.add(mnRegister);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1116,388 +1130,62 @@ public class frmVault extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jpAdventureGearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpAdventureGearMouseClicked
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_jpAdventureGearMouseClicked
+    private void jpWeaponComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpWeaponComponentShown
+        limpaCamposWeapon();
+        habilitaDesabilitaCamposWeapon(false);
 
-    private void jpAdventureGearComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpAdventureGearComponentShown
-        clearFields();
-        habilitaDesabilitaCamposGear(false);
-        
-        //Habilitando a barra de ferramentas
-        btnNew.setEnabled(true);
-        btnUpdate.setEnabled(false);
-        btnDelete.setEnabled(false);
-        btnCancel.setEnabled(false);
-        btnSave.setEnabled(false);
-        btnExit.setEnabled(true);
-        
+        btnNewWpn.setEnabled(true);
+        btnUpdateWpn.setEnabled(false);
+        btnDeleteWpn.setEnabled(false);
+        btnSaveWpn.setEnabled(false);
+        btnCancelWpn.setEnabled(false);
+
         //reload table
         try {
-            advGList = advGController.getAdventureGearList();
-            fillTable(advGList,tblGear);
+            weaponList = weaponC.getWeaponList();
+            fillTable(weaponList,tblWeapon);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }        
-    }//GEN-LAST:event_jpAdventureGearComponentShown
-
-    private void btnNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewMouseClicked
-        if (btnNew.isEnabled()) {
-            clearFields();
-            habilitaDesabilitaCamposGear(true);
-            
-            btnNew.setEnabled(false);
-            btnUpdate.setEnabled(false);
-            btnDelete.setEnabled(false);
-            btnCancel.setEnabled(true);
-            btnSave.setEnabled(true);
-            btnExit.setEnabled(false);
-
-            //advGear.setId(-1);            
         }
-    }//GEN-LAST:event_btnNewMouseClicked
+    }//GEN-LAST:event_jpWeaponComponentShown
 
-    private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
-        if (btnUpdate.isEnabled()) {
-            advGear = new AdventureGear(
-                txtDescription.getText(),
-                cmbGearType.getSelectedItem().toString(),
-                txtGearName.getText(),
-                Integer.parseInt(txtGearCost.getText()),
-                txtGearWeight.getText(),
-                advGear.getId());
-            
-            advGController.update(advGear);
-            clearFields();
-            habilitaDesabilitaCamposGear(false);
-        
-            btnNew.setEnabled(true);
-            btnUpdate.setEnabled(false);
-            btnDelete.setEnabled(false);
-            btnCancel.setEnabled(false);
-            btnSave.setEnabled(false);
-            btnExit.setEnabled(true);    
-            
-            try {
-                advGList = advGController.getAdventureGearList();
-                fillTable(advGList,tblGear);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_btnUpdateMouseClicked
-
-    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        if (btnDelete.isEnabled()) {
-            advGController.remove(advGear);
-            clearFields();
-            habilitaDesabilitaCamposGear(false);
-
-            btnNew.setEnabled(true);
-            btnUpdate.setEnabled(false);
-            btnDelete.setEnabled(false);
-            btnCancel.setEnabled(false);
-            btnSave.setEnabled(false);
-            btnExit.setEnabled(true);
-
-            //reload table
-            try {
-                advGList = advGController.getAdventureGearList();
-                fillTable(advGList,tblGear);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_btnDeleteMouseClicked
-
-    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
-        if (btnSave.isEnabled()) {
-            advGear = new AdventureGear(txtDescription.getText(),
-                cmbGearType.getSelectedItem().toString(), txtGearName.getText(),
-                Integer.parseInt(txtGearCost.getText()), txtGearWeight.getText());
-
-            //populando o obj
-            //advGear.setName(txtGearName.getText());
-            //advGear.setCost(Integer.parseInt(txtGearCost.getText()));
-            //advGear.setDescription(txtDescription.getText());
-            //advGear.setGear_type(cmbGearType.getSelectedItem().toString());
-            //advGear.setWeight(txtGearWeight.getText());
-            
-            advGController.insert(advGear);
-            
-            clearFields();
-            //desabilitando campos
-            habilitaDesabilitaCamposGear(false);
-
-            //gerenciando os botoes
-            btnNew.setEnabled(true);
-            btnUpdate.setEnabled(false);
-            btnDelete.setEnabled(false);
-            btnCancel.setEnabled(false);
-            btnSave.setEnabled(false);
-            btnExit.setEnabled(true);
-
-            try {
-                advGList = advGController.getAdventureGearList();
-                fillTable(advGList,tblGear);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_btnSaveMouseClicked
-
-    private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
-        if (btnCancel.isEnabled()) {
-            clearFields();
-            habilitaDesabilitaCamposGear(true);
-            //Habilitando a barra de ferramentas
-            btnNew.setEnabled(false);
-            btnUpdate.setEnabled(false);
-            btnDelete.setEnabled(false);
-            btnCancel.setEnabled(true);
-            btnSave.setEnabled(true);
-            btnExit.setEnabled(true);            
-        }
-    }//GEN-LAST:event_btnCancelMouseClicked
-
-    private void jpArmorComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpArmorComponentShown
-        limpaCamposArmor();
-        habilitaDesabilitaCamposArmor(false);
-        
-        btnNewArmor.setEnabled(true);
-        btnUpdateArmor.setEnabled(false);
-        btnDeleteArmor.setEnabled(false);
-        btnCancelArmor.setEnabled(false);
-        btnSaveArmor.setEnabled(false);
-        btnExitArmor.setEnabled(true);
-                
-        //reload table
-        try {
-            armorList = armorC.getArmorList();
-            fillTable(armorList,tblArmor);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }    
-    }//GEN-LAST:event_jpArmorComponentShown
-
-    private void btnNewArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewArmorMouseClicked
-        if (btnNewArmor.isEnabled()) {
-            limpaCamposArmor();
-            habilitaDesabilitaCamposArmor(true);
-        
-            btnNewArmor.setEnabled(false);
-            btnUpdateArmor.setEnabled(false);
-            btnDeleteArmor.setEnabled(false);
-            btnCancelArmor.setEnabled(true);
-            btnSaveArmor.setEnabled(true);
-            btnExitArmor.setEnabled(true);
-        }
-    }//GEN-LAST:event_btnNewArmorMouseClicked
-
-    private void btnUpdateArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateArmorMouseClicked
-        if (btnUpdateArmor.isEnabled()) {
-            armor = new Armor(armor.getIdArmor(),
-                cmbArmorType.getSelectedItem().toString(),
-                Integer.parseInt(txtACBonus.getText()),
-                cmbModifier.getSelectedIndex(),
-                Integer.parseInt(txtStrenghtRArmor.getText()),
-                btnStealthDArmor.isSelected(),
-                btnArmorIsEquiped.isSelected(),
-                txtArmorName.getText(),
-                Integer.parseInt(txtArmorCost.getText()),
-                txtArmorWeight.getText());
-            
-            armorC.update(armor);
-            limpaCamposArmor();
-            habilitaDesabilitaCamposArmor(false);
-            
-            btnNewArmor.setEnabled(true);
-            btnUpdateArmor.setEnabled(false);
-            btnDeleteArmor.setEnabled(false);
-            btnCancelArmor.setEnabled(false);
-            btnSaveArmor.setEnabled(false);
-            btnExitArmor.setEnabled(true);
-
-            //reload table
-            try {
-                armorList = armorC.getArmorList();
-                fillTable(armorList,tblArmor);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            } 
-        }
-    }//GEN-LAST:event_btnUpdateArmorMouseClicked
-
-    private void btnDeleteArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteArmorMouseClicked
-        if (btnDeleteArmor.isEnabled()) {
-            armorC.remove(armor);
-            limpaCamposArmor();
-            habilitaDesabilitaCamposArmor(false);
-        
-            btnNewArmor.setEnabled(true);
-            btnUpdateArmor.setEnabled(false);
-            btnDeleteArmor.setEnabled(false);
-            btnCancelArmor.setEnabled(false);
-            btnSaveArmor.setEnabled(false);
-            btnExitArmor.setEnabled(true);      
-            
-            //reload table
-            try {
-                armorList = armorC.getArmorList();
-                fillTable(armorList,tblArmor);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_btnDeleteArmorMouseClicked
-
-    private void btnSaveArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveArmorMouseClicked
-        if (btnSaveArmor.isEnabled()) {
-            //Faz o insert
-            String armorName,armorWeight, armorType;
-            int baseACBonus, modifier, strengthReq, armorCost;
-            boolean isEquiped, stealthDArmor;
-
-            armorName = txtArmorName.getText();
-            armorWeight = txtArmorWeight.getText();
-            armorCost = Integer.parseInt(txtArmorCost.getText());
-            armorType = (String)cmbArmorType.getSelectedItem();
-            baseACBonus = Integer.parseInt(txtACBonus.getText());
-            modifier = cmbModifier.getSelectedIndex();
-            strengthReq = Integer.parseInt(txtStrenghtRArmor.getText());
-            isEquiped = btnArmorIsEquiped.isSelected();
-            stealthDArmor = btnStealthDArmor.isEnabled();
-            armor = new Armor(armorType, baseACBonus, modifier,
-                    strengthReq, stealthDArmor, isEquiped, armorName, 
-                    armorCost, armorWeight);
-
-            if (armorC.insert(armor) == 1) {
-                System.out.println("armor inserted!");
-            }
-            else {
-                System.out.println("error");
-            }
-            
-            limpaCamposArmor();
-            habilitaDesabilitaCamposArmor(false);
-
-            btnNewArmor.setEnabled(true);
-            btnUpdateArmor.setEnabled(false);
-            btnDeleteArmor.setEnabled(false);
-            btnCancelArmor.setEnabled(false);
-            btnSaveArmor.setEnabled(false);
-            btnExitArmor.setEnabled(true);
-            
-            //reload table
-            try {
-                armorList = armorC.getArmorList();
-                fillTable(armorList,tblArmor);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_btnSaveArmorMouseClicked
-
-    private void btnCancelArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelArmorMouseClicked
-        if (btnCancelArmor.isEnabled()) {
-            limpaCamposArmor();
-            habilitaDesabilitaCamposArmor(true);       
-
-            btnNewArmor.setEnabled(false);
-            btnUpdateArmor.setEnabled(false);
-            btnDeleteArmor.setEnabled(false);
-            btnCancelArmor.setEnabled(true);
-            btnSaveArmor.setEnabled(true);
-            btnExitArmor.setEnabled(true);
-        }
-    }//GEN-LAST:event_btnCancelArmorMouseClicked
-
-    private void btnStealthDArmorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStealthDArmorActionPerformed
-        // TODO add your handling code here:
-        if(btnStealthDArmor.isSelected()){
-            btnStealthDArmor.setText("True");
+    private void btnWpnIsEquipedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWpnIsEquipedMouseClicked
+        if(btnWpnIsEquiped.isSelected()){
+            btnWpnIsEquiped.setText("True");
         }else{
-            btnStealthDArmor.setText("False");
+            btnWpnIsEquiped.setText("False");
         }
-    }//GEN-LAST:event_btnStealthDArmorActionPerformed
+    }//GEN-LAST:event_btnWpnIsEquipedMouseClicked
 
-    private void btnNewWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewWpnMouseClicked
-        if (btnNewWpn.isEnabled()) {
+    private void chkWpnTwoHandedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkWpnTwoHandedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkWpnTwoHandedActionPerformed
+
+    private void cmbWpnTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbWpnTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbWpnTypeActionPerformed
+
+    private void cmbWpnTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbWpnTypeItemStateChanged
+        // TODO add your handling code here:
+        if(cmbWpnType.getSelectedItem().toString().contains("Melee")){
+            txtWpnMaxRange.setEnabled(false);
+        }else{
+            txtWpnMaxRange.setEnabled(true);
+        }
+    }//GEN-LAST:event_cmbWpnTypeItemStateChanged
+
+    private void btnCancelWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelWpnMouseClicked
+        if (btnCancelWpn.isEnabled()) {
             limpaCamposWeapon();
             habilitaDesabilitaCamposWeapon(true);
 
             btnNewWpn.setEnabled(false);
             btnUpdateWpn.setEnabled(false);
             btnDeleteWpn.setEnabled(false);
-            btnSaveWpn.setEnabled(true);
             btnCancelWpn.setEnabled(true);
-            btnExitWpn.setEnabled(true);            
+            btnSaveWpn.setEnabled(true);
         }
-    }//GEN-LAST:event_btnNewWpnMouseClicked
-
-    private void btnUpdateWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateWpnMouseClicked
-        if (btnUpdateWpn.isEnabled()) {
-            weapon = new Weapon(weapon.getIdWeapon(),
-                cmbWpnType.getSelectedItem().toString(),
-                chkWpnHeavy.isSelected(),
-                chkWpnLoading.isSelected(),
-                Integer.parseInt(txtWpnMinRange.getText()),
-                Integer.parseInt(txtWpnMaxRange.getText()),
-                chkWpnThrown.isSelected(),
-                chkWpnTwoHanded.isSelected(),
-                chkWpnAmmunition.isSelected(),
-                chkWpnFinesse.isSelected(),
-                txtWpnAttack.getText(),
-                txtWpnTHAttack.getText(),
-                btnWpnIsEquiped.isSelected(),
-                txtWpnName.getText(),
-                Integer.parseInt(txtWpnCost.getText()),
-                txtWpnWeight.getText());
-            
-            weaponC.update(weapon);
-            limpaCamposWeapon();
-            habilitaDesabilitaCamposWeapon(false);
-
-            btnNewWpn.setEnabled(true);
-            btnUpdateWpn.setEnabled(false);
-            btnDeleteWpn.setEnabled(false);
-            btnSaveWpn.setEnabled(false);
-            btnCancelWpn.setEnabled(false);
-            btnExitWpn.setEnabled(true);
-                        
-            //reload table
-            try {
-                weaponList = weaponC.getWeaponList();
-                fillTable(weaponList,tblWeapon);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_btnUpdateWpnMouseClicked
-
-    private void btnDeleteWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteWpnMouseClicked
-        if (btnDeleteWpn.isEnabled()) {
-            weaponC.remove(weapon);
-            limpaCamposWeapon();
-            habilitaDesabilitaCamposWeapon(false);
-        
-            btnNewWpn.setEnabled(true);
-            btnUpdateWpn.setEnabled(false);
-            btnDeleteWpn.setEnabled(false);
-            btnCancelWpn.setEnabled(false);
-            btnSaveWpn.setEnabled(false);
-            btnExitWpn.setEnabled(true);    
-            
-            //reload table
-            try {
-                weaponList = weaponC.getWeaponList();
-                fillTable(weaponList,tblWeapon);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_btnDeleteWpnMouseClicked
+    }//GEN-LAST:event_btnCancelWpnMouseClicked
 
     private void btnSaveWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveWpnMouseClicked
         if (btnSaveWpn.isEnabled()) {
@@ -1520,9 +1208,9 @@ public class frmVault extends javax.swing.JFrame {
             twoHanded = chkWpnTwoHanded.isSelected();
             ammunition = chkWpnAmmunition.isSelected();
             finesse = chkWpnFinesse.isSelected();
-            weapon = new Weapon(weaponType, heavy, loading, minRange, maxRange, 
-                    thrown, twoHanded, ammunition, finesse, normalAtk, twoHandedAtk, isEquiped, 
-                    weaponName, weaponCost, weaponWeight);
+            weapon = new Weapon(weaponType, heavy, loading, minRange, maxRange,
+                thrown, twoHanded, ammunition, finesse, normalAtk, twoHandedAtk, isEquiped,
+                weaponName, weaponCost, weaponWeight);
 
             if (weaponC.insert(weapon) == 1) {
                 System.out.println("weapon inserted!");
@@ -1530,7 +1218,7 @@ public class frmVault extends javax.swing.JFrame {
             else {
                 System.out.println("error");
             }
-            
+
             limpaCamposWeapon();
             habilitaDesabilitaCamposWeapon(false);
 
@@ -1539,8 +1227,7 @@ public class frmVault extends javax.swing.JFrame {
             btnDeleteWpn.setEnabled(false);
             btnSaveWpn.setEnabled(false);
             btnCancelWpn.setEnabled(false);
-            btnExitWpn.setEnabled(true);
-            
+
             //reload table
             try {
                 weaponList = weaponC.getWeaponList();
@@ -1551,90 +1238,122 @@ public class frmVault extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSaveWpnMouseClicked
 
-    private void btnCancelWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelWpnMouseClicked
-        if (btnCancelWpn.isEnabled()) {
+    private void btnDeleteWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteWpnMouseClicked
+        if (btnDeleteWpn.isEnabled()) {
+            weaponC.remove(weapon);
             limpaCamposWeapon();
-            habilitaDesabilitaCamposWeapon(true);       
+            habilitaDesabilitaCamposWeapon(false);
+
+            btnNewWpn.setEnabled(true);
+            btnUpdateWpn.setEnabled(false);
+            btnDeleteWpn.setEnabled(false);
+            btnCancelWpn.setEnabled(false);
+            btnSaveWpn.setEnabled(false);
+
+            //reload table
+            try {
+                weaponList = weaponC.getWeaponList();
+                fillTable(weaponList,tblWeapon);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnDeleteWpnMouseClicked
+
+    private void btnUpdateWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateWpnMouseClicked
+        if (btnUpdateWpn.isEnabled()) {
+            weapon = new Weapon(weapon.getIdWeapon(),
+                cmbWpnType.getSelectedItem().toString(),
+                chkWpnHeavy.isSelected(),
+                chkWpnLoading.isSelected(),
+                Integer.parseInt(txtWpnMinRange.getText()),
+                Integer.parseInt(txtWpnMaxRange.getText()),
+                chkWpnThrown.isSelected(),
+                chkWpnTwoHanded.isSelected(),
+                chkWpnAmmunition.isSelected(),
+                chkWpnFinesse.isSelected(),
+                txtWpnAttack.getText(),
+                txtWpnTHAttack.getText(),
+                btnWpnIsEquiped.isSelected(),
+                txtWpnName.getText(),
+                Integer.parseInt(txtWpnCost.getText()),
+                txtWpnWeight.getText());
+
+            weaponC.update(weapon);
+            limpaCamposWeapon();
+            habilitaDesabilitaCamposWeapon(false);
+
+            btnNewWpn.setEnabled(true);
+            btnUpdateWpn.setEnabled(false);
+            btnDeleteWpn.setEnabled(false);
+            btnSaveWpn.setEnabled(false);
+            btnCancelWpn.setEnabled(false);
+
+            //reload table
+            try {
+                weaponList = weaponC.getWeaponList();
+                fillTable(weaponList,tblWeapon);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnUpdateWpnMouseClicked
+
+    private void btnNewWpnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewWpnMouseClicked
+        if (btnNewWpn.isEnabled()) {
+            limpaCamposWeapon();
+            habilitaDesabilitaCamposWeapon(true);
 
             btnNewWpn.setEnabled(false);
             btnUpdateWpn.setEnabled(false);
             btnDeleteWpn.setEnabled(false);
-            btnCancelWpn.setEnabled(true);
             btnSaveWpn.setEnabled(true);
-            btnExitWpn.setEnabled(true);
+            btnCancelWpn.setEnabled(true);
         }
-    }//GEN-LAST:event_btnCancelWpnMouseClicked
+    }//GEN-LAST:event_btnNewWpnMouseClicked
 
-    private void chkWpnTwoHandedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkWpnTwoHandedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkWpnTwoHandedActionPerformed
+    private void tblWeaponMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblWeaponMouseClicked
+        habilitaDesabilitaCamposWeapon(true);
 
-    private void cmbGearTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGearTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbGearTypeActionPerformed
-
-    private void cmbWpnTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbWpnTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbWpnTypeActionPerformed
-
-    private void cmbWpnTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbWpnTypeItemStateChanged
-        // TODO add your handling code here:
-        if(cmbWpnType.getSelectedItem().toString().contains("Melee")){
-            txtWpnMaxRange.setEnabled(false);
-        }else{
-            txtWpnMaxRange.setEnabled(true);
-        }
-    }//GEN-LAST:event_cmbWpnTypeItemStateChanged
-
-    private void jpWeaponComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpWeaponComponentShown
-        limpaCamposWeapon();
-        habilitaDesabilitaCamposWeapon(false);
-
-        btnNewWpn.setEnabled(true);
-        btnUpdateWpn.setEnabled(false);
-        btnDeleteWpn.setEnabled(false);
+        btnNewWpn.setEnabled(false);
+        btnUpdateWpn.setEnabled(true);
+        btnDeleteWpn.setEnabled(true);
+        btnCancelWpn.setEnabled(true);
         btnSaveWpn.setEnabled(false);
-        btnCancelWpn.setEnabled(false);
-        btnExitWpn.setEnabled(true);
-        
+
+        int row = tblWeapon.getSelectedRow();
+        weapon = new Weapon(((Long) tblWeapon.getValueAt(row,0)).intValue(),tblWeapon.getValueAt(row,5).toString(),
+            (boolean)tblWeapon.getValueAt(row,6), (boolean)tblWeapon.getValueAt(row,7),
+            Integer.parseInt(tblWeapon.getValueAt(row,8).toString()),
+            Integer.parseInt(tblWeapon.getValueAt(row,9).toString()),
+            (boolean)tblWeapon.getValueAt(row,10), (boolean)tblWeapon.getValueAt(row,11),
+            (boolean)tblWeapon.getValueAt(row,12), (boolean)tblWeapon.getValueAt(row,13),
+            tblWeapon.getValueAt(row,14).toString(), tblWeapon.getValueAt(row,15).toString(),
+            (boolean)tblWeapon.getValueAt(row,4), tblWeapon.getValueAt(row,1).toString(),
+            Integer.parseInt(tblWeapon.getValueAt(row,2).toString()),
+            tblWeapon.getValueAt(row,3).toString());
+
+        preencheCamposWeapon(weapon);
+    }//GEN-LAST:event_tblWeaponMouseClicked
+
+    private void jpArmorComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpArmorComponentShown
+        limpaCamposArmor();
+        habilitaDesabilitaCamposArmor(false);
+
+        btnNewArmor.setEnabled(true);
+        btnUpdateArmor.setEnabled(false);
+        btnDeleteArmor.setEnabled(false);
+        btnCancelArmor.setEnabled(false);
+        btnSaveArmor.setEnabled(false);
+
         //reload table
         try {
-            weaponList = weaponC.getWeaponList();
-            fillTable(weaponList,tblWeapon);
+            armorList = armorC.getArmorList();
+            fillTable(armorList,tblArmor);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_jpWeaponComponentShown
-
-    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewActionPerformed
-
-    private void tblGearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGearMouseClicked
-        habilitaDesabilitaCamposGear(true);
-        
-        btnNew.setEnabled(false);
-        btnUpdate.setEnabled(true);
-        btnDelete.setEnabled(true);
-        btnCancel.setEnabled(true);
-        btnSave.setEnabled(false);
-        btnExit.setEnabled(true);
-        
-        int row = tblGear.getSelectedRow();
-        advGear = new AdventureGear(tblGear.getValueAt(row,4).toString(),
-            tblGear.getValueAt(row,5).toString(), tblGear.getValueAt(row,1).toString(),
-            Integer.parseInt(tblGear.getValueAt(row,2).toString()), 
-            tblGear.getValueAt(row,3).toString(), ((Long) tblGear.getValueAt(row,0)).intValue());
-        
-        //advGear.setId(((Long) tblGear.getValueAt(row,0)).intValue());
-        //advGear.setName(tblGear.getValueAt(row,1).toString());
-        //advGear.setCost(Integer.parseInt(tblGear.getValueAt(row,2).toString()));
-        //advGear.setGear_type(tblGear.getValueAt(row,5).toString());
-        //advGear.setWeight(tblGear.getValueAt(row,3).toString());
-        //advGear.setDescription(tblGear.getValueAt(row,4).toString());
-        
-        fillFields(advGear);
-    }//GEN-LAST:event_tblGearMouseClicked
+    }//GEN-LAST:event_jpArmorComponentShown
 
     private void btnArmorIsEquipedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArmorIsEquipedActionPerformed
         if(btnArmorIsEquiped.isSelected()){
@@ -1644,59 +1363,367 @@ public class frmVault extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnArmorIsEquipedActionPerformed
 
-    private void btnWpnIsEquipedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWpnIsEquipedMouseClicked
-        if(btnWpnIsEquiped.isSelected()){
-            btnWpnIsEquiped.setText("True");
+    private void btnStealthDArmorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStealthDArmorActionPerformed
+        // TODO add your handling code here:
+        if(btnStealthDArmor.isSelected()){
+            btnStealthDArmor.setText("True");
         }else{
-            btnWpnIsEquiped.setText("False");
+            btnStealthDArmor.setText("False");
         }
-    }//GEN-LAST:event_btnWpnIsEquipedMouseClicked
+    }//GEN-LAST:event_btnStealthDArmorActionPerformed
 
     private void tblArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblArmorMouseClicked
         habilitaDesabilitaCamposArmor(true);
-        
+
         btnNewArmor.setEnabled(false);
         btnUpdateArmor.setEnabled(true);
         btnDeleteArmor.setEnabled(true);
         btnCancelArmor.setEnabled(true);
         btnSaveArmor.setEnabled(false);
-        btnExitArmor.setEnabled(true);
-        
+
         int row = tblArmor.getSelectedRow();
         armor = new Armor(((Long) tblArmor.getValueAt(row,0)).intValue(),tblArmor.getValueAt(row,5).toString(),
-            Integer.parseInt(tblArmor.getValueAt(row,6).toString()), 
+            Integer.parseInt(tblArmor.getValueAt(row,6).toString()),
             Integer.parseInt(tblArmor.getValueAt(row,7).toString()),
             Integer.parseInt(tblArmor.getValueAt(row,8).toString()), (boolean)tblArmor.getValueAt(row,9),
             (boolean)tblArmor.getValueAt(row,4), tblArmor.getValueAt(row,1).toString(),
             Integer.parseInt(tblArmor.getValueAt(row,2).toString()), tblArmor.getValueAt(row,3).toString());
-        
+
         preencheCamposArmor(armor);
     }//GEN-LAST:event_tblArmorMouseClicked
 
-    private void tblWeaponMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblWeaponMouseClicked
-        habilitaDesabilitaCamposWeapon(true);
-        
-        btnNewWpn.setEnabled(false);
-        btnUpdateWpn.setEnabled(true);
-        btnDeleteWpn.setEnabled(true);
-        btnCancelWpn.setEnabled(true);
-        btnSaveWpn.setEnabled(false);
-        btnExitWpn.setEnabled(true);
-        
-        int row = tblWeapon.getSelectedRow();
-        weapon = new Weapon(((Long) tblWeapon.getValueAt(row,0)).intValue(),tblWeapon.getValueAt(row,5).toString(),
-            (boolean)tblWeapon.getValueAt(row,6), (boolean)tblWeapon.getValueAt(row,7),
-            Integer.parseInt(tblWeapon.getValueAt(row,8).toString()), 
-            Integer.parseInt(tblWeapon.getValueAt(row,9).toString()),
-            (boolean)tblWeapon.getValueAt(row,10), (boolean)tblWeapon.getValueAt(row,11),
-            (boolean)tblWeapon.getValueAt(row,12), (boolean)tblWeapon.getValueAt(row,13),
-            tblWeapon.getValueAt(row,14).toString(), tblWeapon.getValueAt(row,15).toString(),
-            (boolean)tblWeapon.getValueAt(row,4), tblWeapon.getValueAt(row,1).toString(),
-            Integer.parseInt(tblWeapon.getValueAt(row,2).toString()),
-            tblWeapon.getValueAt(row,3).toString());
-        
-        preencheCamposWeapon(weapon);
-    }//GEN-LAST:event_tblWeaponMouseClicked
+    private void btnCancelArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelArmorMouseClicked
+        if (btnCancelArmor.isEnabled()) {
+            limpaCamposArmor();
+            habilitaDesabilitaCamposArmor(true);
+
+            btnNewArmor.setEnabled(false);
+            btnUpdateArmor.setEnabled(false);
+            btnDeleteArmor.setEnabled(false);
+            btnCancelArmor.setEnabled(true);
+            btnSaveArmor.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnCancelArmorMouseClicked
+
+    private void btnSaveArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveArmorMouseClicked
+        if (btnSaveArmor.isEnabled()) {
+            //Faz o insert
+            String armorName,armorWeight, armorType;
+            int baseACBonus, modifier, strengthReq, armorCost;
+            boolean isEquiped, stealthDArmor;
+
+            armorName = txtArmorName.getText();
+            armorWeight = txtArmorWeight.getText();
+            armorCost = Integer.parseInt(txtArmorCost.getText());
+            armorType = (String)cmbArmorType.getSelectedItem();
+            baseACBonus = Integer.parseInt(txtACBonus.getText());
+            modifier = cmbModifier.getSelectedIndex();
+            strengthReq = Integer.parseInt(txtStrenghtRArmor.getText());
+            isEquiped = btnArmorIsEquiped.isSelected();
+            stealthDArmor = btnStealthDArmor.isEnabled();
+            armor = new Armor(armorType, baseACBonus, modifier,
+                strengthReq, stealthDArmor, isEquiped, armorName,
+                armorCost, armorWeight);
+
+            if (armorC.insert(armor) == 1) {
+                System.out.println("armor inserted!");
+            }
+            else {
+                System.out.println("error");
+            }
+
+            limpaCamposArmor();
+            habilitaDesabilitaCamposArmor(false);
+
+            btnNewArmor.setEnabled(true);
+            btnUpdateArmor.setEnabled(false);
+            btnDeleteArmor.setEnabled(false);
+            btnCancelArmor.setEnabled(false);
+            btnSaveArmor.setEnabled(false);
+
+            //reload table
+            try {
+                armorList = armorC.getArmorList();
+                fillTable(armorList,tblArmor);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnSaveArmorMouseClicked
+
+    private void btnDeleteArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteArmorMouseClicked
+        if (btnDeleteArmor.isEnabled()) {
+            armorC.remove(armor);
+            limpaCamposArmor();
+            habilitaDesabilitaCamposArmor(false);
+
+            btnNewArmor.setEnabled(true);
+            btnUpdateArmor.setEnabled(false);
+            btnDeleteArmor.setEnabled(false);
+            btnCancelArmor.setEnabled(false);
+            btnSaveArmor.setEnabled(false);
+
+            //reload table
+            try {
+                armorList = armorC.getArmorList();
+                fillTable(armorList,tblArmor);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnDeleteArmorMouseClicked
+
+    private void btnUpdateArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateArmorMouseClicked
+        if (btnUpdateArmor.isEnabled()) {
+            armor = new Armor(armor.getIdArmor(),
+                cmbArmorType.getSelectedItem().toString(),
+                Integer.parseInt(txtACBonus.getText()),
+                cmbModifier.getSelectedIndex(),
+                Integer.parseInt(txtStrenghtRArmor.getText()),
+                btnStealthDArmor.isSelected(),
+                btnArmorIsEquiped.isSelected(),
+                txtArmorName.getText(),
+                Integer.parseInt(txtArmorCost.getText()),
+                txtArmorWeight.getText());
+
+            armorC.update(armor);
+            limpaCamposArmor();
+            habilitaDesabilitaCamposArmor(false);
+
+            btnNewArmor.setEnabled(true);
+            btnUpdateArmor.setEnabled(false);
+            btnDeleteArmor.setEnabled(false);
+            btnCancelArmor.setEnabled(false);
+            btnSaveArmor.setEnabled(false);
+
+            //reload table
+            try {
+                armorList = armorC.getArmorList();
+                fillTable(armorList,tblArmor);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnUpdateArmorMouseClicked
+
+    private void btnNewArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewArmorMouseClicked
+        if (btnNewArmor.isEnabled()) {
+            limpaCamposArmor();
+            habilitaDesabilitaCamposArmor(true);
+
+            btnNewArmor.setEnabled(false);
+            btnUpdateArmor.setEnabled(false);
+            btnDeleteArmor.setEnabled(false);
+            btnCancelArmor.setEnabled(true);
+            btnSaveArmor.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnNewArmorMouseClicked
+
+    private void jpAdventureGearComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpAdventureGearComponentShown
+        clearFields();
+        habilitaDesabilitaCamposGear(false);
+
+        //Habilitando a barra de ferramentas
+        btnNew.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
+        btnCancel.setEnabled(false);
+        btnSave.setEnabled(false);
+
+        //reload table
+        try {
+            advGList = advGController.getAdventureGearList();
+            fillTable(advGList,tblGear);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jpAdventureGearComponentShown
+
+    private void jpAdventureGearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpAdventureGearMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jpAdventureGearMouseClicked
+
+    private void cmbGearTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGearTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbGearTypeActionPerformed
+
+    private void tblGearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGearMouseClicked
+        habilitaDesabilitaCamposGear(true);
+
+        btnNew.setEnabled(false);
+        btnUpdate.setEnabled(true);
+        btnDelete.setEnabled(true);
+        btnCancel.setEnabled(true);
+        btnSave.setEnabled(false);
+
+        int row = tblGear.getSelectedRow();
+        advGear = new AdventureGear(tblGear.getValueAt(row,4).toString(),
+            tblGear.getValueAt(row,5).toString(), tblGear.getValueAt(row,1).toString(),
+            Integer.parseInt(tblGear.getValueAt(row,2).toString()),
+            tblGear.getValueAt(row,3).toString(), ((Long) tblGear.getValueAt(row,0)).intValue());
+
+        //advGear.setId(((Long) tblGear.getValueAt(row,0)).intValue());
+        //advGear.setName(tblGear.getValueAt(row,1).toString());
+        //advGear.setCost(Integer.parseInt(tblGear.getValueAt(row,2).toString()));
+        //advGear.setGear_type(tblGear.getValueAt(row,5).toString());
+        //advGear.setWeight(tblGear.getValueAt(row,3).toString());
+        //advGear.setDescription(tblGear.getValueAt(row,4).toString());
+
+        fillFields(advGear);
+    }//GEN-LAST:event_tblGearMouseClicked
+
+    private void btnAdvRelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdvRelMouseClicked
+        // TODO add your handling code here:
+        if(btnAdvRel.isEnabled()){
+            frmRelAdv relAdv = new frmRelAdv();
+            relAdv.setVisible(true);
+        }
+    }//GEN-LAST:event_btnAdvRelMouseClicked
+
+    private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
+        if (btnCancel.isEnabled()) {
+            clearFields();
+            habilitaDesabilitaCamposGear(true);
+            //Habilitando a barra de ferramentas
+            btnNew.setEnabled(false);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+            btnCancel.setEnabled(true);
+            btnSave.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnCancelMouseClicked
+
+    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+        if (btnSave.isEnabled()) {
+            advGear = new AdventureGear(txtDescription.getText(),
+                cmbGearType.getSelectedItem().toString(), txtGearName.getText(),
+                Integer.parseInt(txtGearCost.getText()), txtGearWeight.getText());
+
+            //populando o obj
+            //advGear.setName(txtGearName.getText());
+            //advGear.setCost(Integer.parseInt(txtGearCost.getText()));
+            //advGear.setDescription(txtDescription.getText());
+            //advGear.setGear_type(cmbGearType.getSelectedItem().toString());
+            //advGear.setWeight(txtGearWeight.getText());
+
+            advGController.insert(advGear);
+
+            clearFields();
+            //desabilitando campos
+            habilitaDesabilitaCamposGear(false);
+
+            //gerenciando os botoes
+            btnNew.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+            btnCancel.setEnabled(false);
+            btnSave.setEnabled(false);
+
+            try {
+                advGList = advGController.getAdventureGearList();
+                fillTable(advGList,tblGear);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnSaveMouseClicked
+
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        if (btnDelete.isEnabled()) {
+            advGController.remove(advGear);
+            clearFields();
+            habilitaDesabilitaCamposGear(false);
+
+            btnNew.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+            btnCancel.setEnabled(false);
+            btnSave.setEnabled(false);
+
+            //reload table
+            try {
+                advGList = advGController.getAdventureGearList();
+                fillTable(advGList,tblGear);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnDeleteMouseClicked
+
+    private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
+        if (btnUpdate.isEnabled()) {
+            advGear = new AdventureGear(
+                txtDescription.getText(),
+                cmbGearType.getSelectedItem().toString(),
+                txtGearName.getText(),
+                Integer.parseInt(txtGearCost.getText()),
+                txtGearWeight.getText(),
+                advGear.getId());
+
+            advGController.update(advGear);
+            clearFields();
+            habilitaDesabilitaCamposGear(false);
+
+            btnNew.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+            btnCancel.setEnabled(false);
+            btnSave.setEnabled(false);
+
+            try {
+                advGList = advGController.getAdventureGearList();
+                fillTable(advGList,tblGear);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnUpdateMouseClicked
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewMouseClicked
+        if (btnNew.isEnabled()) {
+            clearFields();
+            habilitaDesabilitaCamposGear(true);
+
+            btnNew.setEnabled(false);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+            btnCancel.setEnabled(true);
+            btnSave.setEnabled(true);
+
+            //advGear.setId(-1);
+        }
+    }//GEN-LAST:event_btnNewMouseClicked
+
+    private void btnRelArmorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelArmorMouseClicked
+        // TODO add your handling code here:
+        if(btnRelArmor.isEnabled()){
+            frmRelArmor relArmor = new frmRelArmor();
+            relArmor.setVisible(true);
+        }
+    }//GEN-LAST:event_btnRelArmorMouseClicked
+
+    private void btnRelWeaponMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelWeaponMouseClicked
+        // TODO add your handling code here:
+        if(btnRelWeapon.isEnabled()){
+            frmRelWpn relWpn = new frmRelWpn();
+            relWpn.setVisible(true);
+        }
+    }//GEN-LAST:event_btnRelWeaponMouseClicked
+
+    private void mnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnRegisterMouseClicked
+        // TODO add your handling code here:
+        FrmRegister frmReg = new FrmRegister(access).setVisible();
+    }//GEN-LAST:event_mnRegisterMouseClicked
+
+    private void mnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnUpdateMouseClicked
+        // TODO add your handling code here:
+        FrmRegister frmReg = new FrmRegister(access).setVisible();
+    }//GEN-LAST:event_mnUpdateMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1734,6 +1761,7 @@ public class frmVault extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdvRel;
     private javax.swing.JToggleButton btnArmorIsEquiped;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCancelArmor;
@@ -1741,12 +1769,11 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteArmor;
     private javax.swing.JButton btnDeleteWpn;
-    private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnExitArmor;
-    private javax.swing.JButton btnExitWpn;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnNewArmor;
     private javax.swing.JButton btnNewWpn;
+    private javax.swing.JButton btnRelArmor;
+    private javax.swing.JButton btnRelWeapon;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSaveArmor;
     private javax.swing.JButton btnSaveWpn;
@@ -1766,16 +1793,14 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbModifier;
     private javax.swing.JComboBox<String> cmbWpnType;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPanel jpAdventureGear;
     private javax.swing.JPanel jpArmor;
-    private javax.swing.JPanel jpAttack;
-    private javax.swing.JPanel jpAttribute;
-    private javax.swing.JPanel jpEquipment;
-    private javax.swing.JPanel jpItem;
     private javax.swing.JPanel jpMonster;
     private javax.swing.JPanel jpSpell;
     private javax.swing.JPanel jpVault;
@@ -1803,6 +1828,8 @@ public class frmVault extends javax.swing.JFrame {
     private javax.swing.JLabel lblWpnTHAttack;
     private javax.swing.JLabel lblWpnType;
     private javax.swing.JLabel lblWpnWeight;
+    private javax.swing.JMenuItem mnRegister;
+    private javax.swing.JMenuItem mnUpdate;
     private javax.swing.JToolBar tbAdventureGear;
     private javax.swing.JToolBar tbArmor;
     private javax.swing.JToolBar tbWeapon;
