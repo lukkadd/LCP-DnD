@@ -8,6 +8,7 @@ package gui;
 
 import entity.Access;
 import controller.AccessController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -60,6 +61,11 @@ public class FrmLogIn extends javax.swing.JFrame {
 
         btnSignIn.setText("Sign In");
         btnSignIn.setName("btnSignIn"); // NOI18N
+        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignInActionPerformed(evt);
+            }
+        });
 
         btnLogIn.setText("Log In");
         btnLogIn.setName("btnLogIn"); // NOI18N
@@ -68,8 +74,6 @@ public class FrmLogIn extends javax.swing.JFrame {
                 btnLogInMouseClicked(evt);
             }
         });
-
-        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\LCP\\LCP-DnD\\img\\D&DLOGO.png")); // NOI18N
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
@@ -151,6 +155,21 @@ public class FrmLogIn extends javax.swing.JFrame {
             System.out.println("yes!!");
         }
     }//GEN-LAST:event_btnLogInMouseClicked
+
+    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
+        // TODO add your handling code here: 
+        Access acc = new Access();
+        AccessController ac = new AccessController();
+        acc.setPermission(0);
+        acc.setUsername(txtUsername.getText());
+        acc.setPasskey(txtPassword.getText());
+        
+        if(ac.insert(acc) == 1){
+            JOptionPane.showMessageDialog(pnlMain, "Account registration accepted! please log in");
+        }else{
+            JOptionPane.showMessageDialog(pnlMain, "Account registration failed!");
+        }
+    }//GEN-LAST:event_btnSignInActionPerformed
 
     /**
      * @param args the command line arguments
