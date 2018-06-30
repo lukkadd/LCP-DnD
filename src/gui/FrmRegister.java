@@ -7,6 +7,7 @@
 package gui;
 import controller.AccessController;
 import entity.Access;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,7 @@ public class FrmRegister extends javax.swing.JFrame {
     
     public FrmRegister() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
     
     /**
@@ -29,7 +31,7 @@ public class FrmRegister extends javax.swing.JFrame {
      */
     public FrmRegister(Access a) {
         initComponents();
-        
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         if (a == null) {
             btnSearchRegister.setVisible(false);
             btnDeleteRegister.setVisible(false);
