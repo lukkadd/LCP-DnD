@@ -357,7 +357,6 @@ public class FrmRegister extends javax.swing.JFrame {
                 }
                 else {
                     if (chkPermission.isVisible()) permission = chkPermission.isSelected()?1:0;
-                    System.out.println(permission);
                     access = new Access(txtUsername.getText(), passkey, permission);
 
                     if (acC.insert(access) == 1) {
@@ -408,8 +407,6 @@ public class FrmRegister extends javax.swing.JFrame {
     private void btnSearchRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchRegisterMouseClicked
         if (btnSearchRegister.isEnabled()) {
             access = acC.getByLogin(txtUsername.getText());
-            
-            System.out.println(access.getIdAccess());
             
             if (access == null) {
                 JOptionPane.showMessageDialog(jpRegister, "invalid login");
