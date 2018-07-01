@@ -235,7 +235,7 @@ public class FrmVault extends javax.swing.JFrame {
         btnAdvRel = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGear = new javax.swing.JTable();
-        cmbGearType = new javax.swing.JComboBox<String>();
+        cmbGearType = new javax.swing.JComboBox<>();
         lblGearName = new javax.swing.JLabel();
         txtGearName = new javax.swing.JTextField();
         lblGearCost = new javax.swing.JLabel();
@@ -259,9 +259,9 @@ public class FrmVault extends javax.swing.JFrame {
         btnRelArmor = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblArmor = new javax.swing.JTable();
-        cmbModifier = new javax.swing.JComboBox<String>();
+        cmbModifier = new javax.swing.JComboBox<>();
         btnStealthDArmor = new javax.swing.JToggleButton();
-        cmbArmorType = new javax.swing.JComboBox<String>();
+        cmbArmorType = new javax.swing.JComboBox<>();
         txtArmorName = new javax.swing.JTextField();
         lblArmorName = new javax.swing.JLabel();
         lblArmorCost = new javax.swing.JLabel();
@@ -285,7 +285,7 @@ public class FrmVault extends javax.swing.JFrame {
         lblWpnCost = new javax.swing.JLabel();
         txtWpnCost = new javax.swing.JTextField();
         lblWpnType = new javax.swing.JLabel();
-        cmbWpnType = new javax.swing.JComboBox<String>();
+        cmbWpnType = new javax.swing.JComboBox<>();
         lblWpnRange = new javax.swing.JLabel();
         txtWpnMaxRange = new javax.swing.JTextField();
         txtWpnMinRange = new javax.swing.JTextField();
@@ -308,6 +308,7 @@ public class FrmVault extends javax.swing.JFrame {
         jpSpell = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        mnLogOut = new javax.swing.JMenuItem();
         mnUpdate = new javax.swing.JMenuItem();
         mnRegister = new javax.swing.JMenuItem();
 
@@ -457,7 +458,7 @@ public class FrmVault extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblGear);
 
-        cmbGearType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
+        cmbGearType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Tools", "Mount and Vehicles", "Trade Goods", "Food Drink and Lodging" }));
         cmbGearType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbGearTypeActionPerformed(evt);
@@ -639,7 +640,7 @@ public class FrmVault extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblArmor);
 
-        cmbModifier.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
+        cmbModifier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Modifier", "Dex Modifier", "Dex Modifier (max 2)", " " }));
 
         btnStealthDArmor.setText("False");
         btnStealthDArmor.addActionListener(new java.awt.event.ActionListener() {
@@ -648,7 +649,7 @@ public class FrmVault extends javax.swing.JFrame {
             }
         });
 
-        cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
+        cmbArmorType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" }));
 
         txtArmorName.setToolTipText("");
 
@@ -870,7 +871,7 @@ public class FrmVault extends javax.swing.JFrame {
 
         lblWpnType.setText("Weapon Type :");
 
-        cmbWpnType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged" }));
+        cmbWpnType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged" }));
         cmbWpnType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbWpnTypeItemStateChanged(evt);
@@ -1088,6 +1089,14 @@ public class FrmVault extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Options");
+
+        mnLogOut.setText("Log Out");
+        mnLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnLogOutActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnLogOut);
 
         mnUpdate.setText("Update Account");
         mnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -1725,6 +1734,12 @@ public class FrmVault extends javax.swing.JFrame {
         frmReg.setVisible(true);
     }//GEN-LAST:event_mnRegisterActionPerformed
 
+    private void mnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLogOutActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new FrmLogIn().setVisible(true);
+    }//GEN-LAST:event_mnLogOutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1828,6 +1843,7 @@ public class FrmVault extends javax.swing.JFrame {
     private javax.swing.JLabel lblWpnTHAttack;
     private javax.swing.JLabel lblWpnType;
     private javax.swing.JLabel lblWpnWeight;
+    private javax.swing.JMenuItem mnLogOut;
     private javax.swing.JMenuItem mnRegister;
     private javax.swing.JMenuItem mnUpdate;
     private javax.swing.JToolBar tbAdventureGear;

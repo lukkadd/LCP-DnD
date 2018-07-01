@@ -9,6 +9,7 @@ package gui;
 import entity.Access;
 import controller.AccessController;
 import gui.FrmRegister;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -152,6 +153,7 @@ public class FrmLogIn extends javax.swing.JFrame {
         access = ac.getByLogin(username);
 
         if (access == null || !access.getPasskey().equals(password)) {
+            JOptionPane.showMessageDialog(pnlMain, "invalid Login or Password");
             System.out.println("invalid login or password");
         }
         else {
